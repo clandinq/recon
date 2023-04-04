@@ -23,7 +23,7 @@
 <meta name="author" content="César Landín" />
 
 
-<meta name="date" content="2023-04-03" />
+<meta name="date" content="2023-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -292,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mshow-visualizing-quickly-regression-outcomes" class="section level4 hasAnchor" number="3.2.1.1">
 <h4><span class="header-section-number">3.2.1.1</span> <code>mshow</code>: <strong>visualizing quickly regression outcomes</strong><a href="generating-publication-quality-tables.html#mshow-visualizing-quickly-regression-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Next, we introduce a function called <strong>mshow</strong> for visualizing quickly regression outcomes. This function is helpful when we want to quickly preview a model in R Studio’s Viewer window instead of having to export the model to LaTeX. <strong>mshow</strong> defines standard significance levels and omits all statistics but the number of observations. The function takes as an input a list with the models (or a single model), and can include additional input that is passed on to the <code>modelsummary</code> function (for example, including additional rows).</p>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -358,13 +360,20 @@ Num.Obs.
 </td>
 </tr>
 </tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr>
+</tfoot>
 </table>
 </div>
 <div id="exporting-the-table-to-latex" class="section level4 hasAnchor" number="3.2.1.2">
 <h4><span class="header-section-number">3.2.1.2</span> Exporting the table to LaTeX<a href="generating-publication-quality-tables.html#exporting-the-table-to-latex" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can export the previous table to latex with the following code:</p>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_1.jpg" width="300" />
+<img src="results/tables/table_1.jpg" width="300" />
 </center>
 <p>The previous table is far from being ready to include in a paper: it does not specify what the outcome variable is, the default variable names have not been replaced by more descriptive names, and it includes content that is better left for the footnote (significance notes). The next thing that should be done to format the table is to adjust the table size and position, since both of these issues are fixed earlier on in the LaTeX code.</p>
 </div>
@@ -428,7 +437,7 @@ Num.Obs.
 <span id="cb22-5"><a href="generating-publication-quality-tables.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adjust_col_spacing</span>(<span class="dv">16</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb22-6"><a href="generating-publication-quality-tables.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_2.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_2.jpg" width="389" />
+<img src="results/tables/table_2.jpg" width="389" />
 </center>
 <p>The effects of <code>float_here</code>, <code>adjust_box</code>, and <code>adjust_height</code> can only be seen when compiling the table. The wide column spacing specified by <code>adjust_col_spacing</code> can be observed when comparing with the previous table.</p>
 </div>
@@ -445,7 +454,7 @@ Num.Obs.
 <span id="cb23-6"><a href="generating-publication-quality-tables.html#cb23-6" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span></span>
 <span id="cb23-7"><a href="generating-publication-quality-tables.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_3.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_3.jpg" width="300" />
+<img src="results/tables/table_3.jpg" width="300" />
 </center>
 </div>
 <div id="adding-dependent-variable-names-and-model-numbers" class="section level3 hasAnchor" number="3.4.2">
@@ -473,7 +482,7 @@ Num.Obs.
 <span id="cb25-6"><a href="generating-publication-quality-tables.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-7"><a href="generating-publication-quality-tables.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_4.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_4.jpg" width="297" />
+<img src="results/tables/table_4.jpg" width="297" />
 </center>
 </div>
 <div id="adding-a-multicolumn-title" class="section level3 hasAnchor" number="3.4.3">
@@ -522,7 +531,7 @@ Num.Obs.
 <span id="cb27-7"><a href="generating-publication-quality-tables.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb27-8"><a href="generating-publication-quality-tables.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_5.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_5.jpg" width="267" />
+<img src="results/tables/table_5.jpg" width="267" />
 </center>
 </div>
 <div id="adding-a-caption-and-title-to-the-table" class="section level3 hasAnchor" number="3.4.4">
@@ -546,7 +555,7 @@ Num.Obs.
 <span id="cb29-7"><a href="generating-publication-quality-tables.html#cb29-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb29-8"><a href="generating-publication-quality-tables.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_6.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_6.jpg" width="525" />
+<img src="results/tables/table_6.jpg" width="525" />
 </center>
 </div>
 </div>
@@ -608,7 +617,7 @@ Num.Obs.
 <span id="cb31-12"><a href="generating-publication-quality-tables.html#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_numobs</span>(<span class="st">&quot;Number of observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb31-13"><a href="generating-publication-quality-tables.html#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_7.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_7.jpg" width="525" />
+<img src="results/tables/table_7.jpg" width="525" />
 </center>
 </div>
 <div id="inserting-additional-data-rows" class="section level3 hasAnchor" number="3.5.2">
@@ -638,7 +647,7 @@ Num.Obs.
 <span id="cb32-21"><a href="generating-publication-quality-tables.html#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_numobs</span>(<span class="st">&quot;Number of observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb32-22"><a href="generating-publication-quality-tables.html#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_8.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_8.jpg" width="525" />
+<img src="results/tables/table_8.jpg" width="525" />
 </center>
 </div>
 <div id="distributing-coefficient-names-over-two-rows" class="section level3 hasAnchor" number="3.5.3">
@@ -711,7 +720,7 @@ Num.Obs.
 <span id="cb34-30"><a href="generating-publication-quality-tables.html#cb34-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef_two_rows</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb34-31"><a href="generating-publication-quality-tables.html#cb34-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_9.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_9.jpg" width="525" />
+<img src="results/tables/table_9.jpg" width="525" />
 </center>
 </div>
 <div id="inserting-space-between-variables" class="section level3 hasAnchor" number="3.5.4">
@@ -749,7 +758,7 @@ Num.Obs.
 <span id="cb36-10"><a href="generating-publication-quality-tables.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_line_space</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb36-11"><a href="generating-publication-quality-tables.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_10.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_10.jpg" width="451" />
+<img src="results/tables/table_10.jpg" width="451" />
 </center>
 </div>
 </div>
@@ -803,7 +812,7 @@ Num.Obs.
 <span id="cb38-8"><a href="generating-publication-quality-tables.html#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_line_space</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb38-9"><a href="generating-publication-quality-tables.html#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_11.tex&quot;</span>))</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_10.jpg" width="451" />
+<img src="results/tables/table_10.jpg" width="451" />
 </center>
 </div>
 <div id="adding-footnotes" class="section level3 hasAnchor" number="3.6.2">
@@ -834,7 +843,7 @@ Num.Obs.
 <span id="cb41-8"><a href="generating-publication-quality-tables.html#cb41-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;All estimations include species fixed effects, and standard errors clustered at the species level are included in parentheses.&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb41-9"><a href="generating-publication-quality-tables.html#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_save_footnote</span>(<span class="st">&quot;current_table.tex&quot;</span>, <span class="at">stars =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_12.jpg" width="451" />
+<img src="results/tables/table_12.jpg" width="451" />
 </center>
 </div>
 </div>
@@ -875,9 +884,9 @@ Num.Obs.
 <span id="cb45-2"><a href="generating-publication-quality-tables.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_std_errors_col_nums</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb45-3"><a href="generating-publication-quality-tables.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_13.tex&quot;</span>))</span>
 <span id="cb45-4"><a href="generating-publication-quality-tables.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">convert_save_pres_table</span>(<span class="st">&quot;table_13.tex&quot;</span>)</span></code></pre></div>
-###
+<p>###</p>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/pres_table_13.jpg" width="462" />
+<img src="results/tables/pres_table_13.jpg" width="462" />
 </center>
 </div>
 <div id="adding-notes" class="section level3 hasAnchor" number="3.7.3">
@@ -893,9 +902,9 @@ Num.Obs.
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="generating-publication-quality-tables.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;pres_table_13.tex&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb47-2"><a href="generating-publication-quality-tables.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_note</span>(<span class="st">&quot;Quick note at the bottom of the presentation table.&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb47-3"><a href="generating-publication-quality-tables.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_14.tex&quot;</span>))</span></code></pre></div>
-###
+<p>###</p>
 <center>
-<img src="/Users/cesarlandin/Work/iZettle_fee/scripts/book/results/tables/table_14.jpg" width="462" />
+<img src="results/tables/table_14.jpg" width="462" />
 </center>
 
 </div>
