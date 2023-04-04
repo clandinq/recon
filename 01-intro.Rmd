@@ -1,0 +1,340 @@
+# Tips for using `ggplot` to generate publication-quality graphs {#ggplot}
+
+<!-- Figures -->
+<!-- - Sans-serif fonts such as Arial and Helvetica should be used whenever possible. Package `ggplot2` uses Arial as the default font. -->
+<!-- - Multi-panel figures should include panel subtitles (e.g. Panel A: Intent to Treat). -->
+<!-- - Figures should always include legends explaining the colors and symbols used.  -->
+
+<!-- Distinguishing color in figures -->
+<!-- - Multiple shades of color -->
+<!-- - Line graphs: include different keys. -->
+<!-- - Grouped bar graphs: include patterned fills. -->
+
+<!-- If images require multiple lines, choose keys and line types that are easily distinguished from each other (give example). -->
+
+<!-- Figure files should be in EPS format. -->
+
+<!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
+<!-- Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab). -->
+<!-- Figures and tables with captions will be placed in `figure` and `table` environments, respectively. -->
+<!-- # ```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'} -->
+
+<!-- https://bookdown.org/yihui/bookdown-demo/intro.html -->
+<!-- https://bookdown.org/yihui/bookdown/preview-a-chapter.html -->
+<!-- bookdown::render_book(here("scripts", "book")) -->
+## Plot margins
+### Removing white space around the plot
+To remove the white space around the plot, set the plot margins equal to 0. The order is [top, right, bottom, left].
+```{r plot.margin, eval = FALSE, echo = TRUE}
+figure %>% 
+  theme(plot.margin = margin(0, 0, 0, 0))
+```
+
+This setting is useful when working with package `cowplot` to generate multi-panel figures. `cowplot::plot_grid` often overlays panel labels on top of the figures, so you can add space to the top of the figure:
+```{r plot.margin_cowplot, eval = FALSE, echo = TRUE}
+plot_grid(g1 + theme(plot.margin = margin(t = 15)),
+          g2 + theme(plot.margin = margin(t = 15)),
+          nrow = 2)
+```
+
+### Removing white space between axes and plot
+Sometimes it's useful to reduce the distance between the plot and axis text. You can do this by reducing the top margin of the x-axis text and the right margin of the y-axis text:
+```{r plot.margin_axis, eval = FALSE, echo = TRUE}
+figure %>% 
+  theme(axis.text.x = element_text(margin = margin(t = -5, r = 0, b = 0, l = 0)),
+        axis.text.y = element_text(margin = margin(t = 0, r = -5, b = 0, l = 0)))
+```
+
+## Axis labels
+### Removing axis labels
+When removing axis labels (for example, when dealing with dates in the x-axis), use `labs(x = NULL)` rather than `labs(x = "")`, as this eliminates the extra white space.
+```{r axis_labels, eval = FALSE, echo = TRUE}
+figure %>% 
+  labs(x = NULL)
+```
+
+## Legends
+### Removing the legend title
+Legend titles are always redundant: if the figure is included in the paper or report, then the title and axis label give enough information; if the figure is in a presentation, the slide title and description along with axis labels provide enough information to understand what is being plotted.
+```{r legend_title, eval = FALSE, echo = TRUE}
+figure %>% 
+  theme(legend.title = element_blank())
+```
+
+### Removing black boxes around legend keys
+Legend keys look much better without the black border surrounding them. This should be a standard for any figure.
+```{r legend_key, eval = FALSE, echo = TRUE}
+figure %>% 
+  theme(legend.key = element_blank())
+```
+
+### Putting the legend inside the figure
+Useful for when there is a lot of blank space in the figure.
+```{r legend_position, eval = FALSE, echo = TRUE}
+figure %>% 
+  theme(legend.position = c(0.75, 0.85))
+```
+
+
+
+
+
+<!-- # Center ggplot title -->
+<!-- theme(plot.title = element_text(hjust = 0.5)) -->
+
+
+
+## Geographic place matching
+In applied work, we often have to deal with observations that have an associated address or coordinates but no geographic codes. For cases in which no coordinates are available, one option is to match addresses to coordinates using Google Place API searches, and then merge the resulting coordinates with shapefiles to obtain geographic codes.
+
+### Google Places API searches
+R package `googleway` makes it easy to perform Google Place API searches. `googleway::google_find_place` generates a [Find Place request](https://developers.google.com/maps/documentation/places/web-service/search-find-place), taking a text input and returning an array of place candidates, along with their corresponding search status. From this result, we can extract the address and coordinates. 
+
+Currently, you get \$200 of Google Maps Platform usage every month for free. [Each request costs $0.017](https://mapsplatform.google.com/pricing/). While this may seem like little, generating 12,000 requests will already exceed the monthly free usage quota ($200 = 11,764.7 requests). It's easy to exceed this number of requests when you're running loops for large query vectors repeatedly. Therefore, the best practice is to start out with a small sample, ensure that searches are returning valid results, and then extend the method to the full sample. You can [set a maximum quota](https://developers.google.com/maps/documentation/places/web-service/report-monitor#quotas) of 375 requests per day (375 x 31 = 11,625) to ensure you don't exceed the monthly free usage limit.
+
+To start using `googleway` to conduct Google Place API searches, you first need to [create a Google Cloud project](https://developers.google.com/maps/documentation/places/web-service/cloud-setup) and [set up an API key](https://developers.google.com/maps/documentation/places/web-service/get-api-key). Once you have set this up, you can load `googleway`, define the API key and start conducting searches. 
+Here is a simple example of an individual query.
+
+```{r google_search, eval = FALSE, echo = TRUE}
+pacman::p_load(here, tidyverse, googleway)
+
+# (1.1): Set Google Place search API key.
+key <- "KJzaLyCLI-nXPsHqVwz-jna1HYg2jKpBueSsTWs" # insert API key here
+set_key(key)
+
+# (1.2): Define tibble with addresses to look up.
+missing_locs <- tribble(~id, ~address,
+                        1, "Av. Álvaro Obregón 225, Roma Norte, Cuauhtémoc, CDMX, Mexico",
+                        2, "Río Hondo #1, Col. Progreso Tizapán, Álvaro Obregón, CDMX, México")
+
+# (1.3): Loop over missing addresses.
+loc_coords <- tibble()
+for (i in 1:nrow(missing_locs)) {     
+  # Get results from Google Place search
+  results <- google_find_place(missing_locs$address[i], inputtype = "textquery", language = "es")
+  
+  # Print results
+  search_status <- ifelse(results[["status"]] == "OK", 
+                          "search successful", 
+                          "search returned no results")
+  print(str_c("Working on address ", i, " out of ", nrow(missing_locs), ", ", search_status))
+  
+  # Extract formatted address and coordinates results
+  clean_results <- tibble(id = missing_locs$id[i],
+                          address_clean = results[["candidates"]][["formatted_address"]],
+                          loc_lat = results[["candidates"]][["geometry"]][["location"]][["lat"]],
+                          loc_lon = results[["candidates"]][["geometry"]][["location"]][["lng"]])
+  
+  # Append to full results dataframe.
+  loc_coords %<>% bind_rows(clean_results)
+}
+rm(results, clean_results, i, search_status)
+
+# (1.4): Keep first result for each address.
+clean_results %<>%
+  group_by(id) %>% 
+  slice(1)
+
+```
+
+Once you finish your set of Google Place API requests, you should save the results to a CSV file for later use. The search process is not perfectly replicable as identical searches can produce different results over time, so you should only run your full search loop once.
+
+
+<!-- ### -->
+
+<!-- # (4.7): Merge missing municipalities with shapefiles. # -->
+<!-- shp_mun <- st_read(here("proc", "shapefiles", "shp_mun.shp")) -->
+<!-- missing_coords_shp <- mun_coords  %>%  -->
+<!--   st_as_sf(coords = c("loc_lon", "loc_lat")) %>%  -->
+<!--   st_set_crs(8999) -->
+<!-- intersections <- tibble(cve_total = st_intersects(missing_coords_shp, shp_mun) %>% unlist(), -->
+<!--                         cve_ent = shp_mun$cve_ent[cve_total], -->
+<!--                         cve_mun_2020 = shp_mun$cve_mun[cve_total], -->
+<!--                         mun_id = mun_coords$mun_id) %>%  -->
+<!--   select(-cve_total) %>%  -->
+<!--   left_join(mun_coords, by = "mun_id") -->
+<!-- missing_muns_l %<>%  -->
+<!--   left_join(intersections %>% select(-loc_lat, -loc_lon),  -->
+<!--             by = c("cve_ent", "mun_id")) -->
+<!-- rm(intersections, mun_coords, missing_coords_shp, key) -->
+
+
+
+
+
+## Number formatting functions
+You can save these functions in a script called number_functions.R and import them in each script where they're needed, e.g.:
+
+```{r number_functions, eval = FALSE, echo = TRUE}
+source(here("scripts", "programs", "number_functions.R"))
+```
+
+### Calculating the mean, median and standard deviation of a variable
+```{r stat_calc, eval = FALSE, echo = TRUE}
+# Mean
+num_mean <- function(df, variable, dig = 1) {
+  df %>% 
+    pull(eval(as.name(variable))) %>% 
+    mean(na.rm = TRUE) %>% 
+    round(digits = dig)
+}
+
+# Median
+num_median <- function(df, variable, dig = 1) {
+  df %>% 
+    pull(eval(as.name(variable))) %>% 
+    median(na.rm = TRUE) %>% 
+    round(digits = dig)
+}
+
+# Standard deviation
+num_sd <- function(df, variable, dig = 1) {
+  df %>% 
+    pull(eval(as.name(variable))) %>% 
+    sd(na.rm = TRUE) %>% 
+    round(digits = dig)
+}
+```
+
+You can call these functions the following way:
+
+```{r stat_calc_ex, eval = FALSE, echo = TRUE}
+df %>% num_mean("number_employees")
+```
+
+### Checking if a number is an integer.
+This is used in the functions that print numbers to .tex files, since no decimals should be added after integers.
+```{r num_int, eval = FALSE, echo = TRUE}
+num_int <- function(x) {
+  x == round(x)
+}
+```
+
+### Number formatting function
+This function formats numbers with a standard number of digits and commas to present large and small numbers in a more readable format.
+
+How does this function work? First, the function calculates the number of digits the number should have to the right of the decimal point. For numbers from 1-9, three digits are assigned, two digits are assigned for numbers 10-99, one for 100-999, and no right digits for numbers equal or larger than 1,000. This function sets the maximum number of right digits as 3. Therefore, 0.0001 will display as 0.000. Once the number of right digits is defined, the number is formatted. Numbers smaller than 1 are padded if necessary to ensure that there are 3 right digits (e.g., 0.25 is formatted as 0.250). The default number of right digits can be overridden with the option `override_right_digits`.
+
+This function has the same name as `scales::comma_format`. However, this function has been superseded by `scales::label_comma`, so there are no issues with this user-defined function taking priority over `scales::comma_format`.
+
+```{r comma_format, eval = TRUE, echo = TRUE}
+comma_format <- function(x, override_right_digits = NA) {
+  # Calculate number of right digits
+  if (x <= 0) {num <- 1} else {num <- x}
+  right_digits <- 3 - floor(log10(abs(num)))
+  if (right_digits < 0) {right_digits <- 0}
+  if (right_digits > 3) {right_digits <- 3}
+  if (!is.na(override_right_digits)) {right_digits <- override_right_digits}
+  # Calculate number of left digits
+  left_digits <- 4 + floor(log10(abs(num)))
+  if (left_digits <= 0) {left_digits <- 1}
+  # Format number
+  proc_num <- format(round(x, right_digits), nsmall = right_digits, digits =  left_digits, big.mark = ",")
+  if (proc_num != "0" & as.numeric(str_replace(proc_num, fixed(","), "")) < 1) {
+    proc_num <- str_pad(proc_num, right_digits + 2, "right", "0")
+  }
+  return(proc_num)
+}
+```
+
+Here are a few examples of the output of this function:
+
+```{r comma_format_ex, eval = TRUE, echo = TRUE}
+pacman::p_load(tidyverse)
+
+lapply(c(0.098, 0.11, 3.1233, 45.968, 1949), comma_format) %>% unlist()
+```
+
+
+
+<!-- # (1.3): Print number to file. -->
+<!-- print_n <- function(x, file, note = "", dig = 1) { -->
+<!--   # Round number to desired number of digits -->
+<!--   current_num <- as.numeric(x) %>% -->
+<!--     round(dig) -->
+<!--   # Don't add 0 after decimal point if number is a whole number -->
+<!--   # https://support.jmir.org/hc/en-us/articles/360019690851-Guidelines-for-Reporting-Statistics -->
+<!--   current_num <- ifelse(num_int(current_num), -->
+<!--                         comma_format(current_num, override_right_digits = 0), -->
+<!--                         comma_format(current_num, override_right_digits = dig)) -->
+<!--  # Export number -->
+<!--   current_num %>% -->
+<!--     print() %>% # prior to adding the % for Latex -->
+<!--     str_c("%") %>% # this % is to prevent space after number -->
+<!--     str_c(ifelse(note != "", str_c("\n% ", note), "")) %>% -->
+<!--     write_(here("results", "numbers", file)) -->
+<!-- } -->
+
+<!-- # (1.4): Print percentage to file. -->
+<!-- print_pct <- function(x, file, note = "", dig = 1) { -->
+<!--   # Round number to desired number of digits -->
+<!--   current_num <- as.numeric(x) %>% -->
+<!--     "*"(100) %>% -->
+<!--     round(dig) -->
+<!--   # Don't add 0 after decimal point if percentage is a whole number -->
+<!--   # https://support.jmir.org/hc/en-us/articles/360019690851-Guidelines-for-Reporting-Statistics -->
+<!--   current_num <- ifelse(num_int(current_num), -->
+<!--                         comma_format(current_num, override_right_digits = 0), -->
+<!--                         comma_format(current_num, override_right_digits = dig)) -->
+<!--   # Export number -->
+<!--   current_num %>% -->
+<!--     str_c("\\%%") %T>% # this % is to prevent space after number; not the \% in Latex -->
+<!--     print() %>% -->
+<!--     str_c(ifelse(note != "", str_c("\n% ", note), "")) %>% -->
+<!--     write_(here("results", "numbers", file))  # includes the "%" in printing since it's a percent -->
+<!-- } -->
+
+
+
+<!-- ## Saving numbers as .tex files -->
+
+<!-- When results change, you want numbers to change -->
+<!-- Eliminates possibility of manual error -->
+
+
+<!-- Folder structure should include "results/numbers" and we should include instructions about producing all numbers in a paper as tex files that are included with \input{} -->
+
+
+
+<!-- This should be added to the RA Guide. Furthermore, the commands I've written to write these numbers to tex files with the correct formatting (e.g. print_n.R, print_as_percent.R) should be added to the R, Stata, and Python guides. For those guides, @César Landín add to R Guide first then @Anoushka Nalwa to Stata guide and @Jora to Python guide. -->
+
+<!-- Note that when adding them to the guides you should be using command line git, clone the repo, create a new branch, make the changes, push your branch, then on GitHub submit a pull request to incorporate those changes into the main branch. There are some instructions on this in the RA Guide: https://github.com/skhiggins/ra_guide. Just as there are some scripts already included as part of the R, Stata, and Python guides, these scripts to print output to a tex file should also be included within the repo and linked in the guides. -->
+
+
+
+
+## Multiplot figures
+### Auxiliary functions to remove figure components: axes, legend
+
+**Functions:**
+```{r cowplot_aux_fun, eval = FALSE, echo = TRUE}
+remove_axis_x <- function(plot) {
+  plot + 
+    theme(axis.title.x = element_blank(),
+          axis.text.x = element_blank())
+}
+remove_axis_y <- function(plot) {
+  plot + 
+    theme(axis.title.y = element_blank(),
+          axis.text.y = element_blank())
+}
+remove_legend <- function(plot) {
+  plot +
+    theme(legend.position = "none")
+}
+```
+
+**Usage:**
+Let `g1`, `g2` and `g3` be three figures with the same x-axis. We can plot the three figures in one multipanel figure, removing the legend and x-axis from all but the bottom figure.
+```{r cowplot_aux_use, eval = FALSE, echo = TRUE}
+plot_grid(g1 %>% remove_legend() %>% remove_axis_x(), 
+          g2 %>% remove_legend() %>% remove_axis_x(), 
+          g3, 
+          rel_heights = c(1, 1, 1),
+          nrow = 3,
+          axis = "b", 
+          align = "h")
+```
+
+
+<!-- An alternative to the previous is to simply remove the axis from the three figures and then incorporate the axis in the bottom fig. -->

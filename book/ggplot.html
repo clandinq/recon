@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Short Programming Guide for Economics Research</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Short Programming Guide for Economics Research" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Short Programming Guide for Economics Research" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="César Landín" />
+
+
+<meta name="date" content="2023-03-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="01-intro.html"><a href="#ggplot"><i class="fa fa-check"></i><b>1</b> Tips for using <code>ggplot</code> to generate publication-quality graphs</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="01-intro.html"><a href="#plot-margins"><i class="fa fa-check"></i><b>1.1</b> Plot margins</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="01-intro.html"><a href="#removing-white-space-around-the-plot"><i class="fa fa-check"></i><b>1.1.1</b> Removing white space around the plot</a></li>
+<li class="chapter" data-level="1.1.2" data-path="01-intro.html"><a href="#removing-white-space-between-axes-and-plot"><i class="fa fa-check"></i><b>1.1.2</b> Removing white space between axes and plot</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="01-intro.html"><a href="#axis-labels"><i class="fa fa-check"></i><b>1.2</b> Axis labels</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="01-intro.html"><a href="#removing-axis-labels"><i class="fa fa-check"></i><b>1.2.1</b> Removing axis labels</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="01-intro.html"><a href="#legends"><i class="fa fa-check"></i><b>1.3</b> Legends</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="01-intro.html"><a href="#removing-the-legend-title"><i class="fa fa-check"></i><b>1.3.1</b> Removing the legend title</a></li>
+<li class="chapter" data-level="1.3.2" data-path="01-intro.html"><a href="#removing-black-boxes-around-legend-keys"><i class="fa fa-check"></i><b>1.3.2</b> Removing black boxes around legend keys</a></li>
+<li class="chapter" data-level="1.3.3" data-path="01-intro.html"><a href="#putting-the-legend-inside-the-figure"><i class="fa fa-check"></i><b>1.3.3</b> Putting the legend inside the figure</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="01-intro.html"><a href="#geographic-place-matching"><i class="fa fa-check"></i><b>1.4</b> Geographic place matching</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="01-intro.html"><a href="#google-places-api-searches"><i class="fa fa-check"></i><b>1.4.1</b> Google Places API searches</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="01-intro.html"><a href="#number-formatting-functions"><i class="fa fa-check"></i><b>1.5</b> Number formatting functions</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="01-intro.html"><a href="#calculating-the-mean-median-and-standard-deviation-of-a-variable"><i class="fa fa-check"></i><b>1.5.1</b> Calculating the mean, median and standard deviation of a variable</a></li>
+<li class="chapter" data-level="1.5.2" data-path="01-intro.html"><a href="#checking-if-a-number-is-an-integer."><i class="fa fa-check"></i><b>1.5.2</b> Checking if a number is an integer.</a></li>
+<li class="chapter" data-level="1.5.3" data-path="01-intro.html"><a href="#number-formatting-function"><i class="fa fa-check"></i><b>1.5.3</b> Number formatting function</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Short Programming Guide for Economics Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">A Short Programming Guide for Economics Research</h1>
+<p class="author"><em>César Landín</em></p>
+<p class="date"><em>2023-03-14</em></p>
+</div>
+<div id="ggplot" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Tips for using <code>ggplot</code> to generate publication-quality graphs<a href="#ggplot" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods). -->
+<!-- Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab). -->
+<!-- Figures and tables with captions will be placed in `figure` and `table` environments, respectively. -->
+<!-- # ```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'} -->
+<!-- https://bookdown.org/yihui/bookdown-demo/intro.html -->
+<!-- https://bookdown.org/yihui/bookdown/preview-a-chapter.html -->
+<div id="plot-margins" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Plot margins<a href="#plot-margins" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="removing-white-space-around-the-plot" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Removing white space around the plot<a href="#removing-white-space-around-the-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To remove the white space around the plot, set the plot margins equal to 0. The order is [top, right, bottom, left].</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>figure <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span></code></pre></div>
+<p>This setting is useful when working with package <code>cowplot</code> to generate multi-panel figures. <code>cowplot::plot_grid</code> often overlays panel labels on top of the figures, so you can add space to the top of the figure:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1 <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">15</span>)),</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>          g2 <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">15</span>)),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<div id="removing-white-space-between-axes-and-plot" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Removing white space between axes and plot<a href="#removing-white-space-between-axes-and-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Sometimes it’s useful to reduce the distance between the plot and axis text. You can do this by reducing the top margin of the x-axis text and the right margin of the y-axis text:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>figure <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">l =</span> <span class="dv">0</span>)),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="sc">-</span><span class="dv">5</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">l =</span> <span class="dv">0</span>)))</span></code></pre></div>
+</div>
+</div>
+<div id="axis-labels" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Axis labels<a href="#axis-labels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="removing-axis-labels" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Removing axis labels<a href="#removing-axis-labels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When removing axis labels (for example, when dealing with dates in the x-axis), use <code>labs(x = NULL)</code> rather than <code>labs(x = "")</code>, as this eliminates the extra white space.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>figure <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="legends" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Legends<a href="#legends" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="removing-the-legend-title" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Removing the legend title<a href="#removing-the-legend-title" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Legend titles are always redundant: if the figure is included in the paper or report, then the title and axis label give enough information; if the figure is in a presentation, the slide title and description along with axis labels provide enough information to understand what is being plotted.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>figure <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+</div>
+<div id="removing-black-boxes-around-legend-keys" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Removing black boxes around legend keys<a href="#removing-black-boxes-around-legend-keys" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Legend keys look much better without the black border surrounding them. This should be a standard for any figure.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>figure <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
+</div>
+<div id="putting-the-legend-inside-the-figure" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Putting the legend inside the figure<a href="#putting-the-legend-inside-the-figure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Useful for when there is a lot of blank space in the figure.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>figure <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.85</span>))</span></code></pre></div>
+<!-- # Center ggplot title -->
+<!-- theme(plot.title = element_text(hjust = 0.5)) -->
+</div>
+</div>
+<div id="geographic-place-matching" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Geographic place matching<a href="#geographic-place-matching" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In applied work, we often have to deal with observations that have an associated address or coordinates but no geographic codes. For cases in which no coordinates are available, one option is to match addresses to coordinates using Google Place API searches, and then merge the resulting coordinates with shapefiles to obtain geographic codes.</p>
+<div id="google-places-api-searches" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Google Places API searches<a href="#google-places-api-searches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R package <code>googleway</code> makes it easy to perform Google Place API searches. <code>googleway::google_find_place</code> generates a <a href="https://developers.google.com/maps/documentation/places/web-service/search-find-place">Find Place request</a>, taking a text input and returning an array of place candidates, along with their corresponding search status. From this result, we can extract the address and coordinates.</p>
+<p>Currently, you get $200 of Google Maps Platform usage every month for free. <a href="https://mapsplatform.google.com/pricing/">Each request costs $0.017</a>. While this may seem like little, generating 12,000 requests will already exceed the monthly free usage quota ($200 = 11,764.7 requests). It’s easy to exceed this number of requests when you’re running loops for large query vectors repeatedly. Therefore, the best practice is to start out with a small sample, ensure that searches are returning valid results, and then extend the method to the full sample. You can <a href="https://developers.google.com/maps/documentation/places/web-service/report-monitor#quotas">set a maximum quota</a> of 375 requests per day (375 x 31 = 11,625) to ensure you don’t exceed the monthly free usage limit.</p>
+<p>To start using <code>googleway</code> to conduct Google Place API searches, you first need to <a href="https://developers.google.com/maps/documentation/places/web-service/cloud-setup">create a Google Cloud project</a> and <a href="https://developers.google.com/maps/documentation/places/web-service/get-api-key">set up an API key</a>. Once you have set this up, you can load <code>googleway</code>, define the API key and start conducting searches.
+Here is a simple example of an individual query.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here, tidyverse, googleway)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.1): Set Google Place search API key.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>key <span class="ot">&lt;-</span> <span class="st">&quot;KJzaLyCLI-nXPsHqVwz-jna1HYg2jKpBueSsTWs&quot;</span> <span class="co"># insert API key here</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set_key</span>(key)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.2): Define tibble with addresses to look up.</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>missing_locs <span class="ot">&lt;-</span> <span class="fu">tribble</span>(<span class="sc">~</span>id, <span class="sc">~</span>address,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">1</span>, <span class="st">&quot;Av. Álvaro Obregón 225, Roma Norte, Cuauhtémoc, CDMX, Mexico&quot;</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">2</span>, <span class="st">&quot;Río Hondo #1, Col. Progreso Tizapán, Álvaro Obregón, CDMX, México&quot;</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.3): Loop over missing addresses.</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>loc_coords <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(missing_locs)) {     </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get results from Google Place search</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">google_find_place</span>(missing_locs<span class="sc">$</span>address[i], <span class="at">inputtype =</span> <span class="st">&quot;textquery&quot;</span>, <span class="at">language =</span> <span class="st">&quot;es&quot;</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print results</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  search_status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(results[[<span class="st">&quot;status&quot;</span>]] <span class="sc">==</span> <span class="st">&quot;OK&quot;</span>, </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;search successful&quot;</span>, </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;search returned no results&quot;</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;Working on address &quot;</span>, i, <span class="st">&quot; out of &quot;</span>, <span class="fu">nrow</span>(missing_locs), <span class="st">&quot;, &quot;</span>, search_status))</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract formatted address and coordinates results</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  clean_results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> missing_locs<span class="sc">$</span>id[i],</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                          <span class="at">address_clean =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;formatted_address&quot;</span>]],</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loc_lat =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;geometry&quot;</span>]][[<span class="st">&quot;location&quot;</span>]][[<span class="st">&quot;lat&quot;</span>]],</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loc_lon =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;geometry&quot;</span>]][[<span class="st">&quot;location&quot;</span>]][[<span class="st">&quot;lng&quot;</span>]])</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append to full results dataframe.</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  loc_coords <span class="sc">%&lt;&gt;%</span> <span class="fu">bind_rows</span>(clean_results)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(results, clean_results, i, search_status)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.4): Keep first result for each address.</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>clean_results <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code></pre></div>
+<p>Once you finish your set of Google Place API requests, you should save the results to a CSV file for later use. The search process is not perfectly replicable as identical searches can produce different results over time, so you should only run your full search loop once.</p>
+<!-- ### -->
+<!-- # (4.7): Merge missing municipalities with shapefiles. # -->
+<!-- shp_mun <- st_read(here("proc", "shapefiles", "shp_mun.shp")) -->
+<!-- missing_coords_shp <- mun_coords  %>%  -->
+<!--   st_as_sf(coords = c("loc_lon", "loc_lat")) %>%  -->
+<!--   st_set_crs(8999) -->
+<!-- intersections <- tibble(cve_total = st_intersects(missing_coords_shp, shp_mun) %>% unlist(), -->
+<!--                         cve_ent = shp_mun$cve_ent[cve_total], -->
+<!--                         cve_mun_2020 = shp_mun$cve_mun[cve_total], -->
+<!--                         mun_id = mun_coords$mun_id) %>%  -->
+<!--   select(-cve_total) %>%  -->
+<!--   left_join(mun_coords, by = "mun_id") -->
+<!-- missing_muns_l %<>%  -->
+<!--   left_join(intersections %>% select(-loc_lat, -loc_lon),  -->
+<!--             by = c("cve_ent", "mun_id")) -->
+<!-- rm(intersections, mun_coords, missing_coords_shp, key) -->
+</div>
+</div>
+<div id="number-formatting-functions" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Number formatting functions<a href="#number-formatting-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can save these functions in a script called number_functions.R and import them in each script where they’re needed, e.g.:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;scripts&quot;</span>, <span class="st">&quot;programs&quot;</span>, <span class="st">&quot;number_functions.R&quot;</span>))</span></code></pre></div>
+<div id="calculating-the-mean-median-and-standard-deviation-of-a-variable" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Calculating the mean, median and standard deviation of a variable<a href="#calculating-the-mean-median-and-standard-deviation-of-a-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>num_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Median</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>num_median <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard deviation</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>num_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sd</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>You can call these functions the following way:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">num_mean</span>(<span class="st">&quot;number_employees&quot;</span>)</span></code></pre></div>
+</div>
+<div id="checking-if-a-number-is-an-integer." class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Checking if a number is an integer.<a href="#checking-if-a-number-is-an-integer." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This is used in the functions that print numbers to .tex files, since no decimals should be added after integers.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>num_int <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">==</span> <span class="fu">round</span>(x)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="number-formatting-function" class="section level3 hasAnchor" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Number formatting function<a href="#number-formatting-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This function formats numbers with a standard number of digits and commas to present large and small numbers in a more readable format.</p>
+<p>How does this function work? First, the function calculates the number of digits the number should have to the right of the decimal point. For numbers from 1-9, three digits are assigned, two digits are assigned for numbers 10-99, one for 100-999, and no right digits for numbers equal or larger than 1,000. This function sets the maximum number of right digits as 3. Therefore, 0.0001 will display as 0.000. Once the number of right digits is defined, the number is formatted. Numbers smaller than 1 are padded if necessary to ensure that there are 3 right digits (e.g., 0.25 is formatted as 0.250). The default number of right digits can be overridden with the option <code>override_right_digits</code>.</p>
+<p>This function has the same name as <code>scales::comma_format</code>. However, this function has been superseded by <code>scales::label_comma</code>, so there are no issues with this user-defined function taking priority over <code>scales::comma_format</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>comma_format <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">override_right_digits =</span> <span class="cn">NA</span>) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of right digits</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">0</span>) {num <span class="ot">&lt;-</span> <span class="dv">1</span>} <span class="cf">else</span> {num <span class="ot">&lt;-</span> x}</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  right_digits <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">-</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&lt;</span> <span class="dv">0</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">0</span>}</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&gt;</span> <span class="dv">3</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">3</span>}</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(override_right_digits)) {right_digits <span class="ot">&lt;-</span> override_right_digits}</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of left digits</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  left_digits <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (left_digits <span class="sc">&lt;=</span> <span class="dv">0</span>) {left_digits <span class="ot">&lt;-</span> <span class="dv">1</span>}</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format number</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  proc_num <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(x, right_digits), <span class="at">nsmall =</span> right_digits, <span class="at">digits =</span>  left_digits, <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (proc_num <span class="sc">!=</span> <span class="st">&quot;0&quot;</span> <span class="sc">&amp;</span> <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(proc_num, <span class="fu">fixed</span>(<span class="st">&quot;,&quot;</span>), <span class="st">&quot;&quot;</span>)) <span class="sc">&lt;</span> <span class="dv">1</span>) {</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    proc_num <span class="ot">&lt;-</span> <span class="fu">str_pad</span>(proc_num, right_digits <span class="sc">+</span> <span class="dv">2</span>, <span class="st">&quot;right&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proc_num)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Here are a few examples of the output of this function:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">c</span>(<span class="fl">0.098</span>, <span class="fl">0.11</span>, <span class="fl">3.1233</span>, <span class="fl">45.968</span>, <span class="dv">1949</span>), comma_format) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;0.098&quot; &quot;0.110&quot; &quot;3.123&quot; &quot;45.97&quot; &quot;1,949&quot;</code></pre>
+<!-- # (1.3): Print number to file. -->
+<!-- print_n <- function(x, file, note = "", dig = 1) { -->
+<!--   # Round number to desired number of digits -->
+<!--   current_num <- as.numeric(x) %>% -->
+<!--     round(dig) -->
+<!--   # Don't add 0 after decimal point if number is a whole number -->
+<!--   # https://support.jmir.org/hc/en-us/articles/360019690851-Guidelines-for-Reporting-Statistics -->
+<!--   current_num <- ifelse(num_int(current_num), -->
+<!--                         comma_format(current_num, override_right_digits = 0), -->
+<!--                         comma_format(current_num, override_right_digits = dig)) -->
+<!--  # Export number -->
+<!--   current_num %>% -->
+<!--     print() %>% # prior to adding the % for Latex -->
+<!--     str_c("%") %>% # this % is to prevent space after number -->
+<!--     str_c(ifelse(note != "", str_c("\n% ", note), "")) %>% -->
+<!--     write_(here("results", "numbers", file)) -->
+<!-- } -->
+<!-- # (1.4): Print percentage to file. -->
+<!-- print_pct <- function(x, file, note = "", dig = 1) { -->
+<!--   # Round number to desired number of digits -->
+<!--   current_num <- as.numeric(x) %>% -->
+<!--     "*"(100) %>% -->
+<!--     round(dig) -->
+<!--   # Don't add 0 after decimal point if percentage is a whole number -->
+<!--   # https://support.jmir.org/hc/en-us/articles/360019690851-Guidelines-for-Reporting-Statistics -->
+<!--   current_num <- ifelse(num_int(current_num), -->
+<!--                         comma_format(current_num, override_right_digits = 0), -->
+<!--                         comma_format(current_num, override_right_digits = dig)) -->
+<!--   # Export number -->
+<!--   current_num %>% -->
+<!--     str_c("\\%%") %T>% # this % is to prevent space after number; not the \% in Latex -->
+<!--     print() %>% -->
+<!--     str_c(ifelse(note != "", str_c("\n% ", note), "")) %>% -->
+<!--     write_(here("results", "numbers", file))  # includes the "%" in printing since it's a percent -->
+<!-- } -->
+<!-- ## Saving numbers as .tex files -->
+<!-- When results change, you want numbers to change -->
+<!-- Eliminates possibility of manual error -->
+<!-- Folder structure should include "results/numbers" and we should include instructions about producing all numbers in a paper as tex files that are included with \input{} -->
+<!-- This should be added to the RA Guide. Furthermore, the commands I've written to write these numbers to tex files with the correct formatting (e.g. print_n.R, print_as_percent.R) should be added to the R, Stata, and Python guides. For those guides, @César Landín add to R Guide first then @Anoushka Nalwa to Stata guide and @Jora to Python guide. -->
+<!-- Note that when adding them to the guides you should be using command line git, clone the repo, create a new branch, make the changes, push your branch, then on GitHub submit a pull request to incorporate those changes into the main branch. There are some instructions on this in the RA Guide: https://github.com/skhiggins/ra_guide. Just as there are some scripts already included as part of the R, Stata, and Python guides, these scripts to print output to a tex file should also be included within the repo and linked in the guides. -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

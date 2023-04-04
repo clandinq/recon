@@ -1,0 +1,420 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={A Short Programming Guide for Economics Research},
+  pdfauthor={César Landín},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{A Short Programming Guide for Economics Research}
+\author{César Landín}
+\date{2023-03-08}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{prerequisites}{%
+\chapter{Prerequisites}\label{prerequisites}}
+
+This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
+
+The \textbf{bookdown} package can be installed from CRAN or Github:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\CommentTok{\# or the development version}
+\CommentTok{\# devtools::install\_github("rstudio/bookdown")}
+\end{Highlighting}
+\end{Shaded}
+
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.name/tinytex/}.
+
+\hypertarget{ggplot}{%
+\chapter{\texorpdfstring{Tips for using \texttt{ggplot} to generate publication-quality graphs}{Tips for using ggplot to generate publication-quality graphs}}\label{ggplot}}
+
+\hypertarget{plot-margins}{%
+\section{Plot margins}\label{plot-margins}}
+
+\hypertarget{removing-white-space-around-the-plot}{%
+\subsection{Removing white space around the plot}\label{removing-white-space-around-the-plot}}
+
+To remove the white space around the plot, set the plot margins equal to 0. The order is {[}top, right, bottom, left{]}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{figure }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{margin}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+This setting is useful when working with package \texttt{cowplot} to generate multi-panel figures. \texttt{cowplot::plot\_grid} often overlays panel labels on top of the figures, so you can add space to the top of the figure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot\_grid}\NormalTok{(g1 }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{margin}\NormalTok{(}\AttributeTok{t =} \DecValTok{15}\NormalTok{)),}
+\NormalTok{          g2 }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.margin =} \FunctionTok{margin}\NormalTok{(}\AttributeTok{t =} \DecValTok{15}\NormalTok{)),}
+          \AttributeTok{nrow =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{removing-white-space-between-axes-and-plot}{%
+\subsection{Removing white space between axes and plot}\label{removing-white-space-between-axes-and-plot}}
+
+Sometimes it's useful to reduce the distance between the plot and axis text. You can do this by reducing the top margin of the x-axis text and the right margin of the y-axis text:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{figure }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{margin =} \FunctionTok{margin}\NormalTok{(}\AttributeTok{t =} \SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\AttributeTok{r =} \DecValTok{0}\NormalTok{, }\AttributeTok{b =} \DecValTok{0}\NormalTok{, }\AttributeTok{l =} \DecValTok{0}\NormalTok{)),}
+        \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{margin =} \FunctionTok{margin}\NormalTok{(}\AttributeTok{t =} \DecValTok{0}\NormalTok{, }\AttributeTok{r =} \SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\AttributeTok{b =} \DecValTok{0}\NormalTok{, }\AttributeTok{l =} \DecValTok{0}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{axis-labels}{%
+\section{Axis labels}\label{axis-labels}}
+
+\hypertarget{removing-axis-labels}{%
+\subsection{Removing axis labels}\label{removing-axis-labels}}
+
+When removing axis labels (for example, when dealing with dates in the x-axis), use \texttt{labs(x\ =\ NULL)} rather than \texttt{labs(x\ =\ "")}, as this eliminates the extra white space.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{figure }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \ConstantTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{legends}{%
+\section{Legends}\label{legends}}
+
+\hypertarget{removing-the-legend-title}{%
+\subsection{Removing the legend title}\label{removing-the-legend-title}}
+
+Legend titles are always redundant: if the figure is included in the paper or report, then the title and axis label give enough information; if the figure is in a presentation, the slide title and description along with axis labels provide enough information to understand what is being plotted.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{figure }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.title =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{removing-black-boxes-around-legend-keys}{%
+\subsection{Removing black boxes around legend keys}\label{removing-black-boxes-around-legend-keys}}
+
+Legend keys look much better without the black border surrounding them. This should be a standard for any figure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{figure }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.key =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{putting-the-legend-inside-the-figure}{%
+\subsection{Putting the legend inside the figure}\label{putting-the-legend-inside-the-figure}}
+
+Useful for when there is a lot of blank space in the figure.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{figure }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.75}\NormalTok{, }\FloatTok{0.85}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{geographic-place-matching}{%
+\section{Geographic place matching}\label{geographic-place-matching}}
+
+In applied work, we often have to deal with observations that have an associated address or coordinates but no geographic codes. For cases in which no coordinates are available, one option is to match addresses to coordinates using Google Place API searches, and then merge the resulting coordinates with shapefiles to obtain geographic codes.
+
+\hypertarget{google-places-api-searches}{%
+\subsection{Google Places API searches}\label{google-places-api-searches}}
+
+R package \texttt{googleway} makes it easy to perform Google Place API searches. \texttt{googleway::google\_find\_place} generates a \href{https://developers.google.com/maps/documentation/places/web-service/search-find-place}{Find Place request}, taking a text input and returning an array of place candidates, along with their corresponding search status. From this result, we can extract the address and coordinates.
+
+Currently, you get \$200 of Google Maps Platform usage every month for free. \href{https://mapsplatform.google.com/pricing/}{Each request costs \$0.017}. While this may seem like little, generating 12,000 requests will already exceed the monthly free usage quota (\$200 = 11,764.7 requests). It's easy to exceed this number of requests when you're running loops for large query vectors repeatedly. Therefore, the best practice is to start out with a small sample, ensure that searches are returning valid results, and then extend the method to the full sample. You can \href{https://developers.google.com/maps/documentation/places/web-service/report-monitor\#quotas}{set a maximum quota} of 375 requests per day (375 x 31 = 11,625) to ensure you don't exceed the monthly free usage limit.
+
+To start using \texttt{googleway} to conduct Google Place API searches, you first need to \href{https://developers.google.com/maps/documentation/places/web-service/cloud-setup}{create a Google Cloud project} and \href{https://developers.google.com/maps/documentation/places/web-service/get-api-key}{set up an API key}. Once you have set this up, you can load \texttt{googleway}, define the API key and start conducting searches.
+Here is a simple example of an individual query.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pacman}\SpecialCharTok{::}\FunctionTok{p\_load}\NormalTok{(here, tidyverse, googleway)}
+
+\CommentTok{\# (1.1): Set Google Place search API key.}
+\NormalTok{key }\OtherTok{\textless{}{-}} \StringTok{"KJzaLyCLI{-}nXPsHqVwz{-}jna1HYg2jKpBueSsTWs"} \CommentTok{\# insert API key here}
+\FunctionTok{set\_key}\NormalTok{(key)}
+
+\CommentTok{\# (1.2): Define tibble with addresses to look up.}
+\NormalTok{missing\_locs }\OtherTok{\textless{}{-}} \FunctionTok{tribble}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{id, }\SpecialCharTok{\textasciitilde{}}\NormalTok{address,}
+                        \DecValTok{1}\NormalTok{, }\StringTok{"Av. Álvaro Obregón 225, Roma Norte, Cuauhtémoc, CDMX, Mexico"}\NormalTok{,}
+                        \DecValTok{2}\NormalTok{, }\StringTok{"Río Hondo \#1, Col. Progreso Tizapán, Álvaro Obregón, CDMX, México"}\NormalTok{)}
+
+\CommentTok{\# (1.3): Loop over missing addresses.}
+\NormalTok{loc\_coords }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(missing\_locs)) \{     }
+  \CommentTok{\# Get results from Google Place search}
+\NormalTok{  results }\OtherTok{\textless{}{-}} \FunctionTok{google\_find\_place}\NormalTok{(missing\_locs}\SpecialCharTok{$}\NormalTok{address[i], }\AttributeTok{inputtype =} \StringTok{"textquery"}\NormalTok{, }\AttributeTok{language =} \StringTok{"es"}\NormalTok{)}
+  
+  \CommentTok{\# Print results}
+\NormalTok{  search\_status }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(results[[}\StringTok{"status"}\NormalTok{]] }\SpecialCharTok{==} \StringTok{"OK"}\NormalTok{, }
+                          \StringTok{"search successful"}\NormalTok{, }
+                          \StringTok{"search returned no results"}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{str\_c}\NormalTok{(}\StringTok{"Working on address "}\NormalTok{, i, }\StringTok{" out of "}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(missing\_locs), }\StringTok{", "}\NormalTok{, search\_status))}
+  
+  \CommentTok{\# Extract formatted address and coordinates results}
+\NormalTok{  clean\_results }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{id =}\NormalTok{ missing\_locs}\SpecialCharTok{$}\NormalTok{id[i],}
+                          \AttributeTok{address\_clean =}\NormalTok{ results[[}\StringTok{"candidates"}\NormalTok{]][[}\StringTok{"formatted\_address"}\NormalTok{]],}
+                          \AttributeTok{loc\_lat =}\NormalTok{ results[[}\StringTok{"candidates"}\NormalTok{]][[}\StringTok{"geometry"}\NormalTok{]][[}\StringTok{"location"}\NormalTok{]][[}\StringTok{"lat"}\NormalTok{]],}
+                          \AttributeTok{loc\_lon =}\NormalTok{ results[[}\StringTok{"candidates"}\NormalTok{]][[}\StringTok{"geometry"}\NormalTok{]][[}\StringTok{"location"}\NormalTok{]][[}\StringTok{"lng"}\NormalTok{]])}
+  
+  \CommentTok{\# Append to full results dataframe.}
+\NormalTok{  loc\_coords }\SpecialCharTok{\%\textless{}\textgreater{}\%} \FunctionTok{bind\_rows}\NormalTok{(clean\_results)}
+\NormalTok{\}}
+\FunctionTok{rm}\NormalTok{(results, clean\_results, i, search\_status)}
+
+\CommentTok{\# (1.4): Keep first result for each address.}
+\NormalTok{clean\_results }\SpecialCharTok{\%\textless{}\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Once you finish your set of Google Place API requests, you should save the results to a CSV file for later use. The search process is not perfectly replicable as identical searches can produce different results over time, so you should only run your full search loop once.
+
+\hypertarget{number-formatting-functions}{%
+\section{Number formatting functions}\label{number-formatting-functions}}
+
+You can save these functions in a script called number\_functions.R and import them in each script where they're needed, e.g.:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"scripts"}\NormalTok{, }\StringTok{"programs"}\NormalTok{, }\StringTok{"number\_functions.R"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{calculating-the-mean-median-and-standard-deviation-of-a-variable}{%
+\subsection{Calculating the mean, median and standard deviation of a variable}\label{calculating-the-mean-median-and-standard-deviation-of-a-variable}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Mean}
+\NormalTok{num\_mean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, variable, }\AttributeTok{dig =} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{pull}\NormalTok{(}\FunctionTok{eval}\NormalTok{(}\FunctionTok{as.name}\NormalTok{(variable))) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mean}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{round}\NormalTok{(}\AttributeTok{digits =}\NormalTok{ dig)}
+\NormalTok{\}}
+
+\CommentTok{\# Median}
+\NormalTok{num\_median }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, variable, }\AttributeTok{dig =} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{pull}\NormalTok{(}\FunctionTok{eval}\NormalTok{(}\FunctionTok{as.name}\NormalTok{(variable))) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{median}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{round}\NormalTok{(}\AttributeTok{digits =}\NormalTok{ dig)}
+\NormalTok{\}}
+
+\CommentTok{\# Standard deviation}
+\NormalTok{num\_sd }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, variable, }\AttributeTok{dig =} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{pull}\NormalTok{(}\FunctionTok{eval}\NormalTok{(}\FunctionTok{as.name}\NormalTok{(variable))) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{sd}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{round}\NormalTok{(}\AttributeTok{digits =}\NormalTok{ dig)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+You can call these functions the following way:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{num\_mean}\NormalTok{(}\StringTok{"number\_employees"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{checking-if-a-number-is-an-integer.}{%
+\subsection{Checking if a number is an integer.}\label{checking-if-a-number-is-an-integer.}}
+
+This is used in the functions that print numbers to .tex files, since no decimals should be added after integers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num\_int }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x }\SpecialCharTok{==} \FunctionTok{round}\NormalTok{(x)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{number-formatting-function}{%
+\subsection{Number formatting function}\label{number-formatting-function}}
+
+This function formats numbers with a standard number of digits and commas to present large and small numbers in a more readable format.
+
+How does this function work? First, the function calculates the number of digits the number should have to the right of the decimal point. For numbers from 1-9, three digits are assigned, two digits are assigned for numbers 10-99, one for 100-999, and no right digits for numbers equal or larger than 1,000. This function sets the maximum number of right digits as 3. Therefore, 0.0001 will display as 0.000. Once the number of right digits is defined, the number is formatted. Numbers smaller than 1 are padded if necessary to ensure that there are 3 right digits (e.g., 0.25 is formatted as 0.250). The default number of right digits can be overridden with the option \texttt{override\_right\_digits}.
+
+This function has the same name as \texttt{scales::comma\_format}. However, this function has been superseded by \texttt{scales::label\_comma}, so there are no issues with this user-defined function taking priority over \texttt{scales::comma\_format}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{comma\_format }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{override\_right\_digits =} \ConstantTok{NA}\NormalTok{) \{}
+  \CommentTok{\# Calculate number of right digits}
+  \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textless{}=} \DecValTok{0}\NormalTok{) \{num }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{num }\OtherTok{\textless{}{-}}\NormalTok{ x\}}
+\NormalTok{  right\_digits }\OtherTok{\textless{}{-}} \DecValTok{3} \SpecialCharTok{{-}} \FunctionTok{floor}\NormalTok{(}\FunctionTok{log10}\NormalTok{(}\FunctionTok{abs}\NormalTok{(num)))}
+  \ControlFlowTok{if}\NormalTok{ (right\_digits }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) \{right\_digits }\OtherTok{\textless{}{-}} \DecValTok{0}\NormalTok{\}}
+  \ControlFlowTok{if}\NormalTok{ (right\_digits }\SpecialCharTok{\textgreater{}} \DecValTok{3}\NormalTok{) \{right\_digits }\OtherTok{\textless{}{-}} \DecValTok{3}\NormalTok{\}}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(override\_right\_digits)) \{right\_digits }\OtherTok{\textless{}{-}}\NormalTok{ override\_right\_digits\}}
+  \CommentTok{\# Calculate number of left digits}
+\NormalTok{  left\_digits }\OtherTok{\textless{}{-}} \DecValTok{4} \SpecialCharTok{+} \FunctionTok{floor}\NormalTok{(}\FunctionTok{log10}\NormalTok{(}\FunctionTok{abs}\NormalTok{(num)))}
+  \ControlFlowTok{if}\NormalTok{ (left\_digits }\SpecialCharTok{\textless{}=} \DecValTok{0}\NormalTok{) \{left\_digits }\OtherTok{\textless{}{-}} \DecValTok{1}\NormalTok{\}}
+  \CommentTok{\# Format number}
+\NormalTok{  proc\_num }\OtherTok{\textless{}{-}} \FunctionTok{format}\NormalTok{(}\FunctionTok{round}\NormalTok{(x, right\_digits), }\AttributeTok{nsmall =}\NormalTok{ right\_digits, }\AttributeTok{digits =}\NormalTok{  left\_digits, }\AttributeTok{big.mark =} \StringTok{","}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (proc\_num }\SpecialCharTok{!=} \StringTok{"0"} \SpecialCharTok{\&} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_replace}\NormalTok{(proc\_num, }\FunctionTok{fixed}\NormalTok{(}\StringTok{","}\NormalTok{), }\StringTok{""}\NormalTok{)) }\SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{    proc\_num }\OtherTok{\textless{}{-}} \FunctionTok{str\_pad}\NormalTok{(proc\_num, right\_digits }\SpecialCharTok{+} \DecValTok{2}\NormalTok{, }\StringTok{"right"}\NormalTok{, }\StringTok{"0"}\NormalTok{)}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(proc\_num)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Here are a few examples of the output of this function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pacman}\SpecialCharTok{::}\FunctionTok{p\_load}\NormalTok{(tidyverse)}
+
+\FunctionTok{lapply}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.098}\NormalTok{, }\FloatTok{0.11}\NormalTok{, }\FloatTok{3.1233}\NormalTok{, }\FloatTok{45.968}\NormalTok{, }\DecValTok{1949}\NormalTok{), comma\_format) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{unlist}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "0.098" "0.110" "3.123" "45.97" "1,949"
+\end{verbatim}
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}
