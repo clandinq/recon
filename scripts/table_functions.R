@@ -245,6 +245,17 @@ get_num_cols <- function(table) {
   return(col_num)
 }
 
+insert_col_numbers <- function(table, col_numbers) {
+  if (col_numbers) {
+    table %>% 
+      str_insert(pattern = "\\midrule",
+                 insert = str_c("& ", paste(str_c("(", 1:get_num_cols(table), ")"), collapse = " & "), "\\\\"),
+                 before = TRUE) 
+  } else {
+    table
+  }
+}
+
 # (2.2): Add main multi-column title. #
 #' Add main multi-column title.
 #' 
@@ -518,6 +529,7 @@ coef_two_rows <- function(table) {
 #' Insert space between variables.
 #' 
 #' @param table LaTeX-formatted string.
+#' @param space Spacing in cm.
 #' 
 #' @return LaTeX-formatted string.
 #' 
@@ -537,22 +549,26 @@ coef_two_rows <- function(table) {
 #'   write(here("results", "tables", "current_table.tex"))
 #' 
 #' @export
-add_line_space <- function(table) {
-  # Keep split rows after first parentheses.
+add_line_space <- function(table, space = 0.3) {
+  # Keep split rows after first parentheses
   keep_after_firstpar <- (table %>% 
                             str_sub(str_locate(table, fixed("("))[1], str_length(table)) %>% 
                             str_split("\\\n"))[[1]]
-  # Keep rows with parentheses.
+  # Keep rows with parentheses
   keep_after_firstpar <- keep_after_firstpar[str_detect(keep_after_firstpar, fixed("("))]
   # Drop first one (column numbers)
   keep_after_firstpar <- keep_after_firstpar[2:length(keep_after_firstpar)]
-  # Replace with spacing.
+  # Replace with spacing
   proc_table <- table
   for (i in 1:length(keep_after_firstpar)) {
     proc_table %<>%
       str_replace(pattern = fixed(keep_after_firstpar[i]),
-                  replacement = str_c(keep_after_firstpar[i], "[0.3cm]"))
+                  replacement = str_c(keep_after_firstpar[i], "[", space, "cm]"))
   }
+  # Remove space between final row and midrule
+  proc_table %<>%
+    str_replace(pattern = "\\[0\\.[0-9]+cm\\]\n\\\\midrule",
+                replacement = "\n\\\\midrule")
   return(proc_table)
 }
 
@@ -560,11 +576,15 @@ add_line_space <- function(table) {
 ##    (4): Master table function and adding footnotes.  ##
 ##########################################################
 # (4.1): Base table function combining all functions. #
-gen_base_table <- function(models, caption, label, title = NULL, cline = FALSE, coef_names, numobs = "Number of observations", ...) {
+gen_base_table <- function(models, caption, label, title = NULL, cline = FALSE, remove_col_names = FALSE, numobs = "Number of firms", ...) {
   # Get length of model. If large, it is a regression that needs to be put in a list
   if (length(models) > 10) {models <- list(models)}
   # Generate table
   output <- models %>% 
+    set_names(case_when(!remove_col_names & !is.null(names(models)) ~ list(names(models)),
+                        !remove_col_names & is.null(names(models)) ~ list(paste("Model", 1:length(models))), 
+                        remove_col_names ~ list(paste("Model", 1:length(models)))) %>% 
+                unlist()) %>% 
     # Fix number of observation number format
     comma_numobs() %>% 
     # Generate table with modelsummary
@@ -646,10 +666,16 @@ format_save_footnote <- function(text = "", filename, stars = FALSE) {
 #'
 #' @export
 convert_save_pres_table <- function(table_name, table_path = here("results", "tables"), output_path = here("results", "tables")) {
+  # Read table
   table <- read_file(here(table_path, table_name))
+  # Keep content between tabulars
   table <- str_sub(table,
                    str_locate(table, fixed("\\begin{tabular}"))[1],
                    str_locate(table, fixed("\\end{tabular}"))[2])
+  # Remove any additional spacing
+  table %<>%
+    str_remove_all("\\[0\\.[0-9]+cm\\]")
+  # Save table
   pres_table_name <- str_c("pres_", table_name)
   write(table, here(output_path, pres_table_name))
   print(str_c("Presentation table saved to",
