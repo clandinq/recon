@@ -246,12 +246,18 @@ The packages needed are <code>tidyverse</code> for data manipulation, <code>fixe
 With package <code>conflicted</code>, we can specify which package to use for a given function.
 Since <code>multcomp</code> and <code>dplyr</code> conflict in multiple functions, we can specify which package to use for each function and give preference to <code>dplyr</code>.
 The <code>iris</code> dataset contains measurements of 4 attributes for 50 flowers from 3 different species.</p>
-<pre><code>## [conflicted] Removing existing preference
-## [conflicted] Will prefer dplyr::select over any other package
-## [conflicted] Removing existing preference
-## [conflicted] Will prefer dplyr::filter over any other package
-## [conflicted] Removing existing preference
-## [conflicted] Will prefer dplyr::last over any other package</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="statistical-tests-in-r.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb47-2"><a href="statistical-tests-in-r.html#cb47-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, fixest, modelsummary, multcomp, </span>
+<span id="cb47-3"><a href="statistical-tests-in-r.html#cb47-3" aria-hidden="true" tabindex="-1"></a>               conflicted, fastDummies)</span>
+<span id="cb47-4"><a href="statistical-tests-in-r.html#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="statistical-tests-in-r.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolve conflicts</span></span>
+<span id="cb47-6"><a href="statistical-tests-in-r.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;select&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb47-7"><a href="statistical-tests-in-r.html#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;filter&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb47-8"><a href="statistical-tests-in-r.html#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;last&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb47-9"><a href="statistical-tests-in-r.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="statistical-tests-in-r.html#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load iris data</span></span>
+<span id="cb47-11"><a href="statistical-tests-in-r.html#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb47-12"><a href="statistical-tests-in-r.html#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
