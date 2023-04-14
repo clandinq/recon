@@ -18,7 +18,7 @@ With package `conflicted`, we can specify which package to use for a given funct
 Since `multcomp` and `dplyr` conflict in multiple functions, we can specify which package to use for each function and give preference to `dplyr`.
 The `iris` dataset contains measurements of 4 attributes for 50 flowers from 3 different species.
 
-```{r load_data_conflicts, eval = TRUE, echo = FALSE}
+```{r load_data_conflicts, eval = TRUE, echo = TRUE, message = FALSE, warning = FALSE}
 # Load packages
 pacman::p_load(tidyverse, fixest, modelsummary, multcomp, 
                conflicted, fastDummies)
