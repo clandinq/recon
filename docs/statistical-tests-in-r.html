@@ -246,23 +246,12 @@ The packages needed are <code>tidyverse</code> for data manipulation, <code>fixe
 With package <code>conflicted</code>, we can specify which package to use for a given function.
 Since <code>multcomp</code> and <code>dplyr</code> conflict in multiple functions, we can specify which package to use for each function and give preference to <code>dplyr</code>.
 The <code>iris</code> dataset contains measurements of 4 attributes for 50 flowers from 3 different species.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="statistical-tests-in-r.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
-<span id="cb47-2"><a href="statistical-tests-in-r.html#cb47-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, fixest, modelsummary, multcomp, </span>
-<span id="cb47-3"><a href="statistical-tests-in-r.html#cb47-3" aria-hidden="true" tabindex="-1"></a>               conflicted, fastDummies)</span>
-<span id="cb47-4"><a href="statistical-tests-in-r.html#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-5"><a href="statistical-tests-in-r.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolve conflicts</span></span>
-<span id="cb47-6"><a href="statistical-tests-in-r.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;select&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <pre><code>## [conflicted] Removing existing preference
-## [conflicted] Will prefer dplyr::select over any other package</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="statistical-tests-in-r.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;filter&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
-<pre><code>## [conflicted] Removing existing preference
-## [conflicted] Will prefer dplyr::filter over any other package</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-tests-in-r.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;last&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
-<pre><code>## [conflicted] Removing existing preference
+## [conflicted] Will prefer dplyr::select over any other package
+## [conflicted] Removing existing preference
+## [conflicted] Will prefer dplyr::filter over any other package
+## [conflicted] Removing existing preference
 ## [conflicted] Will prefer dplyr::last over any other package</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="statistical-tests-in-r.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load iris data</span></span>
-<span id="cb53-2"><a href="statistical-tests-in-r.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
-<span id="cb53-3"><a href="statistical-tests-in-r.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
@@ -272,20 +261,20 @@ The <code>iris</code> dataset contains measurements of 4 attributes for 50 flowe
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Next, we define terciles of sepal width and a simple model using package <code>fixest</code>.
 We show the model results using the <code>mshow</code> function defined in the previous chapter.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="statistical-tests-in-r.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define terciles of sepal width</span></span>
-<span id="cb55-2"><a href="statistical-tests-in-r.html#cb55-2" aria-hidden="true" tabindex="-1"></a>proc_data <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb55-3"><a href="statistical-tests-in-r.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sepal_width_tercile =</span> <span class="fu">ntile</span>(Sepal.Width, <span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb55-4"><a href="statistical-tests-in-r.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dummy_cols</span>(<span class="st">&quot;sepal_width_tercile&quot;</span>)</span>
-<span id="cb55-5"><a href="statistical-tests-in-r.html#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-6"><a href="statistical-tests-in-r.html#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define coefficient names</span></span>
-<span id="cb55-7"><a href="statistical-tests-in-r.html#cb55-7" aria-hidden="true" tabindex="-1"></a>coef_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;First tercile sepal width&quot;</span>, <span class="st">&quot;Second tercile sepal width&quot;</span>, <span class="st">&quot;Third tercile sepal width&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb55-8"><a href="statistical-tests-in-r.html#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="fu">str_c</span>(<span class="st">&quot;sepal_width_tercile_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)))</span>
-<span id="cb55-9"><a href="statistical-tests-in-r.html#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-10"><a href="statistical-tests-in-r.html#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model </span></span>
-<span id="cb55-11"><a href="statistical-tests-in-r.html#cb55-11" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(Petal.Width <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> Sepal.Length <span class="sc">+</span> sepal_width_tercile_1 <span class="sc">+</span> sepal_width_tercile_2 <span class="sc">+</span> sepal_width_tercile_3,</span>
-<span id="cb55-12"><a href="statistical-tests-in-r.html#cb55-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="st">&quot;hetero&quot;</span>,</span>
-<span id="cb55-13"><a href="statistical-tests-in-r.html#cb55-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> proc_data)</span>
-<span id="cb55-14"><a href="statistical-tests-in-r.html#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mshow</span>(<span class="fu">list</span>(<span class="st">&quot;Petal width&quot;</span> <span class="ot">=</span> m1), <span class="at">coef_map =</span> coef_names)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="statistical-tests-in-r.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define terciles of sepal width</span></span>
+<span id="cb49-2"><a href="statistical-tests-in-r.html#cb49-2" aria-hidden="true" tabindex="-1"></a>proc_data <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="statistical-tests-in-r.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sepal_width_tercile =</span> <span class="fu">ntile</span>(Sepal.Width, <span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-4"><a href="statistical-tests-in-r.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dummy_cols</span>(<span class="st">&quot;sepal_width_tercile&quot;</span>)</span>
+<span id="cb49-5"><a href="statistical-tests-in-r.html#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="statistical-tests-in-r.html#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define coefficient names</span></span>
+<span id="cb49-7"><a href="statistical-tests-in-r.html#cb49-7" aria-hidden="true" tabindex="-1"></a>coef_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;First tercile sepal width&quot;</span>, <span class="st">&quot;Second tercile sepal width&quot;</span>, <span class="st">&quot;Third tercile sepal width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-8"><a href="statistical-tests-in-r.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="fu">str_c</span>(<span class="st">&quot;sepal_width_tercile_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)))</span>
+<span id="cb49-9"><a href="statistical-tests-in-r.html#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="statistical-tests-in-r.html#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model </span></span>
+<span id="cb49-11"><a href="statistical-tests-in-r.html#cb49-11" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(Petal.Width <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> Sepal.Length <span class="sc">+</span> sepal_width_tercile_1 <span class="sc">+</span> sepal_width_tercile_2 <span class="sc">+</span> sepal_width_tercile_3,</span>
+<span id="cb49-12"><a href="statistical-tests-in-r.html#cb49-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="st">&quot;hetero&quot;</span>,</span>
+<span id="cb49-13"><a href="statistical-tests-in-r.html#cb49-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> proc_data)</span>
+<span id="cb49-14"><a href="statistical-tests-in-r.html#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mshow</span>(<span class="fu">list</span>(<span class="st">&quot;Petal width&quot;</span> <span class="ot">=</span> m1), <span class="at">coef_map =</span> coef_names)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -367,29 +356,29 @@ Num.Obs.
 </tr>
 </tbody>
 </table>
-<p>The next step is to use the function <code>extract_test_coef</code> to test two hypothesis: 1.
-The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width 2.
-The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="statistical-tests-in-r.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function</span></span>
-<span id="cb56-2"><a href="statistical-tests-in-r.html#cb56-2" aria-hidden="true" tabindex="-1"></a>extract_test_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, coef) {</span>
-<span id="cb56-3"><a href="statistical-tests-in-r.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> </span>
-<span id="cb56-4"><a href="statistical-tests-in-r.html#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">paste0</span>(coef, <span class="st">&quot;= 0&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb56-5"><a href="statistical-tests-in-r.html#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">confint</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb56-6"><a href="statistical-tests-in-r.html#cb56-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>()</span>
-<span id="cb56-7"><a href="statistical-tests-in-r.html#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>test<span class="sc">$</span>pvalues))</span>
-<span id="cb56-8"><a href="statistical-tests-in-r.html#cb56-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb56-9"><a href="statistical-tests-in-r.html#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-10"><a href="statistical-tests-in-r.html#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Test hypotheses</span></span>
-<span id="cb56-11"><a href="statistical-tests-in-r.html#cb56-11" aria-hidden="true" tabindex="-1"></a>pval_1_2 <span class="ot">&lt;-</span> <span class="fu">extract_test_coef</span>(m1, <span class="st">&quot;sepal_width_tercile_1 - sepal_width_tercile_2&quot;</span>)</span>
-<span id="cb56-12"><a href="statistical-tests-in-r.html#cb56-12" aria-hidden="true" tabindex="-1"></a>pval_1_3 <span class="ot">&lt;-</span> <span class="fu">extract_test_coef</span>(m1, <span class="st">&quot;sepal_width_tercile_1 - sepal_width_tercile_3&quot;</span>)</span></code></pre></div>
+<p>The next step is to use the function <code>extract_test_coef</code> to test two hypothesis:
+1. The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width
+2. The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="statistical-tests-in-r.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function</span></span>
+<span id="cb50-2"><a href="statistical-tests-in-r.html#cb50-2" aria-hidden="true" tabindex="-1"></a>extract_test_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, coef) {</span>
+<span id="cb50-3"><a href="statistical-tests-in-r.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> </span>
+<span id="cb50-4"><a href="statistical-tests-in-r.html#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">paste0</span>(coef, <span class="st">&quot;= 0&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-5"><a href="statistical-tests-in-r.html#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">confint</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb50-6"><a href="statistical-tests-in-r.html#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>()</span>
+<span id="cb50-7"><a href="statistical-tests-in-r.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>test<span class="sc">$</span>pvalues))</span>
+<span id="cb50-8"><a href="statistical-tests-in-r.html#cb50-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-9"><a href="statistical-tests-in-r.html#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="statistical-tests-in-r.html#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Test hypotheses</span></span>
+<span id="cb50-11"><a href="statistical-tests-in-r.html#cb50-11" aria-hidden="true" tabindex="-1"></a>pval_1_2 <span class="ot">&lt;-</span> <span class="fu">extract_test_coef</span>(m1, <span class="st">&quot;sepal_width_tercile_1 - sepal_width_tercile_2&quot;</span>)</span>
+<span id="cb50-12"><a href="statistical-tests-in-r.html#cb50-12" aria-hidden="true" tabindex="-1"></a>pval_1_3 <span class="ot">&lt;-</span> <span class="fu">extract_test_coef</span>(m1, <span class="st">&quot;sepal_width_tercile_1 - sepal_width_tercile_3&quot;</span>)</span></code></pre></div>
 <p>Finally, we add the p-values to the model results using the <code>add_row</code> argument of the <code>mshow</code> function.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="statistical-tests-in-r.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add p-values to model results</span></span>
-<span id="cb57-2"><a href="statistical-tests-in-r.html#cb57-2" aria-hidden="true" tabindex="-1"></a>add_row <span class="ot">&lt;-</span> <span class="fu">tribble</span>(<span class="sc">~</span>name, <span class="sc">~</span>value,</span>
-<span id="cb57-3"><a href="statistical-tests-in-r.html#cb57-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;P-value (Sepal width 1st tercile = Sepal width 2nd tercile)&quot;</span>, <span class="fu">comma_format</span>(pval_1_2),</span>
-<span id="cb57-4"><a href="statistical-tests-in-r.html#cb57-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;P-value (Sepal width 1st tercile = Sepal width 3rd tercile)&quot;</span>, <span class="fu">comma_format</span>(pval_1_3))</span>
-<span id="cb57-5"><a href="statistical-tests-in-r.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mshow</span>(<span class="fu">list</span>(<span class="st">&quot;Petal width&quot;</span> <span class="ot">=</span> m1), </span>
-<span id="cb57-6"><a href="statistical-tests-in-r.html#cb57-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">coef_map =</span> coef_names, </span>
-<span id="cb57-7"><a href="statistical-tests-in-r.html#cb57-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">add_row =</span> add_row)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-tests-in-r.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add p-values to model results</span></span>
+<span id="cb51-2"><a href="statistical-tests-in-r.html#cb51-2" aria-hidden="true" tabindex="-1"></a>add_row <span class="ot">&lt;-</span> <span class="fu">tribble</span>(<span class="sc">~</span>name, <span class="sc">~</span>value,</span>
+<span id="cb51-3"><a href="statistical-tests-in-r.html#cb51-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;P-value (Sepal width 1st tercile = Sepal width 2nd tercile)&quot;</span>, <span class="fu">comma_format</span>(pval_1_2),</span>
+<span id="cb51-4"><a href="statistical-tests-in-r.html#cb51-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;P-value (Sepal width 1st tercile = Sepal width 3rd tercile)&quot;</span>, <span class="fu">comma_format</span>(pval_1_3))</span>
+<span id="cb51-5"><a href="statistical-tests-in-r.html#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mshow</span>(<span class="fu">list</span>(<span class="st">&quot;Petal width&quot;</span> <span class="ot">=</span> m1), </span>
+<span id="cb51-6"><a href="statistical-tests-in-r.html#cb51-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">coef_map =</span> coef_names, </span>
+<span id="cb51-7"><a href="statistical-tests-in-r.html#cb51-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">add_row =</span> add_row)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -487,7 +476,7 @@ P-value (Sepal width 1st tercile = Sepal width 3rd tercile)
 </tr>
 </tbody>
 </table>
-<p>From the results of the hypotheses tests, we can reject the hypothesis that the effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width, and that the effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width.</p>
+<p>From the results of these hypotheses tests, we can reject the hypothesis that the effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width, and that the effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width.</p>
 
 </div>
 </div>

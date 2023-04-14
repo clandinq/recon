@@ -18,7 +18,7 @@ With package `conflicted`, we can specify which package to use for a given funct
 Since `multcomp` and `dplyr` conflict in multiple functions, we can specify which package to use for each function and give preference to `dplyr`.
 The `iris` dataset contains measurements of 4 attributes for 50 flowers from 3 different species.
 
-```{r load_data_conflicts, eval = TRUE, echo = TRUE}
+```{r load_data_conflicts, eval = TRUE, echo = FALSE}
 # Load packages
 pacman::p_load(tidyverse, fixest, modelsummary, multcomp, 
                conflicted, fastDummies)
@@ -63,9 +63,9 @@ m1 <- feols(Petal.Width ~ 0 + Sepal.Length + sepal_width_tercile_1 + sepal_width
 mshow(list("Petal width" = m1), coef_map = coef_names)
 ```
 
-The next step is to use the function `extract_test_coef` to test two hypothesis: 1.
-The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width 2.
-The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.
+The next step is to use the function `extract_test_coef` to test two hypothesis: 
+    1. The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width
+    2. The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.
 
 ```{r extract_test_coef, eval = TRUE, echo = TRUE}
 # Define function
@@ -94,4 +94,4 @@ mshow(list("Petal width" = m1),
       add_row = add_row)
 ```
 
-From the results of the hypotheses tests, we can reject the hypothesis that the effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width, and that the effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width.
+From the results of these hypotheses tests, we can reject the hypothesis that the effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width, and that the effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width.
