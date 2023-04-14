@@ -1,7 +1,9 @@
-commit 8aef1b04b31f2bf170310fa0db06f62b32448c29
+commit b0f11b12c368340da4cf34e6deaa6b08f0edf3e7
 Author: clandinq <cesar.landin@itam.mx>
-Date:   Thu Apr 13 23:02:37 2023 -0500
+Date:   Thu Apr 13 23:07:52 2023 -0500
 
-    Add stuff
+    Update final issues
 
-M	03-stat_tests.Rmd
+M	docs/search_index.json
+M	docs/statistical-tests-in-r.html
+A	git_log.txt

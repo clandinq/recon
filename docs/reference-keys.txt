@@ -42,7 +42,7 @@ preparing-tables-for-presentations
 generating-presentation-versions-of-tables
 removing-standard-errors-and-column-numbers
 adding-notes
-statistical-tests-in-r
-easy-hypothesis-tests-in-r
+post-regression-statistical-tests
+easy-two-sided-hypothesis-tests-in-r
 geographic-place-matching
 google-places-api-searches

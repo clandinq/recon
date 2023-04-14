@@ -4,13 +4,13 @@ editor_options:
     wrap: sentence
 ---
 
-# Statistical Tests in R
+# Post-regression statistical tests
 
 In this section, we introduce functions for performing hypothesis tests on model coefficients using the `multcomp` package.
 We introduce a function called `extract_test_coef` that tests a hypothesis on model parameters and extracts the resulting p-values of the test.
 Then, we show the usage of the function with an example using the `iris` dataset.
 
-## Easy hypothesis tests in R
+## Easy two-sided hypothesis tests in R
 
 First, load the required packages and the `iris` dataset.
 The packages needed are `tidyverse` for data manipulation, `fixest` for estimating models, `modelsummary` for displaying model results, `multcomp` for estimating hypothesis tests and `conflicted` to deal with conflicts in function names.
@@ -63,23 +63,29 @@ m1 <- feols(Petal.Width ~ 0 + Sepal.Length + sepal_width_tercile_1 + sepal_width
 mshow(list("Petal width" = m1), coef_map = coef_names)
 ```
 
-The next step is to use the function `extract_test_coef` to test two hypothesis: 
-    1. The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width
-    2. The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.
+The next step is to use the function `extract_test_coef` to test two hypothesis:
+
+1.  The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width
+2.  The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.
+
+The expression included in the function must be in the form **`coef_a == coef_b`** and will perform a two-sided hypothesis test where the null hypothesis is $H_0: coef_a = coef_b$.
 
 ```{r extract_test_coef, eval = TRUE, echo = TRUE}
 # Define function
-extract_test_coef <- function(model, coef) {
+extract_test_coef <- function(model, comp) {
+  expr <- comp %>% 
+    str_replace(pattern = fixed("=="),
+                replacement = "-")
   res <- model %>% 
-    glht(linfct = paste0(coef, "= 0")) %>% 
+    glht(linfct = str_c(expr, "= 0")) %>% 
     confint() %>% 
     summary()
   return(as.numeric(res$test$pvalues))
 }
 
 # Test hypotheses
-pval_1_2 <- extract_test_coef(m1, "sepal_width_tercile_1 - sepal_width_tercile_2")
-pval_1_3 <- extract_test_coef(m1, "sepal_width_tercile_1 - sepal_width_tercile_3")
+pval_1_2 <- extract_test_coef(m1, "sepal_width_tercile_1 == sepal_width_tercile_2")
+pval_1_3 <- extract_test_coef(m1, "sepal_width_tercile_1 == sepal_width_tercile_3")
 ```
 
 Finally, we add the p-values to the model results using the `add_row` argument of the `mshow` function.
