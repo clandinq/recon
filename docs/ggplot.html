@@ -23,7 +23,7 @@
 <meta name="author" content="César Landín" />
 
 
-<meta name="date" content="2023-04-04" />
+<meta name="date" content="2023-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,8 +54,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -158,19 +156,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.2" data-path="ggplot.html"><a href="ggplot.html#removing-black-boxes-around-legend-keys"><i class="fa fa-check"></i><b>2.3.2</b> Removing black boxes around legend keys</a></li>
 <li class="chapter" data-level="2.3.3" data-path="ggplot.html"><a href="ggplot.html#putting-the-legend-inside-the-figure"><i class="fa fa-check"></i><b>2.3.3</b> Putting the legend inside the figure</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="ggplot.html"><a href="ggplot.html#geographic-place-matching"><i class="fa fa-check"></i><b>2.4</b> Geographic place matching</a>
+<li class="chapter" data-level="2.4" data-path="ggplot.html"><a href="ggplot.html#number-formatting-functions"><i class="fa fa-check"></i><b>2.4</b> Number formatting functions</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="ggplot.html"><a href="ggplot.html#google-places-api-searches"><i class="fa fa-check"></i><b>2.4.1</b> Google Places API searches</a></li>
+<li class="chapter" data-level="2.4.1" data-path="ggplot.html"><a href="ggplot.html#calculating-the-mean-median-and-standard-deviation-of-a-variable"><i class="fa fa-check"></i><b>2.4.1</b> Calculating the mean, median and standard deviation of a variable</a></li>
+<li class="chapter" data-level="2.4.2" data-path="ggplot.html"><a href="ggplot.html#checking-if-a-number-is-an-integer."><i class="fa fa-check"></i><b>2.4.2</b> Checking if a number is an integer.</a></li>
+<li class="chapter" data-level="2.4.3" data-path="ggplot.html"><a href="ggplot.html#number-formatting-function"><i class="fa fa-check"></i><b>2.4.3</b> Number formatting function</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="ggplot.html"><a href="ggplot.html#number-formatting-functions"><i class="fa fa-check"></i><b>2.5</b> Number formatting functions</a>
+<li class="chapter" data-level="2.5" data-path="ggplot.html"><a href="ggplot.html#multiplot-figures"><i class="fa fa-check"></i><b>2.5</b> Multiplot figures</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="ggplot.html"><a href="ggplot.html#calculating-the-mean-median-and-standard-deviation-of-a-variable"><i class="fa fa-check"></i><b>2.5.1</b> Calculating the mean, median and standard deviation of a variable</a></li>
-<li class="chapter" data-level="2.5.2" data-path="ggplot.html"><a href="ggplot.html#checking-if-a-number-is-an-integer."><i class="fa fa-check"></i><b>2.5.2</b> Checking if a number is an integer.</a></li>
-<li class="chapter" data-level="2.5.3" data-path="ggplot.html"><a href="ggplot.html#number-formatting-function"><i class="fa fa-check"></i><b>2.5.3</b> Number formatting function</a></li>
-</ul></li>
-<li class="chapter" data-level="2.6" data-path="ggplot.html"><a href="ggplot.html#multiplot-figures"><i class="fa fa-check"></i><b>2.6</b> Multiplot figures</a>
-<ul>
-<li class="chapter" data-level="2.6.1" data-path="ggplot.html"><a href="ggplot.html#auxiliary-functions-to-remove-figure-components-axes-legend"><i class="fa fa-check"></i><b>2.6.1</b> Auxiliary functions to remove figure components: axes, legend</a></li>
+<li class="chapter" data-level="2.5.1" data-path="ggplot.html"><a href="ggplot.html#auxiliary-functions-to-remove-figure-components-axes-legend"><i class="fa fa-check"></i><b>2.5.1</b> Auxiliary functions to remove figure components: axes, legend</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html"><i class="fa fa-check"></i><b>3</b> Generating publication-quality tables</a>
@@ -211,6 +205,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#removing-standard-errors-and-column-numbers"><i class="fa fa-check"></i><b>3.7.2</b> Removing standard errors and column numbers</a></li>
 <li class="chapter" data-level="3.7.3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adding-notes"><i class="fa fa-check"></i><b>3.7.3</b> Adding notes</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="statistical-tests-in-r.html"><a href="statistical-tests-in-r.html"><i class="fa fa-check"></i><b>4</b> Statistical Tests in R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-tests-in-r.html"><a href="statistical-tests-in-r.html#easy-hypothesis-tests-in-r"><i class="fa fa-check"></i><b>4.1</b> Easy hypothesis tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="geographic-place-matching.html"><a href="geographic-place-matching.html"><i class="fa fa-check"></i><b>5</b> Geographic place matching</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="geographic-place-matching.html"><a href="geographic-place-matching.html#google-places-api-searches"><i class="fa fa-check"></i><b>5.1</b> Google Places API searches</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -301,56 +303,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-2"><a href="ggplot.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.85</span>))</span></code></pre></div>
 <!-- # Center ggplot title -->
 <!-- theme(plot.title = element_text(hjust = 0.5)) -->
-</div>
-</div>
-<div id="geographic-place-matching" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Geographic place matching<a href="ggplot.html#geographic-place-matching" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In applied work, we often have to deal with observations that have an associated address or coordinates but no geographic codes. For cases in which no coordinates are available, one option is to match addresses to coordinates using Google Place API searches, and then merge the resulting coordinates with shapefiles to obtain geographic codes.</p>
-<div id="google-places-api-searches" class="section level3 hasAnchor" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> Google Places API searches<a href="ggplot.html#google-places-api-searches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>R package <code>googleway</code> makes it easy to perform Google Place API searches. <code>googleway::google_find_place</code> generates a <a href="https://developers.google.com/maps/documentation/places/web-service/search-find-place">Find Place request</a>, taking a text input and returning an array of place candidates, along with their corresponding search status. From this result, we can extract the address and coordinates.</p>
-<p>Currently, you get $200 of Google Maps Platform usage every month for free. <a href="https://mapsplatform.google.com/pricing/">Each request costs $0.017</a>. While this may seem like little, generating 12,000 requests will already exceed the monthly free usage quota ($200 = 11,764.7 requests). It’s easy to exceed this number of requests when you’re running loops for large query vectors repeatedly. Therefore, the best practice is to start out with a small sample, ensure that searches are returning valid results, and then extend the method to the full sample. You can <a href="https://developers.google.com/maps/documentation/places/web-service/report-monitor#quotas">set a maximum quota</a> of 375 requests per day (375 x 31 = 11,625) to ensure you don’t exceed the monthly free usage limit.</p>
-<p>To start using <code>googleway</code> to conduct Google Place API searches, you first need to <a href="https://developers.google.com/maps/documentation/places/web-service/cloud-setup">create a Google Cloud project</a> and <a href="https://developers.google.com/maps/documentation/places/web-service/get-api-key">set up an API key</a>. Once you have set this up, you can load <code>googleway</code>, define the API key and start conducting searches.
-Here is a simple example of an individual query.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ggplot.html#cb8-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here, tidyverse, googleway)</span>
-<span id="cb8-2"><a href="ggplot.html#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="ggplot.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.1): Set Google Place search API key.</span></span>
-<span id="cb8-4"><a href="ggplot.html#cb8-4" aria-hidden="true" tabindex="-1"></a>key <span class="ot">&lt;-</span> <span class="st">&quot;KJzaLyCLI-nXPsHqVwz-jna1HYg2jKpBueSsTWs&quot;</span> <span class="co"># insert API key here</span></span>
-<span id="cb8-5"><a href="ggplot.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set_key</span>(key)</span>
-<span id="cb8-6"><a href="ggplot.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="ggplot.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.2): Define tibble with addresses to look up.</span></span>
-<span id="cb8-8"><a href="ggplot.html#cb8-8" aria-hidden="true" tabindex="-1"></a>missing_locs <span class="ot">&lt;-</span> <span class="fu">tribble</span>(<span class="sc">~</span>id, <span class="sc">~</span>address,</span>
-<span id="cb8-9"><a href="ggplot.html#cb8-9" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">1</span>, <span class="st">&quot;Av. Álvaro Obregón 225, Roma Norte, Cuauhtémoc, CDMX, Mexico&quot;</span>,</span>
-<span id="cb8-10"><a href="ggplot.html#cb8-10" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">2</span>, <span class="st">&quot;Río Hondo #1, Col. Progreso Tizapán, Álvaro Obregón, CDMX, México&quot;</span>)</span>
-<span id="cb8-11"><a href="ggplot.html#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="ggplot.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.3): Loop over missing addresses.</span></span>
-<span id="cb8-13"><a href="ggplot.html#cb8-13" aria-hidden="true" tabindex="-1"></a>loc_coords <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
-<span id="cb8-14"><a href="ggplot.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(missing_locs)) {     </span>
-<span id="cb8-15"><a href="ggplot.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get results from Google Place search</span></span>
-<span id="cb8-16"><a href="ggplot.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">google_find_place</span>(missing_locs<span class="sc">$</span>address[i], <span class="at">inputtype =</span> <span class="st">&quot;textquery&quot;</span>, <span class="at">language =</span> <span class="st">&quot;es&quot;</span>)</span>
-<span id="cb8-17"><a href="ggplot.html#cb8-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-18"><a href="ggplot.html#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print results</span></span>
-<span id="cb8-19"><a href="ggplot.html#cb8-19" aria-hidden="true" tabindex="-1"></a>  search_status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(results[[<span class="st">&quot;status&quot;</span>]] <span class="sc">==</span> <span class="st">&quot;OK&quot;</span>, </span>
-<span id="cb8-20"><a href="ggplot.html#cb8-20" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;search successful&quot;</span>, </span>
-<span id="cb8-21"><a href="ggplot.html#cb8-21" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;search returned no results&quot;</span>)</span>
-<span id="cb8-22"><a href="ggplot.html#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;Working on address &quot;</span>, i, <span class="st">&quot; out of &quot;</span>, <span class="fu">nrow</span>(missing_locs), <span class="st">&quot;, &quot;</span>, search_status))</span>
-<span id="cb8-23"><a href="ggplot.html#cb8-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-24"><a href="ggplot.html#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract formatted address and coordinates results</span></span>
-<span id="cb8-25"><a href="ggplot.html#cb8-25" aria-hidden="true" tabindex="-1"></a>  clean_results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> missing_locs<span class="sc">$</span>id[i],</span>
-<span id="cb8-26"><a href="ggplot.html#cb8-26" aria-hidden="true" tabindex="-1"></a>                          <span class="at">address_clean =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;formatted_address&quot;</span>]],</span>
-<span id="cb8-27"><a href="ggplot.html#cb8-27" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loc_lat =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;geometry&quot;</span>]][[<span class="st">&quot;location&quot;</span>]][[<span class="st">&quot;lat&quot;</span>]],</span>
-<span id="cb8-28"><a href="ggplot.html#cb8-28" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loc_lon =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;geometry&quot;</span>]][[<span class="st">&quot;location&quot;</span>]][[<span class="st">&quot;lng&quot;</span>]])</span>
-<span id="cb8-29"><a href="ggplot.html#cb8-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-30"><a href="ggplot.html#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append to full results dataframe.</span></span>
-<span id="cb8-31"><a href="ggplot.html#cb8-31" aria-hidden="true" tabindex="-1"></a>  loc_coords <span class="sc">%&lt;&gt;%</span> <span class="fu">bind_rows</span>(clean_results)</span>
-<span id="cb8-32"><a href="ggplot.html#cb8-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-33"><a href="ggplot.html#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(results, clean_results, i, search_status)</span>
-<span id="cb8-34"><a href="ggplot.html#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="ggplot.html#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.4): Keep first result for each address.</span></span>
-<span id="cb8-36"><a href="ggplot.html#cb8-36" aria-hidden="true" tabindex="-1"></a>clean_results <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb8-37"><a href="ggplot.html#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-38"><a href="ggplot.html#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code></pre></div>
-<p>Once you finish your set of Google Place API requests, you should save the results to a CSV file for later use. The search process is not perfectly replicable as identical searches can produce different results over time, so you should only run your full search loop once.</p>
 <!-- ### -->
 <!-- # (4.7): Merge missing municipalities with shapefiles. # -->
 <!-- shp_mun <- st_read(here("proc", "shapefiles", "shp_mun.shp")) -->
@@ -369,71 +321,71 @@ Here is a simple example of an individual query.</p>
 <!-- rm(intersections, mun_coords, missing_coords_shp, key) -->
 </div>
 </div>
-<div id="number-formatting-functions" class="section level2 hasAnchor" number="2.5">
-<h2><span class="header-section-number">2.5</span> Number formatting functions<a href="ggplot.html#number-formatting-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="number-formatting-functions" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Number formatting functions<a href="ggplot.html#number-formatting-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can save these functions in a script called number_functions.R and import them in each script where they’re needed, e.g.:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ggplot.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;scripts&quot;</span>, <span class="st">&quot;programs&quot;</span>, <span class="st">&quot;number_functions.R&quot;</span>))</span></code></pre></div>
-<div id="calculating-the-mean-median-and-standard-deviation-of-a-variable" class="section level3 hasAnchor" number="2.5.1">
-<h3><span class="header-section-number">2.5.1</span> Calculating the mean, median and standard deviation of a variable<a href="ggplot.html#calculating-the-mean-median-and-standard-deviation-of-a-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ggplot.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean</span></span>
-<span id="cb10-2"><a href="ggplot.html#cb10-2" aria-hidden="true" tabindex="-1"></a>num_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
-<span id="cb10-3"><a href="ggplot.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="ggplot.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="ggplot.html#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-6"><a href="ggplot.html#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
-<span id="cb10-7"><a href="ggplot.html#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-8"><a href="ggplot.html#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="ggplot.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Median</span></span>
-<span id="cb10-10"><a href="ggplot.html#cb10-10" aria-hidden="true" tabindex="-1"></a>num_median <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
-<span id="cb10-11"><a href="ggplot.html#cb10-11" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
-<span id="cb10-12"><a href="ggplot.html#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-13"><a href="ggplot.html#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-14"><a href="ggplot.html#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
-<span id="cb10-15"><a href="ggplot.html#cb10-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-16"><a href="ggplot.html#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="ggplot.html#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard deviation</span></span>
-<span id="cb10-18"><a href="ggplot.html#cb10-18" aria-hidden="true" tabindex="-1"></a>num_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
-<span id="cb10-19"><a href="ggplot.html#cb10-19" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
-<span id="cb10-20"><a href="ggplot.html#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-21"><a href="ggplot.html#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sd</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-22"><a href="ggplot.html#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
-<span id="cb10-23"><a href="ggplot.html#cb10-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ggplot.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;scripts&quot;</span>, <span class="st">&quot;programs&quot;</span>, <span class="st">&quot;number_functions.R&quot;</span>))</span></code></pre></div>
+<div id="calculating-the-mean-median-and-standard-deviation-of-a-variable" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Calculating the mean, median and standard deviation of a variable<a href="ggplot.html#calculating-the-mean-median-and-standard-deviation-of-a-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ggplot.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean</span></span>
+<span id="cb9-2"><a href="ggplot.html#cb9-2" aria-hidden="true" tabindex="-1"></a>num_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
+<span id="cb9-3"><a href="ggplot.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="ggplot.html#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="ggplot.html#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="ggplot.html#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
+<span id="cb9-7"><a href="ggplot.html#cb9-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-8"><a href="ggplot.html#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="ggplot.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Median</span></span>
+<span id="cb9-10"><a href="ggplot.html#cb9-10" aria-hidden="true" tabindex="-1"></a>num_median <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
+<span id="cb9-11"><a href="ggplot.html#cb9-11" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-12"><a href="ggplot.html#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-13"><a href="ggplot.html#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-14"><a href="ggplot.html#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
+<span id="cb9-15"><a href="ggplot.html#cb9-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-16"><a href="ggplot.html#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="ggplot.html#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard deviation</span></span>
+<span id="cb9-18"><a href="ggplot.html#cb9-18" aria-hidden="true" tabindex="-1"></a>num_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(df, variable, <span class="at">dig =</span> <span class="dv">1</span>) {</span>
+<span id="cb9-19"><a href="ggplot.html#cb9-19" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-20"><a href="ggplot.html#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="fu">eval</span>(<span class="fu">as.name</span>(variable))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-21"><a href="ggplot.html#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sd</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-22"><a href="ggplot.html#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="at">digits =</span> dig)</span>
+<span id="cb9-23"><a href="ggplot.html#cb9-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>You can call these functions the following way:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ggplot.html#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">num_mean</span>(<span class="st">&quot;number_employees&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ggplot.html#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">num_mean</span>(<span class="st">&quot;number_employees&quot;</span>)</span></code></pre></div>
 </div>
-<div id="checking-if-a-number-is-an-integer." class="section level3 hasAnchor" number="2.5.2">
-<h3><span class="header-section-number">2.5.2</span> Checking if a number is an integer.<a href="ggplot.html#checking-if-a-number-is-an-integer." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="checking-if-a-number-is-an-integer." class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Checking if a number is an integer.<a href="ggplot.html#checking-if-a-number-is-an-integer." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is used in the functions that print numbers to .tex files, since no decimals should be added after integers.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ggplot.html#cb12-1" aria-hidden="true" tabindex="-1"></a>num_int <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb12-2"><a href="ggplot.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">==</span> <span class="fu">round</span>(x)</span>
-<span id="cb12-3"><a href="ggplot.html#cb12-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ggplot.html#cb11-1" aria-hidden="true" tabindex="-1"></a>num_int <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb11-2"><a href="ggplot.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">==</span> <span class="fu">round</span>(x)</span>
+<span id="cb11-3"><a href="ggplot.html#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="number-formatting-function" class="section level3 hasAnchor" number="2.5.3">
-<h3><span class="header-section-number">2.5.3</span> Number formatting function<a href="ggplot.html#number-formatting-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="number-formatting-function" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Number formatting function<a href="ggplot.html#number-formatting-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This function formats numbers with a standard number of digits and commas to present large and small numbers in a more readable format.</p>
 <p>How does this function work? First, the function calculates the number of digits the number should have to the right of the decimal point. For numbers from 1-9, three digits are assigned, two digits are assigned for numbers 10-99, one for 100-999, and no right digits for numbers equal or larger than 1,000. This function sets the maximum number of right digits as 3. Therefore, 0.0001 will display as 0.000. Once the number of right digits is defined, the number is formatted. Numbers smaller than 1 are padded if necessary to ensure that there are 3 right digits (e.g., 0.25 is formatted as 0.250). The default number of right digits can be overridden with the option <code>override_right_digits</code>.</p>
 <p>This function has the same name as <code>scales::comma_format</code>. However, this function has been superseded by <code>scales::label_comma</code>, so there are no issues with this user-defined function taking priority over <code>scales::comma_format</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ggplot.html#cb13-1" aria-hidden="true" tabindex="-1"></a>comma_format <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">override_right_digits =</span> <span class="cn">NA</span>) {</span>
-<span id="cb13-2"><a href="ggplot.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of right digits</span></span>
-<span id="cb13-3"><a href="ggplot.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">0</span>) {num <span class="ot">&lt;-</span> <span class="dv">1</span>} <span class="cf">else</span> {num <span class="ot">&lt;-</span> x}</span>
-<span id="cb13-4"><a href="ggplot.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  right_digits <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">-</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
-<span id="cb13-5"><a href="ggplot.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&lt;</span> <span class="dv">0</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">0</span>}</span>
-<span id="cb13-6"><a href="ggplot.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&gt;</span> <span class="dv">3</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">3</span>}</span>
-<span id="cb13-7"><a href="ggplot.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(override_right_digits)) {right_digits <span class="ot">&lt;-</span> override_right_digits}</span>
-<span id="cb13-8"><a href="ggplot.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of left digits</span></span>
-<span id="cb13-9"><a href="ggplot.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  left_digits <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
-<span id="cb13-10"><a href="ggplot.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (left_digits <span class="sc">&lt;=</span> <span class="dv">0</span>) {left_digits <span class="ot">&lt;-</span> <span class="dv">1</span>}</span>
-<span id="cb13-11"><a href="ggplot.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format number</span></span>
-<span id="cb13-12"><a href="ggplot.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  proc_num <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(x, right_digits), <span class="at">nsmall =</span> right_digits, <span class="at">digits =</span>  left_digits, <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb13-13"><a href="ggplot.html#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (proc_num <span class="sc">!=</span> <span class="st">&quot;0&quot;</span> <span class="sc">&amp;</span> <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(proc_num, <span class="fu">fixed</span>(<span class="st">&quot;,&quot;</span>), <span class="st">&quot;&quot;</span>)) <span class="sc">&lt;</span> <span class="dv">1</span>) {</span>
-<span id="cb13-14"><a href="ggplot.html#cb13-14" aria-hidden="true" tabindex="-1"></a>    proc_num <span class="ot">&lt;-</span> <span class="fu">str_pad</span>(proc_num, right_digits <span class="sc">+</span> <span class="dv">2</span>, <span class="st">&quot;right&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
-<span id="cb13-15"><a href="ggplot.html#cb13-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb13-16"><a href="ggplot.html#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proc_num)</span>
-<span id="cb13-17"><a href="ggplot.html#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ggplot.html#cb12-1" aria-hidden="true" tabindex="-1"></a>comma_format <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">override_right_digits =</span> <span class="cn">NA</span>) {</span>
+<span id="cb12-2"><a href="ggplot.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of right digits</span></span>
+<span id="cb12-3"><a href="ggplot.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">0</span>) {num <span class="ot">&lt;-</span> <span class="dv">1</span>} <span class="cf">else</span> {num <span class="ot">&lt;-</span> x}</span>
+<span id="cb12-4"><a href="ggplot.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  right_digits <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">-</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
+<span id="cb12-5"><a href="ggplot.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&lt;</span> <span class="dv">0</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">0</span>}</span>
+<span id="cb12-6"><a href="ggplot.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&gt;</span> <span class="dv">3</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">3</span>}</span>
+<span id="cb12-7"><a href="ggplot.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(override_right_digits)) {right_digits <span class="ot">&lt;-</span> override_right_digits}</span>
+<span id="cb12-8"><a href="ggplot.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of left digits</span></span>
+<span id="cb12-9"><a href="ggplot.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  left_digits <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
+<span id="cb12-10"><a href="ggplot.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (left_digits <span class="sc">&lt;=</span> <span class="dv">0</span>) {left_digits <span class="ot">&lt;-</span> <span class="dv">1</span>}</span>
+<span id="cb12-11"><a href="ggplot.html#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format number</span></span>
+<span id="cb12-12"><a href="ggplot.html#cb12-12" aria-hidden="true" tabindex="-1"></a>  proc_num <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(x, right_digits), <span class="at">nsmall =</span> right_digits, <span class="at">digits =</span>  left_digits, <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb12-13"><a href="ggplot.html#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (proc_num <span class="sc">!=</span> <span class="st">&quot;0&quot;</span> <span class="sc">&amp;</span> <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(proc_num, <span class="fu">fixed</span>(<span class="st">&quot;,&quot;</span>), <span class="st">&quot;&quot;</span>)) <span class="sc">&lt;</span> <span class="dv">1</span>) {</span>
+<span id="cb12-14"><a href="ggplot.html#cb12-14" aria-hidden="true" tabindex="-1"></a>    proc_num <span class="ot">&lt;-</span> <span class="fu">str_pad</span>(proc_num, right_digits <span class="sc">+</span> <span class="dv">2</span>, <span class="st">&quot;right&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb12-15"><a href="ggplot.html#cb12-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-16"><a href="ggplot.html#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proc_num)</span>
+<span id="cb12-17"><a href="ggplot.html#cb12-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Here are a few examples of the output of this function:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="ggplot.html#cb14-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
-<span id="cb14-2"><a href="ggplot.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="ggplot.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">c</span>(<span class="fl">0.098</span>, <span class="fl">0.11</span>, <span class="fl">3.1233</span>, <span class="fl">45.968</span>, <span class="dv">1949</span>), comma_format) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ggplot.html#cb13-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb13-2"><a href="ggplot.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="ggplot.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">c</span>(<span class="fl">0.098</span>, <span class="fl">0.11</span>, <span class="fl">3.1233</span>, <span class="fl">45.968</span>, <span class="dv">1949</span>), comma_format) <span class="sc">%&gt;%</span> <span class="fu">unlist</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;0.098&quot; &quot;0.110&quot; &quot;3.123&quot; &quot;45.97&quot; &quot;1,949&quot;</code></pre>
 <!-- # (1.3): Print number to file. -->
 <!-- print_n <- function(x, file, note = "", dig = 1) { -->
@@ -478,34 +430,34 @@ Here is a simple example of an individual query.</p>
 <!-- Note that when adding them to the guides you should be using command line git, clone the repo, create a new branch, make the changes, push your branch, then on GitHub submit a pull request to incorporate those changes into the main branch. There are some instructions on this in the RA Guide: https://github.com/skhiggins/ra_guide. Just as there are some scripts already included as part of the R, Stata, and Python guides, these scripts to print output to a tex file should also be included within the repo and linked in the guides. -->
 </div>
 </div>
-<div id="multiplot-figures" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Multiplot figures<a href="ggplot.html#multiplot-figures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="auxiliary-functions-to-remove-figure-components-axes-legend" class="section level3 hasAnchor" number="2.6.1">
-<h3><span class="header-section-number">2.6.1</span> Auxiliary functions to remove figure components: axes, legend<a href="ggplot.html#auxiliary-functions-to-remove-figure-components-axes-legend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="multiplot-figures" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Multiplot figures<a href="ggplot.html#multiplot-figures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="auxiliary-functions-to-remove-figure-components-axes-legend" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Auxiliary functions to remove figure components: axes, legend<a href="ggplot.html#auxiliary-functions-to-remove-figure-components-axes-legend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Functions:</strong></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ggplot.html#cb16-1" aria-hidden="true" tabindex="-1"></a>remove_axis_x <span class="ot">&lt;-</span> <span class="cf">function</span>(plot) {</span>
-<span id="cb16-2"><a href="ggplot.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  plot <span class="sc">+</span> </span>
-<span id="cb16-3"><a href="ggplot.html#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb16-4"><a href="ggplot.html#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb16-5"><a href="ggplot.html#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-6"><a href="ggplot.html#cb16-6" aria-hidden="true" tabindex="-1"></a>remove_axis_y <span class="ot">&lt;-</span> <span class="cf">function</span>(plot) {</span>
-<span id="cb16-7"><a href="ggplot.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  plot <span class="sc">+</span> </span>
-<span id="cb16-8"><a href="ggplot.html#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb16-9"><a href="ggplot.html#cb16-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb16-10"><a href="ggplot.html#cb16-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-11"><a href="ggplot.html#cb16-11" aria-hidden="true" tabindex="-1"></a>remove_legend <span class="ot">&lt;-</span> <span class="cf">function</span>(plot) {</span>
-<span id="cb16-12"><a href="ggplot.html#cb16-12" aria-hidden="true" tabindex="-1"></a>  plot <span class="sc">+</span></span>
-<span id="cb16-13"><a href="ggplot.html#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb16-14"><a href="ggplot.html#cb16-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ggplot.html#cb15-1" aria-hidden="true" tabindex="-1"></a>remove_axis_x <span class="ot">&lt;-</span> <span class="cf">function</span>(plot) {</span>
+<span id="cb15-2"><a href="ggplot.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  plot <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="ggplot.html#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-4"><a href="ggplot.html#cb15-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb15-5"><a href="ggplot.html#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="ggplot.html#cb15-6" aria-hidden="true" tabindex="-1"></a>remove_axis_y <span class="ot">&lt;-</span> <span class="cf">function</span>(plot) {</span>
+<span id="cb15-7"><a href="ggplot.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  plot <span class="sc">+</span> </span>
+<span id="cb15-8"><a href="ggplot.html#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb15-9"><a href="ggplot.html#cb15-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb15-10"><a href="ggplot.html#cb15-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-11"><a href="ggplot.html#cb15-11" aria-hidden="true" tabindex="-1"></a>remove_legend <span class="ot">&lt;-</span> <span class="cf">function</span>(plot) {</span>
+<span id="cb15-12"><a href="ggplot.html#cb15-12" aria-hidden="true" tabindex="-1"></a>  plot <span class="sc">+</span></span>
+<span id="cb15-13"><a href="ggplot.html#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb15-14"><a href="ggplot.html#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><strong>Usage:</strong>
 Let <code>g1</code>, <code>g2</code> and <code>g3</code> be three figures with the same x-axis. We can plot the three figures in one multipanel figure, removing the legend and x-axis from all but the bottom figure.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ggplot.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1 <span class="sc">%&gt;%</span> <span class="fu">remove_legend</span>() <span class="sc">%&gt;%</span> <span class="fu">remove_axis_x</span>(), </span>
-<span id="cb17-2"><a href="ggplot.html#cb17-2" aria-hidden="true" tabindex="-1"></a>          g2 <span class="sc">%&gt;%</span> <span class="fu">remove_legend</span>() <span class="sc">%&gt;%</span> <span class="fu">remove_axis_x</span>(), </span>
-<span id="cb17-3"><a href="ggplot.html#cb17-3" aria-hidden="true" tabindex="-1"></a>          g3, </span>
-<span id="cb17-4"><a href="ggplot.html#cb17-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb17-5"><a href="ggplot.html#cb17-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">nrow =</span> <span class="dv">3</span>,</span>
-<span id="cb17-6"><a href="ggplot.html#cb17-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis =</span> <span class="st">&quot;b&quot;</span>, </span>
-<span id="cb17-7"><a href="ggplot.html#cb17-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="ggplot.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1 <span class="sc">%&gt;%</span> <span class="fu">remove_legend</span>() <span class="sc">%&gt;%</span> <span class="fu">remove_axis_x</span>(), </span>
+<span id="cb16-2"><a href="ggplot.html#cb16-2" aria-hidden="true" tabindex="-1"></a>          g2 <span class="sc">%&gt;%</span> <span class="fu">remove_legend</span>() <span class="sc">%&gt;%</span> <span class="fu">remove_axis_x</span>(), </span>
+<span id="cb16-3"><a href="ggplot.html#cb16-3" aria-hidden="true" tabindex="-1"></a>          g3, </span>
+<span id="cb16-4"><a href="ggplot.html#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">rel_heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb16-5"><a href="ggplot.html#cb16-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">nrow =</span> <span class="dv">3</span>,</span>
+<span id="cb16-6"><a href="ggplot.html#cb16-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis =</span> <span class="st">&quot;b&quot;</span>, </span>
+<span id="cb16-7"><a href="ggplot.html#cb16-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">align =</span> <span class="st">&quot;h&quot;</span>)</span></code></pre></div>
 <!-- An alternative to the previous is to simply remove the axis from the three figures and then incorporate the axis in the bottom fig. -->
 
 </div>

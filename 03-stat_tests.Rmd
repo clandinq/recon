@@ -1,0 +1,97 @@
+---
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# Statistical Tests in R
+
+In this section, we introduce functions for performing hypothesis tests on model coefficients using the `multcomp` package.
+We introduce a function called `extract_test_coef` that tests a hypothesis on model parameters and extracts the resulting p-values of the test.
+Then, we show the usage of the function with an example using the `iris` dataset.
+
+## Easy hypothesis tests in R
+
+First, load the required packages and the `iris` dataset.
+The packages needed are `tidyverse` for data manipulation, `fixest` for estimating models, `modelsummary` for displaying model results, `multcomp` for estimating hypothesis tests and `conflicted` to deal with conflicts in function names.
+With package `conflicted`, we can specify which package to use for a given function.
+Since `multcomp` and `dplyr` conflict in multiple functions, we can specify which package to use for each function and give preference to `dplyr`.
+The `iris` dataset contains measurements of 4 attributes for 50 flowers from 3 different species.
+
+```{r load_data_conflicts, eval = TRUE, echo = TRUE}
+# Load packages
+pacman::p_load(tidyverse, fixest, modelsummary, multcomp, 
+               conflicted, fastDummies)
+
+# Resolve conflicts
+conflict_prefer("select", "dplyr")
+conflict_prefer("filter", "dplyr")
+conflict_prefer("last", "dplyr")
+
+# Load iris data
+data(iris)
+head(iris)
+```
+
+```{r mshow_hide, eval = TRUE, echo = FALSE}
+# Load mshow 
+mshow <- function(models, ...) { 
+  modelsummary(models, 
+               stars = c("*" = .1, "**" = .05, "***" = 0.01),
+               gof_omit = "AIC|BIC|R2|R2 Adj.|R2 Pseudo|R2 Within|Log.Lik.|Std.Errors|FE|RMSE",
+               ...)
+}
+```
+
+Next, we define terciles of sepal width and a simple model using package `fixest`.
+We show the model results using the `mshow` function defined in the previous chapter.
+
+```{r model, eval = TRUE, echo = TRUE}
+# Define terciles of sepal width
+proc_data <- iris %>%
+  mutate(sepal_width_tercile = ntile(Sepal.Width, 3)) %>% 
+  dummy_cols("sepal_width_tercile")
+
+# Define coefficient names
+coef_names <- c("Sepal length", "First tercile sepal width", "Second tercile sepal width", "Third tercile sepal width") %>% 
+  set_names(c("Sepal.Length", str_c("sepal_width_tercile_", 1:3)))
+
+# Define model 
+m1 <- feols(Petal.Width ~ 0 + Sepal.Length + sepal_width_tercile_1 + sepal_width_tercile_2 + sepal_width_tercile_3,
+            se = "hetero",
+            data = proc_data)
+mshow(list("Petal width" = m1), coef_map = coef_names)
+```
+
+The next step is to use the function `extract_test_coef` to test two hypothesis: 1.
+The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width 2.
+The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.
+
+```{r extract_test_coef, eval = TRUE, echo = TRUE}
+# Define function
+extract_test_coef <- function(model, coef) {
+  res <- model %>% 
+    glht(linfct = paste0(coef, "= 0")) %>% 
+    confint() %>% 
+    summary()
+  return(as.numeric(res$test$pvalues))
+}
+
+# Test hypotheses
+pval_1_2 <- extract_test_coef(m1, "sepal_width_tercile_1 - sepal_width_tercile_2")
+pval_1_3 <- extract_test_coef(m1, "sepal_width_tercile_1 - sepal_width_tercile_3")
+```
+
+Finally, we add the p-values to the model results using the `add_row` argument of the `mshow` function.
+
+```{r add_row, eval = TRUE, echo = TRUE}
+# Add p-values to model results
+add_row <- tribble(~name, ~value,
+                   "P-value (Sepal width 1st tercile = Sepal width 2nd tercile)", comma_format(pval_1_2),
+                   "P-value (Sepal width 1st tercile = Sepal width 3rd tercile)", comma_format(pval_1_3))
+mshow(list("Petal width" = m1), 
+      coef_map = coef_names, 
+      add_row = add_row)
+```
+
+From the results of the hypotheses tests, we can reject the hypothesis that the effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width, and that the effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width.

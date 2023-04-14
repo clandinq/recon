@@ -9,8 +9,6 @@ legends
 removing-the-legend-title
 removing-black-boxes-around-legend-keys
 putting-the-legend-inside-the-figure
-geographic-place-matching
-google-places-api-searches
 number-formatting-functions
 calculating-the-mean-median-and-standard-deviation-of-a-variable
 checking-if-a-number-is-an-integer.
@@ -44,3 +42,7 @@ preparing-tables-for-presentations
 generating-presentation-versions-of-tables
 removing-standard-errors-and-column-numbers
 adding-notes
+statistical-tests-in-r
+easy-hypothesis-tests-in-r
+geographic-place-matching
+google-places-api-searches

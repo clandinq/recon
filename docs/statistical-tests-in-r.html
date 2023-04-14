@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Short Programming Guide for Economics Research</title>
+  <title>Chapter 4 Statistical Tests in R | A Short Programming Guide for Economics Research</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Short Programming Guide for Economics Research" />
+  <meta property="og:title" content="Chapter 4 Statistical Tests in R | A Short Programming Guide for Economics Research" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Short Programming Guide for Economics Research" />
+  <meta name="twitter:title" content="Chapter 4 Statistical Tests in R | A Short Programming Guide for Economics Research" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="ggplot.html"/>
+<link rel="prev" href="generating-publication-quality-tables.html"/>
+<link rel="next" href="geographic-place-matching.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -234,38 +234,270 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">A Short Programming Guide for Economics Research</h1>
-<p class="author"><em>César Landín</em></p>
-<p class="date"><em>2023-04-13</em></p>
-</div>
-<div id="this-is-a-dummy-chapter" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> This is a dummy chapter<a href="index.html#this-is-a-dummy-chapter" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- # Prerequisites -->
-<!-- This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$. -->
-<!-- The **bookdown** package can be installed from CRAN or Github: -->
-<!-- ```{r eval=FALSE} -->
-<!-- install.packages("bookdown") -->
-<!-- # or the development version -->
-<!-- # devtools::install_github("rstudio/bookdown") -->
-<!-- ``` -->
-<!-- Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`. -->
-<!-- To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>. -->
-<!-- ```{r include=FALSE} -->
-<!-- # automatically create a bib database for R packages -->
-<!-- knitr::write_bib(c( -->
-<!--   .packages(), "bookdown", "knitr", "rmarkdown" -->
-<!-- ), "packages.bib") -->
-<!-- ``` -->
+<div id="statistical-tests-in-r" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Statistical Tests in R<a href="statistical-tests-in-r.html#statistical-tests-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this section, we introduce functions for performing hypothesis tests on model coefficients using the <code>multcomp</code> package.
+We introduce a function called <code>extract_test_coef</code> that tests a hypothesis on model parameters and extracts the resulting p-values of the test.
+Then, we show the usage of the function with an example using the <code>iris</code> dataset.</p>
+<div id="easy-hypothesis-tests-in-r" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Easy hypothesis tests in R<a href="statistical-tests-in-r.html#easy-hypothesis-tests-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First, load the required packages and the <code>iris</code> dataset.
+The packages needed are <code>tidyverse</code> for data manipulation, <code>fixest</code> for estimating models, <code>modelsummary</code> for displaying model results, <code>multcomp</code> for estimating hypothesis tests and <code>conflicted</code> to deal with conflicts in function names.
+With package <code>conflicted</code>, we can specify which package to use for a given function.
+Since <code>multcomp</code> and <code>dplyr</code> conflict in multiple functions, we can specify which package to use for each function and give preference to <code>dplyr</code>.
+The <code>iris</code> dataset contains measurements of 4 attributes for 50 flowers from 3 different species.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="statistical-tests-in-r.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb47-2"><a href="statistical-tests-in-r.html#cb47-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, fixest, modelsummary, multcomp, </span>
+<span id="cb47-3"><a href="statistical-tests-in-r.html#cb47-3" aria-hidden="true" tabindex="-1"></a>               conflicted, fastDummies)</span>
+<span id="cb47-4"><a href="statistical-tests-in-r.html#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="statistical-tests-in-r.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Resolve conflicts</span></span>
+<span id="cb47-6"><a href="statistical-tests-in-r.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;select&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<pre><code>## [conflicted] Removing existing preference
+## [conflicted] Will prefer dplyr::select over any other package</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="statistical-tests-in-r.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;filter&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<pre><code>## [conflicted] Removing existing preference
+## [conflicted] Will prefer dplyr::filter over any other package</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-tests-in-r.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">&quot;last&quot;</span>, <span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<pre><code>## [conflicted] Removing existing preference
+## [conflicted] Will prefer dplyr::last over any other package</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="statistical-tests-in-r.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load iris data</span></span>
+<span id="cb53-2"><a href="statistical-tests-in-r.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb53-3"><a href="statistical-tests-in-r.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Next, we define terciles of sepal width and a simple model using package <code>fixest</code>.
+We show the model results using the <code>mshow</code> function defined in the previous chapter.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="statistical-tests-in-r.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define terciles of sepal width</span></span>
+<span id="cb55-2"><a href="statistical-tests-in-r.html#cb55-2" aria-hidden="true" tabindex="-1"></a>proc_data <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="statistical-tests-in-r.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sepal_width_tercile =</span> <span class="fu">ntile</span>(Sepal.Width, <span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-4"><a href="statistical-tests-in-r.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dummy_cols</span>(<span class="st">&quot;sepal_width_tercile&quot;</span>)</span>
+<span id="cb55-5"><a href="statistical-tests-in-r.html#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="statistical-tests-in-r.html#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define coefficient names</span></span>
+<span id="cb55-7"><a href="statistical-tests-in-r.html#cb55-7" aria-hidden="true" tabindex="-1"></a>coef_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;First tercile sepal width&quot;</span>, <span class="st">&quot;Second tercile sepal width&quot;</span>, <span class="st">&quot;Third tercile sepal width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb55-8"><a href="statistical-tests-in-r.html#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="fu">str_c</span>(<span class="st">&quot;sepal_width_tercile_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)))</span>
+<span id="cb55-9"><a href="statistical-tests-in-r.html#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="statistical-tests-in-r.html#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model </span></span>
+<span id="cb55-11"><a href="statistical-tests-in-r.html#cb55-11" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(Petal.Width <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> Sepal.Length <span class="sc">+</span> sepal_width_tercile_1 <span class="sc">+</span> sepal_width_tercile_2 <span class="sc">+</span> sepal_width_tercile_3,</span>
+<span id="cb55-12"><a href="statistical-tests-in-r.html#cb55-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="st">&quot;hetero&quot;</span>,</span>
+<span id="cb55-13"><a href="statistical-tests-in-r.html#cb55-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> proc_data)</span>
+<span id="cb55-14"><a href="statistical-tests-in-r.html#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mshow</span>(<span class="fu">list</span>(<span class="st">&quot;Petal width&quot;</span> <span class="ot">=</span> m1), <span class="at">coef_map =</span> coef_names)</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Petal width
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal length
+</td>
+<td style="text-align:center;">
+0.732***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.041)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+First tercile sepal width
+</td>
+<td style="text-align:center;">
+−2.882***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.242)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Second tercile sepal width
+</td>
+<td style="text-align:center;">
+−3.083***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.237)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Third tercile sepal width
+</td>
+<td style="text-align:center;">
+−3.261***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.215)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+150
+</td>
+</tr>
+</tbody>
+</table>
+<p>The next step is to use the function <code>extract_test_coef</code> to test two hypothesis: 1.
+The effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width 2.
+The effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width The function returns p-values for each test.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="statistical-tests-in-r.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define function</span></span>
+<span id="cb56-2"><a href="statistical-tests-in-r.html#cb56-2" aria-hidden="true" tabindex="-1"></a>extract_test_coef <span class="ot">&lt;-</span> <span class="cf">function</span>(model, coef) {</span>
+<span id="cb56-3"><a href="statistical-tests-in-r.html#cb56-3" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> </span>
+<span id="cb56-4"><a href="statistical-tests-in-r.html#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">paste0</span>(coef, <span class="st">&quot;= 0&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-5"><a href="statistical-tests-in-r.html#cb56-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">confint</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb56-6"><a href="statistical-tests-in-r.html#cb56-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>()</span>
+<span id="cb56-7"><a href="statistical-tests-in-r.html#cb56-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">as.numeric</span>(res<span class="sc">$</span>test<span class="sc">$</span>pvalues))</span>
+<span id="cb56-8"><a href="statistical-tests-in-r.html#cb56-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb56-9"><a href="statistical-tests-in-r.html#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-10"><a href="statistical-tests-in-r.html#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Test hypotheses</span></span>
+<span id="cb56-11"><a href="statistical-tests-in-r.html#cb56-11" aria-hidden="true" tabindex="-1"></a>pval_1_2 <span class="ot">&lt;-</span> <span class="fu">extract_test_coef</span>(m1, <span class="st">&quot;sepal_width_tercile_1 - sepal_width_tercile_2&quot;</span>)</span>
+<span id="cb56-12"><a href="statistical-tests-in-r.html#cb56-12" aria-hidden="true" tabindex="-1"></a>pval_1_3 <span class="ot">&lt;-</span> <span class="fu">extract_test_coef</span>(m1, <span class="st">&quot;sepal_width_tercile_1 - sepal_width_tercile_3&quot;</span>)</span></code></pre></div>
+<p>Finally, we add the p-values to the model results using the <code>add_row</code> argument of the <code>mshow</code> function.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="statistical-tests-in-r.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add p-values to model results</span></span>
+<span id="cb57-2"><a href="statistical-tests-in-r.html#cb57-2" aria-hidden="true" tabindex="-1"></a>add_row <span class="ot">&lt;-</span> <span class="fu">tribble</span>(<span class="sc">~</span>name, <span class="sc">~</span>value,</span>
+<span id="cb57-3"><a href="statistical-tests-in-r.html#cb57-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;P-value (Sepal width 1st tercile = Sepal width 2nd tercile)&quot;</span>, <span class="fu">comma_format</span>(pval_1_2),</span>
+<span id="cb57-4"><a href="statistical-tests-in-r.html#cb57-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;P-value (Sepal width 1st tercile = Sepal width 3rd tercile)&quot;</span>, <span class="fu">comma_format</span>(pval_1_3))</span>
+<span id="cb57-5"><a href="statistical-tests-in-r.html#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mshow</span>(<span class="fu">list</span>(<span class="st">&quot;Petal width&quot;</span> <span class="ot">=</span> m1), </span>
+<span id="cb57-6"><a href="statistical-tests-in-r.html#cb57-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">coef_map =</span> coef_names, </span>
+<span id="cb57-7"><a href="statistical-tests-in-r.html#cb57-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">add_row =</span> add_row)</span></code></pre></div>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Petal width
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal length
+</td>
+<td style="text-align:center;">
+0.732***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.041)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+First tercile sepal width
+</td>
+<td style="text-align:center;">
+−2.882***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.242)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Second tercile sepal width
+</td>
+<td style="text-align:center;">
+−3.083***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.237)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Third tercile sepal width
+</td>
+<td style="text-align:center;">
+−3.261***
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.215)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P-value (Sepal width 1st tercile = Sepal width 2nd tercile)
+</td>
+<td style="text-align:center;">
+0.008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+P-value (Sepal width 1st tercile = Sepal width 3rd tercile)
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+</tbody>
+</table>
+<p>From the results of the hypotheses tests, we can reject the hypothesis that the effect of the first tercile of sepal width on petal width is equal to the effect of the second tercile of sepal width on petal width, and that the effect of the first tercile of sepal width on petal width is equal to the effect of the third tercile of sepal width on petal width.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="ggplot.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="generating-publication-quality-tables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="geographic-place-matching.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -296,7 +528,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-stat_tests.Rmd",
 "text": "Edit"
 },
 "history": {

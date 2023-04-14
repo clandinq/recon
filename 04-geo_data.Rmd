@@ -1,0 +1,55 @@
+# Geographic place matching
+In applied work, we often have to deal with observations that have an associated address or coordinates but no geographic codes. For cases in which no coordinates are available, one option is to match addresses to coordinates using Google Place API searches, and then merge the resulting coordinates with shapefiles to obtain geographic codes.
+
+## Google Places API searches
+R package `googleway` makes it easy to perform Google Place API searches. `googleway::google_find_place` generates a [Find Place request](https://developers.google.com/maps/documentation/places/web-service/search-find-place), taking a text input and returning an array of place candidates, along with their corresponding search status. From this result, we can extract the address and coordinates. 
+
+Currently, you get \$200 of Google Maps Platform usage every month for free. [Each request costs $0.017](https://mapsplatform.google.com/pricing/). While this may seem like little, generating 12,000 requests will already exceed the monthly free usage quota ($200 = 11,764.7 requests). It's easy to exceed this number of requests when you're running loops for large query vectors repeatedly. Therefore, the best practice is to start out with a small sample, ensure that searches are returning valid results, and then extend the method to the full sample. You can [set a maximum quota](https://developers.google.com/maps/documentation/places/web-service/report-monitor#quotas) of 375 requests per day (375 x 31 = 11,625) to ensure you don't exceed the monthly free usage limit.
+
+To start using `googleway` to conduct Google Place API searches, you first need to [create a Google Cloud project](https://developers.google.com/maps/documentation/places/web-service/cloud-setup) and [set up an API key](https://developers.google.com/maps/documentation/places/web-service/get-api-key). Once you have set this up, you can load `googleway`, define the API key and start conducting searches. 
+Here is a simple example of an individual query.
+
+```{r google_search, eval = FALSE, echo = TRUE}
+pacman::p_load(here, tidyverse, googleway)
+
+# (1.1): Set Google Place search API key.
+key <- "KJzaLyCLI-nXPsHqVwz-jna1HYg2jKpBueSsTWs" # insert API key here
+set_key(key)
+
+# (1.2): Define tibble with addresses to look up.
+missing_locs <- tribble(~id, ~address,
+                        1, "Av. Álvaro Obregón 225, Roma Norte, Cuauhtémoc, CDMX, Mexico",
+                        2, "Río Hondo #1, Col. Progreso Tizapán, Álvaro Obregón, CDMX, México")
+
+# (1.3): Loop over missing addresses.
+loc_coords <- tibble()
+for (i in 1:nrow(missing_locs)) {     
+  # Get results from Google Place search
+  results <- google_find_place(missing_locs$address[i], inputtype = "textquery", language = "es")
+  
+  # Print results
+  search_status <- ifelse(results[["status"]] == "OK", 
+                          "search successful", 
+                          "search returned no results")
+  print(str_c("Working on address ", i, " out of ", nrow(missing_locs), ", ", search_status))
+  
+  # Extract formatted address and coordinates results
+  clean_results <- tibble(id = missing_locs$id[i],
+                          address_clean = results[["candidates"]][["formatted_address"]],
+                          loc_lat = results[["candidates"]][["geometry"]][["location"]][["lat"]],
+                          loc_lon = results[["candidates"]][["geometry"]][["location"]][["lng"]])
+  
+  # Append to full results dataframe.
+  loc_coords %<>% bind_rows(clean_results)
+}
+rm(results, clean_results, i, search_status)
+
+# (1.4): Keep first result for each address.
+clean_results %<>%
+  group_by(id) %>% 
+  slice(1)
+
+```
+
+Once you finish your set of Google Place API requests, you should save the results to a CSV file for later use. The search process is not perfectly replicable as identical searches can produce different results over time, so you should only run your full search loop once.
+
