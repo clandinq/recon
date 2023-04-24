@@ -1,9 +1,15 @@
-commit b0f11b12c368340da4cf34e6deaa6b08f0edf3e7
+commit ed9390c9ff82df88bd24e605ba85f10f9ebe0cc8
 Author: clandinq <cesar.landin@itam.mx>
-Date:   Thu Apr 13 23:07:52 2023 -0500
+Date:   Thu Apr 13 23:20:35 2023 -0500
 
-    Update final issues
+    Final update
 
+M	03-stat_tests.Rmd
+M	docs/generating-publication-quality-tables.html
+M	docs/geographic-place-matching.html
+M	docs/ggplot.html
+M	docs/index.html
+A	docs/post-regression-statistical-tests.html
+M	docs/reference-keys.txt
 M	docs/search_index.json
-M	docs/statistical-tests-in-r.html
-A	git_log.txt
+M	git_log.txt

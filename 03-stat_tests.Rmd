@@ -4,7 +4,7 @@ editor_options:
     wrap: sentence
 ---
 
-# Post-regression statistical tests
+# Statistical tests
 
 In this section, we introduce functions for performing hypothesis tests on model coefficients using the `multcomp` package.
 We introduce a function called `extract_test_coef` that tests a hypothesis on model parameters and extracts the resulting p-values of the test.

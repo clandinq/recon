@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Tables | R for Economists</title>
+  <meta name="description" content="A short programming guide for economics research." />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Tables | R for Economists" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="A short programming guide for economics research." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Tables | R for Economists" />
+  
+  <meta name="twitter:description" content="A short programming guide for economics research." />
+  
+
+<meta name="author" content="César Landín" />
+
+
+<meta name="date" content="2023-04-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="figures.html"/>
+<link rel="next" href="statistical-tests.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Economists</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="figures.html"><a href="figures.html"><i class="fa fa-check"></i><b>2</b> Figures</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="figures.html"><a href="figures.html#plot-margins"><i class="fa fa-check"></i><b>2.1</b> Plot margins</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="figures.html"><a href="figures.html#removing-white-space-around-the-plot"><i class="fa fa-check"></i><b>2.1.1</b> Removing white space around the plot</a></li>
+<li class="chapter" data-level="2.1.2" data-path="figures.html"><a href="figures.html#removing-white-space-between-axes-and-plot"><i class="fa fa-check"></i><b>2.1.2</b> Removing white space between axes and plot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="figures.html"><a href="figures.html#axis-labels"><i class="fa fa-check"></i><b>2.2</b> Axis labels</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="figures.html"><a href="figures.html#removing-axis-labels"><i class="fa fa-check"></i><b>2.2.1</b> Removing axis labels</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="figures.html"><a href="figures.html#legends"><i class="fa fa-check"></i><b>2.3</b> Legends</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="figures.html"><a href="figures.html#removing-the-legend-title"><i class="fa fa-check"></i><b>2.3.1</b> Removing the legend title</a></li>
+<li class="chapter" data-level="2.3.2" data-path="figures.html"><a href="figures.html#removing-black-boxes-around-legend-keys"><i class="fa fa-check"></i><b>2.3.2</b> Removing black boxes around legend keys</a></li>
+<li class="chapter" data-level="2.3.3" data-path="figures.html"><a href="figures.html#putting-the-legend-inside-the-figure"><i class="fa fa-check"></i><b>2.3.3</b> Putting the legend inside the figure</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="figures.html"><a href="figures.html#number-formatting-functions"><i class="fa fa-check"></i><b>2.4</b> Number formatting functions</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="figures.html"><a href="figures.html#calculating-the-mean-median-and-standard-deviation-of-a-variable"><i class="fa fa-check"></i><b>2.4.1</b> Calculating the mean, median and standard deviation of a variable</a></li>
+<li class="chapter" data-level="2.4.2" data-path="figures.html"><a href="figures.html#checking-if-a-number-is-an-integer."><i class="fa fa-check"></i><b>2.4.2</b> Checking if a number is an integer.</a></li>
+<li class="chapter" data-level="2.4.3" data-path="figures.html"><a href="figures.html#number-formatting-function"><i class="fa fa-check"></i><b>2.4.3</b> Number formatting function</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="figures.html"><a href="figures.html#multiplot-figures"><i class="fa fa-check"></i><b>2.5</b> Multiplot figures</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="figures.html"><a href="figures.html#auxiliary-functions-to-remove-figure-components-axes-legend"><i class="fa fa-check"></i><b>2.5.1</b> Auxiliary functions to remove figure components: axes, legend</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>3</b> Tables</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tables.html"><a href="tables.html#guidelines-for-table-formatting"><i class="fa fa-check"></i><b>3.1</b> Guidelines for table formatting</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="tables.html"><a href="tables.html#horizontal-and-vertical-lines"><i class="fa fa-check"></i><b>3.1.1</b> Horizontal and vertical lines</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tables.html"><a href="tables.html#column-headings"><i class="fa fa-check"></i><b>3.1.2</b> Column headings</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tables.html"><a href="tables.html#symbols"><i class="fa fa-check"></i><b>3.1.3</b> Symbols</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tables.html"><a href="tables.html#an-example-using-the-iris-dataset"><i class="fa fa-check"></i><b>3.2</b> An example using the <code>iris</code> dataset</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="tables.html"><a href="tables.html#two-simple-models-using-the-iris-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Two simple models using the <code>iris</code> dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="tables.html"><a href="tables.html#adjusting-table-size-and-position"><i class="fa fa-check"></i><b>3.3</b> Adjusting table size and position</a></li>
+<li class="chapter" data-level="3.4" data-path="tables.html"><a href="tables.html#updating-variable-names-and-adding-a-caption-and-label"><i class="fa fa-check"></i><b>3.4</b> Updating variable names and adding a caption and label</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="tables.html"><a href="tables.html#updating-independent-variable-names"><i class="fa fa-check"></i><b>3.4.1</b> Updating independent variable names</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tables.html"><a href="tables.html#adding-dependent-variable-names-and-model-numbers"><i class="fa fa-check"></i><b>3.4.2</b> Adding dependent variable names and model numbers</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tables.html"><a href="tables.html#adding-a-multicolumn-title"><i class="fa fa-check"></i><b>3.4.3</b> Adding a multicolumn title</a></li>
+<li class="chapter" data-level="3.4.4" data-path="tables.html"><a href="tables.html#adding-a-caption-and-title-to-the-table"><i class="fa fa-check"></i><b>3.4.4</b> Adding a caption and title to the table</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="tables.html"><a href="tables.html#final-table-formatting"><i class="fa fa-check"></i><b>3.5</b> Final table formatting</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="tables.html"><a href="tables.html#updating-the-number-of-observations"><i class="fa fa-check"></i><b>3.5.1</b> Updating the number of observations</a></li>
+<li class="chapter" data-level="3.5.2" data-path="tables.html"><a href="tables.html#inserting-additional-data-rows"><i class="fa fa-check"></i><b>3.5.2</b> Inserting additional data rows</a></li>
+<li class="chapter" data-level="3.5.3" data-path="tables.html"><a href="tables.html#distributing-coefficient-names-over-two-rows"><i class="fa fa-check"></i><b>3.5.3</b> Distributing coefficient names over two rows</a></li>
+<li class="chapter" data-level="3.5.4" data-path="tables.html"><a href="tables.html#inserting-space-between-variables"><i class="fa fa-check"></i><b>3.5.4</b> Inserting space between variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="tables.html"><a href="tables.html#putting-it-all-together"><i class="fa fa-check"></i><b>3.6</b> Putting it all together</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="tables.html"><a href="tables.html#combining-everything-into-one-simple-function"><i class="fa fa-check"></i><b>3.6.1</b> Combining everything into one simple function</a></li>
+<li class="chapter" data-level="3.6.2" data-path="tables.html"><a href="tables.html#adding-footnotes"><i class="fa fa-check"></i><b>3.6.2</b> Adding footnotes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="tables.html"><a href="tables.html#preparing-tables-for-presentations"><i class="fa fa-check"></i><b>3.7</b> Preparing tables for presentations</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="tables.html"><a href="tables.html#generating-presentation-versions-of-tables"><i class="fa fa-check"></i><b>3.7.1</b> Generating presentation versions of tables</a></li>
+<li class="chapter" data-level="3.7.2" data-path="tables.html"><a href="tables.html#removing-standard-errors-and-column-numbers"><i class="fa fa-check"></i><b>3.7.2</b> Removing standard errors and column numbers</a></li>
+<li class="chapter" data-level="3.7.3" data-path="tables.html"><a href="tables.html#adding-notes"><i class="fa fa-check"></i><b>3.7.3</b> Adding notes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="statistical-tests.html"><a href="statistical-tests.html"><i class="fa fa-check"></i><b>4</b> Statistical tests</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-tests.html"><a href="statistical-tests.html#easy-two-sided-hypothesis-tests-in-r"><i class="fa fa-check"></i><b>4.1</b> Easy two-sided hypothesis tests in R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="geographic-place-matching.html"><a href="geographic-place-matching.html"><i class="fa fa-check"></i><b>5</b> Geographic place matching</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="geographic-place-matching.html"><a href="geographic-place-matching.html#google-places-api-searches"><i class="fa fa-check"></i><b>5.1</b> Google Places API searches</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Economists</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tables" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Tables<a href="tables.html#tables" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section introduces best practices for the presentation of tables in economics papers and explains the usage of functions that can generate formatted tables from R model objects. First, we give guidelines for table formatting adapted from the Journal of Political Economy’s <a href="journals.uchicago.edu/journals/jpe/prep-table">manuscript preparation guide</a>. Second, we construct a publication-quality table using custom functions that can be downloaded <a href="https://github.com/clandinq/ra_tools/blob/main/scripts/table_functions.R">here</a>.</p>
+<div id="guidelines-for-table-formatting" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Guidelines for table formatting<a href="tables.html#guidelines-for-table-formatting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="horizontal-and-vertical-lines" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Horizontal and vertical lines<a href="tables.html#horizontal-and-vertical-lines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Only three horizontal lines.</strong> Tables should be free of horizontal lines unless they indicate the structure of the data. All tables should have the three following horizontal lines:
+<ul>
+<li>One under the title, above the column headings (LaTeX <code>\toprule</code>)</li>
+<li>One between the column headings and the body of the table (LaTeX <code>\midrule</code>)</li>
+<li>One at the bottom of the table (LaTeX <code>\bottomrule</code>)</li>
+</ul></li>
+<li><strong>No vertical lines.</strong> No vertical lines should be included in the table.</li>
+</ul>
+</div>
+<div id="column-headings" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Column headings<a href="tables.html#column-headings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><strong>Brief column names.</strong> Column headings should identify the column as briefly as possible. Headings should contain any necessary symbols (%, $, etc.) or measurement abbreviations (cm, kg, etc.) that apply to the data in the column below.</li>
+</ul>
+</div>
+<div id="symbols" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Symbols<a href="tables.html#symbols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p><strong>No symbols in the table body.</strong> The body of the table should be free of symbols or measurement abbreviations (e.g. %, USD).</p></li>
+<li><p><strong>Symbols should be included next to dependent variable names.</strong> Symbols should appear in the column head when they apply to all values in the column, or in the leftmost column when they apply to all values in a row.</p>
+<ul>
+<li>For example, balance tables where each row is a regression will include symbols in row headers; regression tables where each column is a regression will include symbols in column headers.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="an-example-using-the-iris-dataset" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> An example using the <code>iris</code> dataset<a href="tables.html#an-example-using-the-iris-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The following sections show how to make a publication-quality table using the <code>iris</code> dataset.</p>
+<div id="two-simple-models-using-the-iris-dataset" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Two simple models using the <code>iris</code> dataset<a href="tables.html#two-simple-models-using-the-iris-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, we load the <code>iris</code> dataset that contains measurements of 4 attributes for 50 flowers from 3 different species.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tables.html#cb17-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here, tidyverse, magrittr, fixest, modelsummary, kableExtra, scales)</span>
+<span id="cb17-2"><a href="tables.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb17-3"><a href="tables.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Then, we define two models using package <code>fixest</code>. Both contain species fixed effects and cluster their errors at the species level.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="tables.html#cb19-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">feols</span>(Petal.Width <span class="sc">~</span> Sepal.Length,</span>
+<span id="cb19-2"><a href="tables.html#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">fixef =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb19-3"><a href="tables.html#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">cluster =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb19-4"><a href="tables.html#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> iris)</span>
+<span id="cb19-5"><a href="tables.html#cb19-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">feols</span>(Petal.Width <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width, </span>
+<span id="cb19-6"><a href="tables.html#cb19-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">fixef =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb19-7"><a href="tables.html#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">cluster =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb19-8"><a href="tables.html#cb19-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> iris)</span></code></pre></div>
+<div id="mshow-visualizing-quickly-regression-outcomes" class="section level4 hasAnchor" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> <code>mshow</code>: <strong>visualizing quickly regression outcomes</strong><a href="tables.html#mshow-visualizing-quickly-regression-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Next, we introduce a function called <strong>mshow</strong> for visualizing quickly regression outcomes. This function is helpful when we want to quickly preview a model in R Studio’s Viewer window instead of having to export the model to LaTeX. <strong>mshow</strong> defines standard significance levels and omits all statistics but the number of observations. The function takes as an input a list with the models (or a single model), and can include additional input that is passed on to the <code>modelsummary</code> function (for example, including additional rows).</p>
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Model 1
+</th>
+<th style="text-align:center;">
+Model 2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Sepal.Length
+</td>
+<td style="text-align:center;">
+0.145**
+</td>
+<td style="text-align:center;">
+0.064
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.033)
+</td>
+<td style="text-align:center;">
+(0.034)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sepal.Width
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.232
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.146)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+150
+</td>
+<td style="text-align:center;">
+150
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> * p &lt; 0.1, ** p &lt; 0.05, *** p &lt; 0.01
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div id="exporting-the-table-to-latex" class="section level4 hasAnchor" number="3.2.1.2">
+<h4><span class="header-section-number">3.2.1.2</span> Exporting the table to LaTeX<a href="tables.html#exporting-the-table-to-latex" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can export the previous table to latex with the following code:</p>
+<center>
+<img src="results/tables/table_1.jpg" width="300" />
+</center>
+<p>The previous table is far from being ready to include in a paper: it does not specify what the outcome variable is, the default variable names have not been replaced by more descriptive names, and it includes content that is better left for the footnote (significance notes). The next thing that should be done to format the table is to adjust the table size and position, since both of these issues are fixed earlier on in the LaTeX code.</p>
+</div>
+</div>
+</div>
+<div id="adjusting-table-size-and-position" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Adjusting table size and position<a href="tables.html#adjusting-table-size-and-position" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The functions <code>float_here</code>, <code>adjust_box</code>, <code>adjust_height</code>, and <code>adjust_col_spacing</code> are used to adjust the table size and position:</p>
+<ul>
+<li><code>float_here</code> inserts the <code>[H]</code> option after <code>\begin{table}</code> so that LaTeX does not reposition the tables. This function requires including <code>\usepackage{float}</code> in the document preamble.</li>
+<li><code>adjust_box</code> reduces the size of the table so that it fits within the text column width. This function requires including <code>\usepackage{adjustbox}</code> in the document preamble.</li>
+<li><code>adjust_height</code> is used to adjust the <em>height</em> of a table. This is useful when dealing with long tables that may not fit within the same page without further adjustment. This limits the table to a user-defined text height percentage (e.g. 70% of the text height). <code>adjust_height</code> requires the previous application of the <code>adjust_box</code> function.</li>
+<li><code>str_insert</code> is an auxiliary function used to insert lines in tables.</li>
+<li><code>adjust_col_spacing</code> defines column spacings. This can be used to increase the spacing between columns when a table looks cramped.</li>
+</ul>
+<p><strong>Functions</strong>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tables.html#cb20-1" aria-hidden="true" tabindex="-1"></a>float_here <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb20-2"><a href="tables.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">suppressWarnings</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> table, </span>
+<span id="cb20-3"><a href="tables.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">pattern =</span> <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{table}[H]&quot;</span>)))) {</span>
+<span id="cb20-4"><a href="tables.html#cb20-4" aria-hidden="true" tabindex="-1"></a>    table <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb20-5"><a href="tables.html#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{table}&quot;</span>), </span>
+<span id="cb20-6"><a href="tables.html#cb20-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replacement =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{table}[H]&quot;</span>)</span>
+<span id="cb20-7"><a href="tables.html#cb20-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-8"><a href="tables.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(table)</span>
+<span id="cb20-9"><a href="tables.html#cb20-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-10"><a href="tables.html#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="tables.html#cb20-11" aria-hidden="true" tabindex="-1"></a>adjust_box <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb20-12"><a href="tables.html#cb20-12" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb20-13"><a href="tables.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{tabular&quot;</span>),</span>
+<span id="cb20-14"><a href="tables.html#cb20-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">adjustbox{max width=</span><span class="sc">\\</span><span class="st">textwidth}{ </span><span class="sc">\n</span><span class="st"> </span><span class="sc">\\</span><span class="st">begin{tabular&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-15"><a href="tables.html#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{tabular}&quot;</span>),</span>
+<span id="cb20-16"><a href="tables.html#cb20-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{tabular}}&quot;</span>)</span>
+<span id="cb20-17"><a href="tables.html#cb20-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-18"><a href="tables.html#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="tables.html#cb20-19" aria-hidden="true" tabindex="-1"></a>adjust_height <span class="ot">&lt;-</span> <span class="cf">function</span>(table, height) {</span>
+<span id="cb20-20"><a href="tables.html#cb20-20" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb20-21"><a href="tables.html#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">adjustbox{max width=</span><span class="sc">\\</span><span class="st">textwidth}&quot;</span>),</span>
+<span id="cb20-22"><a href="tables.html#cb20-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> <span class="fu">str_c</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">adjustbox{max totalheight=&quot;</span>, height, </span>
+<span id="cb20-23"><a href="tables.html#cb20-23" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">textheight, max width=</span><span class="sc">\\</span><span class="st">textwidth}&quot;</span>))</span>
+<span id="cb20-24"><a href="tables.html#cb20-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-25"><a href="tables.html#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="tables.html#cb20-26" aria-hidden="true" tabindex="-1"></a>str_insert <span class="ot">&lt;-</span> <span class="cf">function</span>(table, pattern, insert, <span class="at">before =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb20-27"><a href="tables.html#cb20-27" aria-hidden="true" tabindex="-1"></a>  rep <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(before,</span>
+<span id="cb20-28"><a href="tables.html#cb20-28" aria-hidden="true" tabindex="-1"></a>                <span class="fu">str_c</span>(<span class="fu">fixed</span>(insert), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">fixed</span>(pattern)),</span>
+<span id="cb20-29"><a href="tables.html#cb20-29" aria-hidden="true" tabindex="-1"></a>                <span class="fu">str_c</span>(<span class="fu">fixed</span>(pattern), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="fu">fixed</span>(insert)))</span>
+<span id="cb20-30"><a href="tables.html#cb20-30" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb20-31"><a href="tables.html#cb20-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(pattern),</span>
+<span id="cb20-32"><a href="tables.html#cb20-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> rep)</span>
+<span id="cb20-33"><a href="tables.html#cb20-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-34"><a href="tables.html#cb20-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-35"><a href="tables.html#cb20-35" aria-hidden="true" tabindex="-1"></a>adjust_col_spacing <span class="ot">&lt;-</span> <span class="cf">function</span>(table, spacing) {</span>
+<span id="cb20-36"><a href="tables.html#cb20-36" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb20-37"><a href="tables.html#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_insert</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">centering&quot;</span>,</span>
+<span id="cb20-38"><a href="tables.html#cb20-38" aria-hidden="true" tabindex="-1"></a>               <span class="at">insert =</span> <span class="fu">str_c</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">setlength{</span><span class="sc">\\</span><span class="st">tabcolsep}{&quot;</span>, spacing, <span class="st">&quot;pt}&quot;</span>))</span>
+<span id="cb20-39"><a href="tables.html#cb20-39" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tables.html#cb21-1" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="tables.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="tables.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adjust_box</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="tables.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adjust_height</span>(<span class="fl">0.7</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="tables.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adjust_col_spacing</span>(<span class="dv">16</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="tables.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_2.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_2.jpg" width="389" />
+</center>
+<p>The effects of <code>float_here</code>, <code>adjust_box</code>, and <code>adjust_height</code> can only be seen when compiling the table. The wide column spacing specified by <code>adjust_col_spacing</code> can be observed when comparing with the previous table.</p>
+</div>
+<div id="updating-variable-names-and-adding-a-caption-and-label" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Updating variable names and adding a caption and label<a href="tables.html#updating-variable-names-and-adding-a-caption-and-label" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="updating-independent-variable-names" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Updating independent variable names<a href="tables.html#updating-independent-variable-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To update independent variable names, you should define object called <code>coef_names</code> with the detailed independent variable names, and names equal to the original variable names (example beow). <code>coef_map = coef_names</code> is passed on to <code>modelsummary</code>, substituting the original variable names.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tables.html#cb22-1" aria-hidden="true" tabindex="-1"></a>coef_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;Sepal width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="tables.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;Sepal.Width&quot;</span>))</span>
+<span id="cb22-3"><a href="tables.html#cb22-3" aria-hidden="true" tabindex="-1"></a>current_table <span class="ot">&lt;-</span> <span class="fu">mshow</span>(model_list, </span>
+<span id="cb22-4"><a href="tables.html#cb22-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">coef_map =</span> coef_names,</span>
+<span id="cb22-5"><a href="tables.html#cb22-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>)</span>
+<span id="cb22-6"><a href="tables.html#cb22-6" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span></span>
+<span id="cb22-7"><a href="tables.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_3.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_3.jpg" width="300" />
+</center>
+</div>
+<div id="adding-dependent-variable-names-and-model-numbers" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Adding dependent variable names and model numbers<a href="tables.html#adding-dependent-variable-names-and-model-numbers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The next step is to add dependent variable names and model numbers to the table. This can be done with function <code>insert_col_numbers</code>. The auxiliary function <code>get_num_cols</code> is defined later in this section.</p>
+<p><code>insert_col_numbers</code> has a binary toggle (TRUE includes column numbers, FALSE omits them) so that the function can be included inside other functions. That way, column numbers can be inserted depending on the number of columns.</p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="tables.html#cb23-1" aria-hidden="true" tabindex="-1"></a>insert_col_numbers <span class="ot">&lt;-</span> <span class="cf">function</span>(table, col_numbers) {</span>
+<span id="cb23-2"><a href="tables.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (col_numbers) {</span>
+<span id="cb23-3"><a href="tables.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    table <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="tables.html#cb23-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_insert</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">midrule&quot;</span>,</span>
+<span id="cb23-5"><a href="tables.html#cb23-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">insert =</span> <span class="fu">str_c</span>(<span class="st">&quot;&amp; &quot;</span>, <span class="fu">paste</span>(<span class="fu">str_c</span>(<span class="st">&quot;(&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">get_num_cols</span>(table), <span class="st">&quot;)&quot;</span>), <span class="at">collapse =</span> <span class="st">&quot; &amp; &quot;</span>), <span class="st">&quot;</span><span class="sc">\\\\</span><span class="st">&quot;</span>),</span>
+<span id="cb23-6"><a href="tables.html#cb23-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">before =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb23-7"><a href="tables.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb23-8"><a href="tables.html#cb23-8" aria-hidden="true" tabindex="-1"></a>    table</span>
+<span id="cb23-9"><a href="tables.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-10"><a href="tables.html#cb23-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<p>To update dependent variable names, you should set the names of the list with the models equal to the dependent variable names. Then, you can apply the <code>insert_col_numbers</code> function to include column numbers:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="tables.html#cb24-1" aria-hidden="true" tabindex="-1"></a>current_table <span class="ot">&lt;-</span> model_list <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="tables.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Petal width&quot;</span>, <span class="st">&quot;Petal width&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="tables.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mshow</span>(<span class="at">coef_map =</span> coef_names,</span>
+<span id="cb24-4"><a href="tables.html#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>)</span>
+<span id="cb24-5"><a href="tables.html#cb24-5" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span></span>
+<span id="cb24-6"><a href="tables.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-7"><a href="tables.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_4.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_4.jpg" width="297" />
+</center>
+</div>
+<div id="adding-a-multicolumn-title" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Adding a multicolumn title<a href="tables.html#adding-a-multicolumn-title" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An alternative to the previous table is to add a multicolumn title that describes the dependent variable. This can be done with function <code>multicol_title</code>, which takes as an input the multicolumn title and has an option to add a horizontal line below the multicolumn title.</p>
+<p>The auxiliary function <code>remove_names</code> removes the stock model names to keep only the multicolumn title. Therefore, the model list should remain unnamed. This function depends on another auxiliary function, <code>get_num_cols</code>, which calculates the numbers of columns in the table.</p>
+<p><strong>Functions</strong>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="tables.html#cb25-1" aria-hidden="true" tabindex="-1"></a>multicol_title <span class="ot">&lt;-</span> <span class="cf">function</span>(table, title, <span class="at">cline =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb25-2"><a href="tables.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  proc_table <span class="ot">&lt;-</span> table <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="tables.html#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_insert</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">toprule&quot;</span>,</span>
+<span id="cb25-4"><a href="tables.html#cb25-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">insert =</span> <span class="fu">str_c</span>(<span class="st">&quot;&amp; </span><span class="sc">\\</span><span class="st">multicolumn{&quot;</span>, <span class="fu">get_num_cols</span>(table), <span class="st">&quot;}{c}{&quot;</span>, title, <span class="st">&quot;} </span><span class="sc">\\\\\n</span><span class="st">%clh&quot;</span>))</span>
+<span id="cb25-5"><a href="tables.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cline) {</span>
+<span id="cb25-6"><a href="tables.html#cb25-6" aria-hidden="true" tabindex="-1"></a>    proc_table <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb25-7"><a href="tables.html#cb25-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">&quot;%clh&quot;</span>,</span>
+<span id="cb25-8"><a href="tables.html#cb25-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replacement =</span> <span class="fu">str_c</span>(<span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\\\</span><span class="st">cline{2-&quot;</span>), <span class="fu">get_num_cols</span>(table) <span class="sc">+</span> <span class="dv">1</span>, <span class="st">&quot;}&quot;</span>))</span>
+<span id="cb25-9"><a href="tables.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-10"><a href="tables.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proc_table)</span>
+<span id="cb25-11"><a href="tables.html#cb25-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-12"><a href="tables.html#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="tables.html#cb25-13" aria-hidden="true" tabindex="-1"></a>remove_names <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb25-14"><a href="tables.html#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">str_detect</span>(table, <span class="st">&quot;Model 1&quot;</span>)) {</span>
+<span id="cb25-15"><a href="tables.html#cb25-15" aria-hidden="true" tabindex="-1"></a>    table <span class="sc">%&gt;%</span> </span>
+<span id="cb25-16"><a href="tables.html#cb25-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(<span class="fu">str_c</span>(<span class="st">&quot;&amp; &quot;</span>, <span class="fu">str_c</span>(<span class="st">&quot;Model &quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">get_num_cols</span>(table), <span class="at">collapse =</span> <span class="st">&quot; &amp; &quot;</span>), <span class="st">&quot;</span><span class="sc">\\\\\n</span><span class="st">&quot;</span>)),</span>
+<span id="cb25-17"><a href="tables.html#cb25-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb25-18"><a href="tables.html#cb25-18" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb25-19"><a href="tables.html#cb25-19" aria-hidden="true" tabindex="-1"></a>    table</span>
+<span id="cb25-20"><a href="tables.html#cb25-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-21"><a href="tables.html#cb25-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-22"><a href="tables.html#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="tables.html#cb25-23" aria-hidden="true" tabindex="-1"></a>get_num_cols <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb25-24"><a href="tables.html#cb25-24" aria-hidden="true" tabindex="-1"></a>  pos_start <span class="ot">&lt;-</span> <span class="fu">str_locate</span>(table, <span class="fu">fixed</span>(<span class="st">&quot;tabular}[t]{&quot;</span>))[<span class="dv">2</span>] <span class="sc">+</span> <span class="dv">1</span> <span class="co"># Get starting position of column alignment</span></span>
+<span id="cb25-25"><a href="tables.html#cb25-25" aria-hidden="true" tabindex="-1"></a>  pos_end <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(table, pos_start, pos_start <span class="sc">+</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span>     <span class="co"># Extract end position</span></span>
+<span id="cb25-26"><a href="tables.html#cb25-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_locate</span>(<span class="fu">fixed</span>(<span class="st">&quot;}&quot;</span>))</span>
+<span id="cb25-27"><a href="tables.html#cb25-27" aria-hidden="true" tabindex="-1"></a>  pos_end <span class="ot">&lt;-</span> pos_end[<span class="dv">1</span>] <span class="sc">+</span> pos_start <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb25-28"><a href="tables.html#cb25-28" aria-hidden="true" tabindex="-1"></a>  col_num <span class="ot">&lt;-</span> (<span class="fu">str_sub</span>(table, pos_start, pos_end) <span class="sc">%&gt;%</span> <span class="fu">str_length</span>()) <span class="sc">-</span> <span class="dv">1</span> <span class="co"># Exclude leftmost column</span></span>
+<span id="cb25-29"><a href="tables.html#cb25-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(col_num)</span>
+<span id="cb25-30"><a href="tables.html#cb25-30" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<p>Remember not to name the model list when using a multicolumn title:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="tables.html#cb26-1" aria-hidden="true" tabindex="-1"></a>current_table <span class="ot">&lt;-</span> model_list <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="tables.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mshow</span>(<span class="at">coef_map =</span> coef_names,</span>
+<span id="cb26-3"><a href="tables.html#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>)</span>
+<span id="cb26-4"><a href="tables.html#cb26-4" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="tables.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb26-6"><a href="tables.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">multicol_title</span>(<span class="st">&quot;Petal Width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a href="tables.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-8"><a href="tables.html#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_5.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_5.jpg" width="267" />
+</center>
+</div>
+<div id="adding-a-caption-and-title-to-the-table" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Adding a caption and title to the table<a href="tables.html#adding-a-caption-and-title-to-the-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>add_caption_label_center</code> is used to add a caption to the table float and define the float label. The caption should be as concise as possible, and the float should have the file name as label to facilitate locating the table in the paper and results folders. This function also centers the table in the middle of the float. <code>float_here</code> is required before <code>add_caption_label_center</code>.</p>
+<p><strong>Functions</strong>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tables.html#cb27-1" aria-hidden="true" tabindex="-1"></a>add_caption_label_center <span class="ot">&lt;-</span> <span class="cf">function</span>(table, caption, label) {</span>
+<span id="cb27-2"><a href="tables.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  center <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(table, <span class="st">&quot;centering&quot;</span>), <span class="st">&quot;&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">centering&quot;</span>)</span>
+<span id="cb27-3"><a href="tables.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="tables.html#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_insert</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{table}[H]&quot;</span>,</span>
+<span id="cb27-5"><a href="tables.html#cb27-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">insert =</span> <span class="fu">str_c</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">caption{&quot;</span>, caption, <span class="st">&quot;} </span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb27-6"><a href="tables.html#cb27-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;</span><span class="sc">\\</span><span class="st">label{tab:&quot;</span>, label, <span class="st">&quot;}&quot;</span>, center))</span>
+<span id="cb27-7"><a href="tables.html#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="tables.html#cb28-1" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="tables.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="tables.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="tables.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">multicol_title</span>(<span class="st">&quot;Petal Width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="tables.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="tables.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_caption_label_center</span>(<span class="at">caption =</span> <span class="st">&quot;Correlation Between Flower Petal Width and Sepal Length and Width&quot;</span>,</span>
+<span id="cb28-7"><a href="tables.html#cb28-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-8"><a href="tables.html#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_6.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_6.jpg" width="525" />
+</center>
+</div>
+</div>
+<div id="final-table-formatting" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Final table formatting<a href="tables.html#final-table-formatting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="updating-the-number-of-observations" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Updating the number of observations<a href="tables.html#updating-the-number-of-observations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Two functions can help to update the number of observations:</p>
+<ul>
+<li><p><code>comma_numobs</code> inserts a comma every three digits in the number of observations. The auxiliary function <code>comma_format</code> is used by this function.</p></li>
+<li><p><code>replace_numobs</code> replaces “Num.Obs” with a custom text (e.g. “Number of observations” or “Number of firms”).</p></li>
+</ul>
+<p><strong>Functions</strong>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tables.html#cb29-1" aria-hidden="true" tabindex="-1"></a>comma_format <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">override_right_digits =</span> <span class="cn">NA</span>) {</span>
+<span id="cb29-2"><a href="tables.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of right digits</span></span>
+<span id="cb29-3"><a href="tables.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">0</span>) {num <span class="ot">&lt;-</span> <span class="dv">1</span>} <span class="cf">else</span> {num <span class="ot">&lt;-</span> x}</span>
+<span id="cb29-4"><a href="tables.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  right_digits <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">-</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
+<span id="cb29-5"><a href="tables.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&lt;</span> <span class="dv">0</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">0</span>}</span>
+<span id="cb29-6"><a href="tables.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (right_digits <span class="sc">&gt;</span> <span class="dv">3</span>) {right_digits <span class="ot">&lt;-</span> <span class="dv">3</span>}</span>
+<span id="cb29-7"><a href="tables.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(override_right_digits)) {right_digits <span class="ot">&lt;-</span> override_right_digits}</span>
+<span id="cb29-8"><a href="tables.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate number of left digits</span></span>
+<span id="cb29-9"><a href="tables.html#cb29-9" aria-hidden="true" tabindex="-1"></a>  left_digits <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">+</span> <span class="fu">floor</span>(<span class="fu">log10</span>(<span class="fu">abs</span>(num)))</span>
+<span id="cb29-10"><a href="tables.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (left_digits <span class="sc">&lt;=</span> <span class="dv">0</span>) {left_digits <span class="ot">&lt;-</span> <span class="dv">1</span>}</span>
+<span id="cb29-11"><a href="tables.html#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Format number</span></span>
+<span id="cb29-12"><a href="tables.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  proc_num <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">round</span>(x, right_digits), <span class="at">nsmall =</span> right_digits, <span class="at">digits =</span>  left_digits, <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb29-13"><a href="tables.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (proc_num <span class="sc">!=</span> <span class="st">&quot;0&quot;</span> <span class="sc">&amp;</span> <span class="fu">as.numeric</span>(<span class="fu">str_replace</span>(proc_num, <span class="fu">fixed</span>(<span class="st">&quot;,&quot;</span>), <span class="st">&quot;&quot;</span>)) <span class="sc">&lt;</span> <span class="dv">1</span>) {</span>
+<span id="cb29-14"><a href="tables.html#cb29-14" aria-hidden="true" tabindex="-1"></a>    proc_num <span class="ot">&lt;-</span> <span class="fu">str_pad</span>(proc_num, right_digits <span class="sc">+</span> <span class="dv">2</span>, <span class="st">&quot;right&quot;</span>, <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb29-15"><a href="tables.html#cb29-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-16"><a href="tables.html#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proc_num)</span>
+<span id="cb29-17"><a href="tables.html#cb29-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-18"><a href="tables.html#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="tables.html#cb29-19" aria-hidden="true" tabindex="-1"></a>comma_numobs <span class="ot">&lt;-</span> <span class="cf">function</span>(models) {</span>
+<span id="cb29-20"><a href="tables.html#cb29-20" aria-hidden="true" tabindex="-1"></a>  model_proc <span class="ot">&lt;-</span> models</span>
+<span id="cb29-21"><a href="tables.html#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(model_proc)) {</span>
+<span id="cb29-22"><a href="tables.html#cb29-22" aria-hidden="true" tabindex="-1"></a>    model_proc[[i]]<span class="sc">$</span>nobs <span class="ot">&lt;-</span> <span class="fu">comma</span>(model_proc[[i]]<span class="sc">$</span>nobs)</span>
+<span id="cb29-23"><a href="tables.html#cb29-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-24"><a href="tables.html#cb29-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(model_proc)</span>
+<span id="cb29-25"><a href="tables.html#cb29-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-26"><a href="tables.html#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="tables.html#cb29-27" aria-hidden="true" tabindex="-1"></a>replace_numobs <span class="ot">&lt;-</span> <span class="cf">function</span>(table, text) {</span>
+<span id="cb29-28"><a href="tables.html#cb29-28" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb29-29"><a href="tables.html#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">&quot;Num.Obs.&quot;</span>,</span>
+<span id="cb29-30"><a href="tables.html#cb29-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> text) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-31"><a href="tables.html#cb29-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="st">&quot;Num. Obs.&quot;</span>,</span>
+<span id="cb29-32"><a href="tables.html#cb29-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">replacement =</span> text)</span>
+<span id="cb29-33"><a href="tables.html#cb29-33" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="tables.html#cb30-1" aria-hidden="true" tabindex="-1"></a>current_table <span class="ot">&lt;-</span> model_list <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="tables.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">comma_numobs</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="tables.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mshow</span>(<span class="at">coef_map =</span> coef_names,</span>
+<span id="cb30-4"><a href="tables.html#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>)</span>
+<span id="cb30-5"><a href="tables.html#cb30-5" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span> </span>
+<span id="cb30-6"><a href="tables.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="tables.html#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb30-8"><a href="tables.html#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">multicol_title</span>(<span class="st">&quot;Petal Width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-9"><a href="tables.html#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-10"><a href="tables.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_caption_label_center</span>(<span class="at">caption =</span> <span class="st">&quot;Correlation Between Flower Petal Width and Sepal Length and Width&quot;</span>,</span>
+<span id="cb30-11"><a href="tables.html#cb30-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-12"><a href="tables.html#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_numobs</span>(<span class="st">&quot;Number of observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-13"><a href="tables.html#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_7.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_7.jpg" width="525" />
+</center>
+</div>
+<div id="inserting-additional-data-rows" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Inserting additional data rows<a href="tables.html#inserting-additional-data-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Often it’s useful to insert additional rows with statistics, for example means and medians. You can feed <code>modelsummary</code> a dataframe with the desired content and add these rows below the number of observations.</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tables.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define additional rows</span></span>
+<span id="cb31-2"><a href="tables.html#cb31-2" aria-hidden="true" tabindex="-1"></a>petal_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Width) <span class="sc">%&gt;%</span> <span class="fu">comma_format</span>()</span>
+<span id="cb31-3"><a href="tables.html#cb31-3" aria-hidden="true" tabindex="-1"></a>sepal_length_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Length)  <span class="sc">%&gt;%</span> <span class="fu">comma_format</span>()</span>
+<span id="cb31-4"><a href="tables.html#cb31-4" aria-hidden="true" tabindex="-1"></a>sepal_width_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris<span class="sc">$</span>Sepal.Width) <span class="sc">%&gt;%</span> <span class="fu">comma_format</span>()</span>
+<span id="cb31-5"><a href="tables.html#cb31-5" aria-hidden="true" tabindex="-1"></a>add_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(<span class="st">&quot;Mean petal width&quot;</span>, <span class="fu">rep</span>(petal_mean, <span class="dv">2</span>)),</span>
+<span id="cb31-6"><a href="tables.html#cb31-6" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">c</span>(<span class="st">&quot;Mean sepal length&quot;</span>, <span class="fu">rep</span>(sepal_length_mean, <span class="dv">2</span>)),</span>
+<span id="cb31-7"><a href="tables.html#cb31-7" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">c</span>(<span class="st">&quot;Mean sepal width&quot;</span>, <span class="fu">rep</span>(sepal_width_mean, <span class="dv">2</span>))))</span>
+<span id="cb31-8"><a href="tables.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add rows to previous table</span></span>
+<span id="cb31-9"><a href="tables.html#cb31-9" aria-hidden="true" tabindex="-1"></a>current_table <span class="ot">&lt;-</span> model_list <span class="sc">%&gt;%</span> </span>
+<span id="cb31-10"><a href="tables.html#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">comma_numobs</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb31-11"><a href="tables.html#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mshow</span>(<span class="at">coef_map =</span> coef_names,</span>
+<span id="cb31-12"><a href="tables.html#cb31-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">add_rows =</span> add_row,</span>
+<span id="cb31-13"><a href="tables.html#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>)</span>
+<span id="cb31-14"><a href="tables.html#cb31-14" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span> </span>
+<span id="cb31-15"><a href="tables.html#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb31-16"><a href="tables.html#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb31-17"><a href="tables.html#cb31-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">multicol_title</span>(<span class="st">&quot;Petal Width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-18"><a href="tables.html#cb31-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-19"><a href="tables.html#cb31-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_caption_label_center</span>(<span class="at">caption =</span> <span class="st">&quot;Correlation Between Flower Petal Width and Sepal Length and Width&quot;</span>,</span>
+<span id="cb31-20"><a href="tables.html#cb31-20" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-21"><a href="tables.html#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_numobs</span>(<span class="st">&quot;Number of observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-22"><a href="tables.html#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_8.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_8.jpg" width="525" />
+</center>
+</div>
+<div id="distributing-coefficient-names-over-two-rows" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Distributing coefficient names over two rows<a href="tables.html#distributing-coefficient-names-over-two-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Interactions of variables frequently generate excessively long variable names. One solution for this is to split the variable name in two and put the second part of the variable name in the next row. Function <code>coef_two_rows</code> can do this automatically; all this needs is for the interaction variable to include “times” between the two variables.</p>
+<p><strong>Functions</strong>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="tables.html#cb32-1" aria-hidden="true" tabindex="-1"></a>coef_two_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb32-2"><a href="tables.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check number of string locations</span></span>
+<span id="cb32-3"><a href="tables.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  string_loc <span class="ot">&lt;-</span> <span class="fu">str_locate_all</span>(table, <span class="st">&quot;times&quot;</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb32-4"><a href="tables.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  num_locations <span class="ot">&lt;-</span> <span class="fu">nrow</span>(string_loc)</span>
+<span id="cb32-5"><a href="tables.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate temporary output</span></span>
+<span id="cb32-6"><a href="tables.html#cb32-6" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> table</span>
+<span id="cb32-7"><a href="tables.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Tag words</span></span>
+<span id="cb32-8"><a href="tables.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  tagged_string <span class="ot">&lt;-</span> <span class="st">&quot;REPtimes&quot;</span></span>
+<span id="cb32-9"><a href="tables.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  output <span class="sc">%&lt;&gt;%</span> <span class="fu">str_replace_all</span>(<span class="st">&quot;times&quot;</span>, tagged_string)</span>
+<span id="cb32-10"><a href="tables.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Loop over string locations</span></span>
+<span id="cb32-11"><a href="tables.html#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(string_loc)) {</span>
+<span id="cb32-12"><a href="tables.html#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Locate coefficient string to replace with &quot;&quot;</span></span>
+<span id="cb32-13"><a href="tables.html#cb32-13" aria-hidden="true" tabindex="-1"></a>    pat_loc <span class="ot">&lt;-</span> <span class="fu">str_locate</span>(output, <span class="fu">fixed</span>(tagged_string))[<span class="dv">1</span>]</span>
+<span id="cb32-14"><a href="tables.html#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Locate lower row to replace with coefficient string</span></span>
+<span id="cb32-15"><a href="tables.html#cb32-15" aria-hidden="true" tabindex="-1"></a>    upper_row <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(output, pat_loc, <span class="fu">str_length</span>(output))</span>
+<span id="cb32-16"><a href="tables.html#cb32-16" aria-hidden="true" tabindex="-1"></a>    lower_row <span class="ot">&lt;-</span> upper_row <span class="sc">%&gt;%</span> </span>
+<span id="cb32-17"><a href="tables.html#cb32-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_sub</span>(<span class="fu">str_locate</span>(upper_row, <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\\\\n</span><span class="st"> &quot;</span>))[<span class="dv">2</span>] <span class="sc">+</span> <span class="dv">1</span>, <span class="fu">str_length</span>(upper_row))</span>
+<span id="cb32-18"><a href="tables.html#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define pattern to replace in upper row</span></span>
+<span id="cb32-19"><a href="tables.html#cb32-19" aria-hidden="true" tabindex="-1"></a>    pat_rep_upper <span class="ot">&lt;-</span> <span class="fu">str_split</span>(upper_row, <span class="st">&quot;&amp;&quot;</span>, <span class="at">n =</span> <span class="dv">2</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb32-20"><a href="tables.html#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define pattern to replace in lower row</span></span>
+<span id="cb32-21"><a href="tables.html#cb32-21" aria-hidden="true" tabindex="-1"></a>    pat_rep_lower <span class="ot">&lt;-</span> lower_row <span class="sc">%&gt;%</span> </span>
+<span id="cb32-22"><a href="tables.html#cb32-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_sub</span>(<span class="dv">1</span>, <span class="fu">str_locate</span>(lower_row, <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\\\\n</span><span class="st">&quot;</span>))[<span class="dv">2</span>])</span>
+<span id="cb32-23"><a href="tables.html#cb32-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace strings in table.</span></span>
+<span id="cb32-24"><a href="tables.html#cb32-24" aria-hidden="true" tabindex="-1"></a>    output <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb32-25"><a href="tables.html#cb32-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace</span>(<span class="at">pattern =</span> pat_rep_upper,</span>
+<span id="cb32-26"><a href="tables.html#cb32-26" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-27"><a href="tables.html#cb32-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(pat_rep_lower),</span>
+<span id="cb32-28"><a href="tables.html#cb32-28" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replacement =</span> <span class="fu">str_c</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">quad $</span><span class="sc">\\</span><span class="st">times$&quot;</span>, </span>
+<span id="cb32-29"><a href="tables.html#cb32-29" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">str_replace</span>(pat_rep_upper, tagged_string, <span class="st">&quot;&quot;</span>),</span>
+<span id="cb32-30"><a href="tables.html#cb32-30" aria-hidden="true" tabindex="-1"></a>                                      pat_rep_lower))</span>
+<span id="cb32-31"><a href="tables.html#cb32-31" aria-hidden="true" tabindex="-1"></a>  }  </span>
+<span id="cb32-32"><a href="tables.html#cb32-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb32-33"><a href="tables.html#cb32-33" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="tables.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new variable to dataset.</span></span>
+<span id="cb33-2"><a href="tables.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb33-3"><a href="tables.html#cb33-3" aria-hidden="true" tabindex="-1"></a>current_data <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="tables.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">random =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="fu">nrow</span>(.), <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb33-5"><a href="tables.html#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="tables.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model</span></span>
+<span id="cb33-7"><a href="tables.html#cb33-7" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">feols</span>(Petal.Width <span class="sc">~</span> Sepal.Length <span class="sc">*</span> random,</span>
+<span id="cb33-8"><a href="tables.html#cb33-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">fixef =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb33-9"><a href="tables.html#cb33-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">cluster =</span> <span class="st">&quot;Species&quot;</span>,</span>
+<span id="cb33-10"><a href="tables.html#cb33-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> current_data)</span>
+<span id="cb33-11"><a href="tables.html#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="tables.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define coefficient names</span></span>
+<span id="cb33-13"><a href="tables.html#cb33-13" aria-hidden="true" tabindex="-1"></a>coef_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sepal length&quot;</span>, <span class="st">&quot;Random variable&quot;</span>, <span class="st">&quot;Sepal length times Random variable&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-14"><a href="tables.html#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="fu">c</span>(<span class="st">&quot;Sepal.Length&quot;</span>, <span class="st">&quot;random&quot;</span>, <span class="st">&quot;Sepal.Length:random&quot;</span>))</span>
+<span id="cb33-15"><a href="tables.html#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="tables.html#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Export table</span></span>
+<span id="cb33-17"><a href="tables.html#cb33-17" aria-hidden="true" tabindex="-1"></a>current_table <span class="ot">&lt;-</span> model_list <span class="sc">%&gt;%</span> </span>
+<span id="cb33-18"><a href="tables.html#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">list</span>(m3)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-19"><a href="tables.html#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">comma_numobs</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-20"><a href="tables.html#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mshow</span>(<span class="at">coef_map =</span> coef_names,</span>
+<span id="cb33-21"><a href="tables.html#cb33-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>)</span>
+<span id="cb33-22"><a href="tables.html#cb33-22" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span> </span>
+<span id="cb33-23"><a href="tables.html#cb33-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-24"><a href="tables.html#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb33-25"><a href="tables.html#cb33-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">multicol_title</span>(<span class="st">&quot;Petal Width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-26"><a href="tables.html#cb33-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-27"><a href="tables.html#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_caption_label_center</span>(<span class="at">caption =</span> <span class="st">&quot;Correlation Between Flower Petal Width and Sepal Length and Width&quot;</span>,</span>
+<span id="cb33-28"><a href="tables.html#cb33-28" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-29"><a href="tables.html#cb33-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_numobs</span>(<span class="st">&quot;Number of observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-30"><a href="tables.html#cb33-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef_two_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-31"><a href="tables.html#cb33-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_9.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_9.jpg" width="525" />
+</center>
+</div>
+<div id="inserting-space-between-variables" class="section level3 hasAnchor" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Inserting space between variables<a href="tables.html#inserting-space-between-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In tables with two-line variable names, it can be easier to read the table when there is sufficient spacing between each set of variable coefficient and standard errors. The function <code>add_line_space</code> inserts vertical space between each set of variable numbers and facilitates reading the table.</p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="tables.html#cb34-1" aria-hidden="true" tabindex="-1"></a>add_line_space <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb34-2"><a href="tables.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep split rows after first parentheses.</span></span>
+<span id="cb34-3"><a href="tables.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  keep_after_firstpar <span class="ot">&lt;-</span> (table <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="tables.html#cb34-4" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">str_sub</span>(<span class="fu">str_locate</span>(table, <span class="fu">fixed</span>(<span class="st">&quot;(&quot;</span>))[<span class="dv">1</span>], <span class="fu">str_length</span>(table)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-5"><a href="tables.html#cb34-5" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">str_split</span>(<span class="st">&quot;</span><span class="sc">\\\n</span><span class="st">&quot;</span>))[[<span class="dv">1</span>]]</span>
+<span id="cb34-6"><a href="tables.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keep rows with parentheses.</span></span>
+<span id="cb34-7"><a href="tables.html#cb34-7" aria-hidden="true" tabindex="-1"></a>  keep_after_firstpar <span class="ot">&lt;-</span> keep_after_firstpar[<span class="fu">str_detect</span>(keep_after_firstpar, <span class="fu">fixed</span>(<span class="st">&quot;(&quot;</span>))]</span>
+<span id="cb34-8"><a href="tables.html#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Drop first one (column numbers)</span></span>
+<span id="cb34-9"><a href="tables.html#cb34-9" aria-hidden="true" tabindex="-1"></a>  keep_after_firstpar <span class="ot">&lt;-</span> keep_after_firstpar[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(keep_after_firstpar)]</span>
+<span id="cb34-10"><a href="tables.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replace with spacing.</span></span>
+<span id="cb34-11"><a href="tables.html#cb34-11" aria-hidden="true" tabindex="-1"></a>  proc_table <span class="ot">&lt;-</span> table</span>
+<span id="cb34-12"><a href="tables.html#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(keep_after_firstpar)) {</span>
+<span id="cb34-13"><a href="tables.html#cb34-13" aria-hidden="true" tabindex="-1"></a>    proc_table <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb34-14"><a href="tables.html#cb34-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace</span>(<span class="at">pattern =</span> <span class="fu">fixed</span>(keep_after_firstpar[i]),</span>
+<span id="cb34-15"><a href="tables.html#cb34-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replacement =</span> <span class="fu">str_c</span>(keep_after_firstpar[i], <span class="st">&quot;[0.3cm]&quot;</span>))</span>
+<span id="cb34-16"><a href="tables.html#cb34-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb34-17"><a href="tables.html#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(proc_table)</span>
+<span id="cb34-18"><a href="tables.html#cb34-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tables.html#cb35-1" aria-hidden="true" tabindex="-1"></a>current_table <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="tables.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="tables.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb35-4"><a href="tables.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">multicol_title</span>(<span class="st">&quot;Petal Width&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-5"><a href="tables.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">insert_col_numbers</span>(<span class="at">col_numbers =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-6"><a href="tables.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_caption_label_center</span>(<span class="at">caption =</span> <span class="st">&quot;Correlation Between Flower Petal Width and Sepal Length and Width&quot;</span>,</span>
+<span id="cb35-7"><a href="tables.html#cb35-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-8"><a href="tables.html#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_numobs</span>(<span class="st">&quot;Number of observations&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-9"><a href="tables.html#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef_two_rows</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb35-10"><a href="tables.html#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_line_space</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb35-11"><a href="tables.html#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_10.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_10.jpg" width="451" />
+</center>
+</div>
+</div>
+<div id="putting-it-all-together" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Putting it all together<a href="tables.html#putting-it-all-together" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="combining-everything-into-one-simple-function" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Combining everything into one simple function<a href="tables.html#combining-everything-into-one-simple-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Most of the previous tables can be combined into one simple function: <code>gen_base_table</code>. The only non-auxiliary functions that are not included by default in the options are <code>adjust_height</code>, <code>adjust_col_spacing</code>, <code>coef_two_rows</code> and <code>add_line_space</code>.</p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tables.html#cb36-1" aria-hidden="true" tabindex="-1"></a>gen_base_table <span class="ot">&lt;-</span> <span class="cf">function</span>(models, caption, label, <span class="at">title =</span> <span class="cn">NULL</span>, <span class="at">cline =</span> <span class="cn">FALSE</span>, coef_names, <span class="at">numobs =</span> <span class="st">&quot;Number of observations&quot;</span>, ...) {</span>
+<span id="cb36-2"><a href="tables.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get length of model. If large, it is a regression that needs to be put in a list</span></span>
+<span id="cb36-3"><a href="tables.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(models) <span class="sc">&gt;</span> <span class="dv">10</span>) {models <span class="ot">&lt;-</span> <span class="fu">list</span>(models)}</span>
+<span id="cb36-4"><a href="tables.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Generate table</span></span>
+<span id="cb36-5"><a href="tables.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> models <span class="sc">%&gt;%</span> </span>
+<span id="cb36-6"><a href="tables.html#cb36-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fix number of observation number format</span></span>
+<span id="cb36-7"><a href="tables.html#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">comma_numobs</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb36-8"><a href="tables.html#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate table with modelsummary</span></span>
+<span id="cb36-9"><a href="tables.html#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">modelsummary</span>(<span class="at">coef_map =</span> coef_names,</span>
+<span id="cb36-10"><a href="tables.html#cb36-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">stars =</span> <span class="fu">c</span>(<span class="st">&quot;*&quot;</span> <span class="ot">=</span> .<span class="dv">1</span>, <span class="st">&quot;**&quot;</span> <span class="ot">=</span> .<span class="dv">05</span>, <span class="st">&quot;***&quot;</span> <span class="ot">=</span> <span class="fl">0.01</span>),</span>
+<span id="cb36-11"><a href="tables.html#cb36-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">gof_omit =</span> <span class="st">&quot;AIC|BIC|R2|R2 Adj.|R2 Pseudo|R2 Within|Log.Lik.|Std.Errors|FE|RMSE&quot;</span>,</span>
+<span id="cb36-12"><a href="tables.html#cb36-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb36-13"><a href="tables.html#cb36-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">output =</span> <span class="st">&quot;latex&quot;</span>,</span>
+<span id="cb36-14"><a href="tables.html#cb36-14" aria-hidden="true" tabindex="-1"></a>                 ...) <span class="sc">%&gt;%</span></span>
+<span id="cb36-15"><a href="tables.html#cb36-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Insert float here option</span></span>
+<span id="cb36-16"><a href="tables.html#cb36-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">float_here</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb36-17"><a href="tables.html#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Insert adjustbox</span></span>
+<span id="cb36-18"><a href="tables.html#cb36-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">adjust_box</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb36-19"><a href="tables.html#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add caption and label</span></span>
+<span id="cb36-20"><a href="tables.html#cb36-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_caption_label_center</span>(<span class="at">caption =</span> caption,</span>
+<span id="cb36-21"><a href="tables.html#cb36-21" aria-hidden="true" tabindex="-1"></a>                             <span class="at">label =</span> label) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-22"><a href="tables.html#cb36-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Insert column numbers</span></span>
+<span id="cb36-23"><a href="tables.html#cb36-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">insert_col_numbers</span>(<span class="fu">ifelse</span>(<span class="fu">length</span>(models) <span class="sc">==</span> <span class="dv">1</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-24"><a href="tables.html#cb36-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove model names if no unique column names given</span></span>
+<span id="cb36-25"><a href="tables.html#cb36-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">remove_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb36-26"><a href="tables.html#cb36-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Replace number of observations (Num.Obs. with Num. Obs.)</span></span>
+<span id="cb36-27"><a href="tables.html#cb36-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">replace_numobs</span>(numobs)</span>
+<span id="cb36-28"><a href="tables.html#cb36-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(title)) {</span>
+<span id="cb36-29"><a href="tables.html#cb36-29" aria-hidden="true" tabindex="-1"></a>    output <span class="sc">%&lt;&gt;%</span> <span class="fu">multicol_title</span>(title, <span class="at">cline =</span> cline)</span>
+<span id="cb36-30"><a href="tables.html#cb36-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-31"><a href="tables.html#cb36-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb36-32"><a href="tables.html#cb36-32" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<p>You can replicate the previous table with this simple command:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tables.html#cb37-1" aria-hidden="true" tabindex="-1"></a>model_list <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="tables.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">append</span>(<span class="fu">list</span>(m3)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="tables.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gen_base_table</span>(<span class="at">caption =</span> <span class="st">&quot;Correlation Between Flower Petal Width and Sepal Length and Width&quot;</span>,</span>
+<span id="cb37-4"><a href="tables.html#cb37-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">label =</span> <span class="st">&quot;flower_table&quot;</span>,</span>
+<span id="cb37-5"><a href="tables.html#cb37-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Petal Width&quot;</span>,</span>
+<span id="cb37-6"><a href="tables.html#cb37-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">coef_names =</span> coef_names) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-7"><a href="tables.html#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef_two_rows</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb37-8"><a href="tables.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_line_space</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb37-9"><a href="tables.html#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_11.tex&quot;</span>))</span></code></pre></div>
+<center>
+<img src="results/tables/table_10.jpg" width="451" />
+</center>
+</div>
+<div id="adding-footnotes" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Adding footnotes<a href="tables.html#adding-footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The final step is to remove the notes from the bottom of the table and include our own footnote. You can do this with function <code>format_save_footnote</code> and including <code>options("modelsummary_stars_note" = FALSE)</code> in your code. This function saves a footnote to a file with the same name as the table in the folder /results/notes. This makes it easier to locate notes and include them in the LaTeX document the following way:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tables.html#cb38-1" aria-hidden="true" tabindex="-1"></a>\input{..<span class="sc">/</span>results<span class="sc">/</span>tables<span class="sc">/</span>current_table.tex}</span>
+<span id="cb38-2"><a href="tables.html#cb38-2" aria-hidden="true" tabindex="-1"></a>\input{..<span class="sc">/</span>results<span class="sc">/</span>notes<span class="sc">/</span>current_table.tex}</span></code></pre></div>
+<p><strong>Usage</strong></p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tables.html#cb39-1" aria-hidden="true" tabindex="-1"></a>format_save_footnote <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">text =</span> <span class="st">&quot;&quot;</span>, filename, <span class="at">stars =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb39-2"><a href="tables.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  sig <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(stars, <span class="st">&quot; * $p &lt; 0.1$, ** $p &lt; 0.05$, *** $p &lt; 0.01$.&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb39-3"><a href="tables.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  footnote <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">footnotesize </span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb39-4"><a href="tables.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{justify} </span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb39-5"><a href="tables.html#cb39-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">emph{Note}: &quot;</span>, text, sig, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb39-6"><a href="tables.html#cb39-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{justify} </span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb39-7"><a href="tables.html#cb39-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;</span><span class="sc">\\</span><span class="st">normalsize </span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb39-8"><a href="tables.html#cb39-8" aria-hidden="true" tabindex="-1"></a>  clean_filename <span class="ot">&lt;-</span> <span class="fu">str_split</span>(filename, <span class="fu">fixed</span>(<span class="st">&quot;.&quot;</span>))[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb39-9"><a href="tables.html#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(footnote, <span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;notes&quot;</span>, <span class="fu">str_c</span>(clean_filename, <span class="st">&quot;.tex&quot;</span>)))</span>
+<span id="cb39-10"><a href="tables.html#cb39-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tables.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;modelsummary_stars_note&quot;</span> <span class="ot">=</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-2"><a href="tables.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (generate previous table after running this line)</span></span>
+<span id="cb40-3"><a href="tables.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="tables.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;This table reports the correlation between petal width and sepal lenght and width.&quot;</span>,</span>
+<span id="cb40-5"><a href="tables.html#cb40-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;The unit of observation is at the plant level.&quot;</span>,</span>
+<span id="cb40-6"><a href="tables.html#cb40-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;The coefficients come from the regression of petal width on sepal length (column (1)), the regression of petal width on sepal length and sepal width (column (2)), and the regression of petal width on a random dummy variable, sepal length and the interaction between these two variables (column (3)).&quot;</span>,</span>
+<span id="cb40-7"><a href="tables.html#cb40-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;Data comes from the iris dataset.&quot;</span>,</span>
+<span id="cb40-8"><a href="tables.html#cb40-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;All estimations include species fixed effects, and standard errors clustered at the species level are included in parentheses.&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-9"><a href="tables.html#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format_save_footnote</span>(<span class="st">&quot;current_table.tex&quot;</span>, <span class="at">stars =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<center>
+<img src="results/tables/table_12.jpg" width="451" />
+</center>
+</div>
+</div>
+<div id="preparing-tables-for-presentations" class="section level2 hasAnchor" number="3.7">
+<h2><span class="header-section-number">3.7</span> Preparing tables for presentations<a href="tables.html#preparing-tables-for-presentations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once you have generated a final version of the table, there are a few functions that can easily generate a presentation version of the table, remove unwanted rows and add short notes at the bottom of the table.</p>
+<div id="generating-presentation-versions-of-tables" class="section level3 hasAnchor" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Generating presentation versions of tables<a href="tables.html#generating-presentation-versions-of-tables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Presentation versions of tables only include the content between <code>\begin{tabulate}</code> and <code>\end{tabulate}</code>. <code>convert_save_pres_table</code> can do this conversion rapidly. By default, this table looks for the input table in /results/tables, and saves the output to the same folder with the <em>pres_</em> prefix.</p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="tables.html#cb41-1" aria-hidden="true" tabindex="-1"></a>convert_save_pres_table <span class="ot">&lt;-</span> <span class="cf">function</span>(table_name, <span class="at">table_path =</span> <span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>), <span class="at">output_path =</span> <span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>)) {</span>
+<span id="cb41-2"><a href="tables.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">&lt;-</span> <span class="fu">read_file</span>(<span class="fu">here</span>(table_path, table_name))</span>
+<span id="cb41-3"><a href="tables.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  table <span class="ot">&lt;-</span> <span class="fu">str_sub</span>(table,</span>
+<span id="cb41-4"><a href="tables.html#cb41-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">str_locate</span>(table, <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">begin{tabular}&quot;</span>))[<span class="dv">1</span>],</span>
+<span id="cb41-5"><a href="tables.html#cb41-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">str_locate</span>(table, <span class="fu">fixed</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">end{tabular}&quot;</span>))[<span class="dv">2</span>])</span>
+<span id="cb41-6"><a href="tables.html#cb41-6" aria-hidden="true" tabindex="-1"></a>  pres_table_name <span class="ot">&lt;-</span> <span class="fu">str_c</span>(<span class="st">&quot;pres_&quot;</span>, table_name)</span>
+<span id="cb41-7"><a href="tables.html#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(table, <span class="fu">here</span>(output_path, pres_table_name))</span>
+<span id="cb41-8"><a href="tables.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;Presentation table saved to&quot;</span>,</span>
+<span id="cb41-9"><a href="tables.html#cb41-9" aria-hidden="true" tabindex="-1"></a>              <span class="fu">str_remove</span>(output_path, <span class="fu">here</span>()), <span class="st">&quot;/&quot;</span>, pres_table_name))</span>
+<span id="cb41-10"><a href="tables.html#cb41-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tables.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">convert_save_pres_table</span>(<span class="st">&quot;table_11.tex&quot;</span>)</span></code></pre></div>
+</div>
+<div id="removing-standard-errors-and-column-numbers" class="section level3 hasAnchor" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Removing standard errors and column numbers<a href="tables.html#removing-standard-errors-and-column-numbers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Removing standard errors and column numbers can make it easier to fit tables in presentations without having to reduce the font size too much. <code>remove_std_errors_col_nums</code> is another simple function with no options that can quickly perform this modification.</p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="tables.html#cb43-1" aria-hidden="true" tabindex="-1"></a>remove_std_errors_col_nums <span class="ot">&lt;-</span> <span class="cf">function</span>(table) {</span>
+<span id="cb43-2"><a href="tables.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span>   </span>
+<span id="cb43-3"><a href="tables.html#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_split</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-4"><a href="tables.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    .[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> </span>
+<span id="cb43-5"><a href="tables.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    .[<span class="sc">!</span>(<span class="fu">str_detect</span>(., <span class="fu">fixed</span>(<span class="st">&quot;(&quot;</span>)))] <span class="sc">%&gt;%</span> </span>
+<span id="cb43-6"><a href="tables.html#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb43-7"><a href="tables.html#cb43-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<p>This would require saving a version of the original table without standard errors and column numbers, and then converting to a presentation version. The previous table would look like this:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tables.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_12.tex&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="tables.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_std_errors_col_nums</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="tables.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_13.tex&quot;</span>))</span>
+<span id="cb44-4"><a href="tables.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">convert_save_pres_table</span>(<span class="st">&quot;table_13.tex&quot;</span>)</span></code></pre></div>
+<p>###</p>
+<center>
+<img src="results/tables/pres_table_13.jpg" width="462" />
+</center>
+</div>
+<div id="adding-notes" class="section level3 hasAnchor" number="3.7.3">
+<h3><span class="header-section-number">3.7.3</span> Adding notes<a href="tables.html#adding-notes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Finally, although it’s best practice not to add notes directly to a table, it is the only way you can add a note to a presentation table (since footnotes can’t be included). <code>add_note</code> can be used for adding notes to presentation tables.</p>
+<p><strong>Function</strong>:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="tables.html#cb45-1" aria-hidden="true" tabindex="-1"></a>add_note <span class="ot">&lt;-</span> <span class="cf">function</span>(table, note) {</span>
+<span id="cb45-2"><a href="tables.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  table <span class="sc">%&gt;%</span> </span>
+<span id="cb45-3"><a href="tables.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_insert</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">bottomrule&quot;</span>,</span>
+<span id="cb45-4"><a href="tables.html#cb45-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">insert =</span> <span class="fu">str_c</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">multicolumn{&quot;</span>, <span class="fu">get_num_cols</span>(table) <span class="sc">+</span> <span class="dv">1</span>, <span class="st">&quot;}{c}{&quot;</span>, note, <span class="st">&quot;}&quot;</span>))</span>
+<span id="cb45-5"><a href="tables.html#cb45-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Usage</strong>:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tables.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;pres_table_13.tex&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="tables.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_note</span>(<span class="st">&quot;Quick note at the bottom of the presentation table.&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="tables.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write</span>(<span class="fu">here</span>(<span class="st">&quot;results&quot;</span>, <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;table_14.tex&quot;</span>))</span></code></pre></div>
+<p>###</p>
+<center>
+<img src="results/tables/table_14.jpg" width="462" />
+</center>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="figures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-tests.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-tables.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

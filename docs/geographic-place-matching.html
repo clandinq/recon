@@ -4,33 +4,33 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Geographic place matching | A Short Programming Guide for Economics Research</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <title>Chapter 5 Geographic place matching | R for Economists</title>
+  <meta name="description" content="A short programming guide for economics research." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Geographic place matching | A Short Programming Guide for Economics Research" />
+  <meta property="og:title" content="Chapter 5 Geographic place matching | R for Economists" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="A short programming guide for economics research." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Geographic place matching | A Short Programming Guide for Economics Research" />
+  <meta name="twitter:title" content="Chapter 5 Geographic place matching | R for Economists" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="A short programming guide for economics research." />
   
 
 <meta name="author" content="César Landín" />
 
 
-<meta name="date" content="2023-04-13" />
+<meta name="date" content="2023-04-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="post-regression-statistical-tests.html"/>
+<link rel="prev" href="statistical-tests.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -54,6 +54,8 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -135,80 +137,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">R for Economists</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> This is a dummy chapter</a></li>
-<li class="chapter" data-level="2" data-path="ggplot.html"><a href="ggplot.html"><i class="fa fa-check"></i><b>2</b> Tips for using <code>ggplot</code> to generate publication-quality graphs</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Index</a></li>
+<li class="chapter" data-level="2" data-path="figures.html"><a href="figures.html"><i class="fa fa-check"></i><b>2</b> Figures</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="ggplot.html"><a href="ggplot.html#plot-margins"><i class="fa fa-check"></i><b>2.1</b> Plot margins</a>
+<li class="chapter" data-level="2.1" data-path="figures.html"><a href="figures.html#plot-margins"><i class="fa fa-check"></i><b>2.1</b> Plot margins</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="ggplot.html"><a href="ggplot.html#removing-white-space-around-the-plot"><i class="fa fa-check"></i><b>2.1.1</b> Removing white space around the plot</a></li>
-<li class="chapter" data-level="2.1.2" data-path="ggplot.html"><a href="ggplot.html#removing-white-space-between-axes-and-plot"><i class="fa fa-check"></i><b>2.1.2</b> Removing white space between axes and plot</a></li>
+<li class="chapter" data-level="2.1.1" data-path="figures.html"><a href="figures.html#removing-white-space-around-the-plot"><i class="fa fa-check"></i><b>2.1.1</b> Removing white space around the plot</a></li>
+<li class="chapter" data-level="2.1.2" data-path="figures.html"><a href="figures.html#removing-white-space-between-axes-and-plot"><i class="fa fa-check"></i><b>2.1.2</b> Removing white space between axes and plot</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="ggplot.html"><a href="ggplot.html#axis-labels"><i class="fa fa-check"></i><b>2.2</b> Axis labels</a>
+<li class="chapter" data-level="2.2" data-path="figures.html"><a href="figures.html#axis-labels"><i class="fa fa-check"></i><b>2.2</b> Axis labels</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="ggplot.html"><a href="ggplot.html#removing-axis-labels"><i class="fa fa-check"></i><b>2.2.1</b> Removing axis labels</a></li>
+<li class="chapter" data-level="2.2.1" data-path="figures.html"><a href="figures.html#removing-axis-labels"><i class="fa fa-check"></i><b>2.2.1</b> Removing axis labels</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="ggplot.html"><a href="ggplot.html#legends"><i class="fa fa-check"></i><b>2.3</b> Legends</a>
+<li class="chapter" data-level="2.3" data-path="figures.html"><a href="figures.html#legends"><i class="fa fa-check"></i><b>2.3</b> Legends</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="ggplot.html"><a href="ggplot.html#removing-the-legend-title"><i class="fa fa-check"></i><b>2.3.1</b> Removing the legend title</a></li>
-<li class="chapter" data-level="2.3.2" data-path="ggplot.html"><a href="ggplot.html#removing-black-boxes-around-legend-keys"><i class="fa fa-check"></i><b>2.3.2</b> Removing black boxes around legend keys</a></li>
-<li class="chapter" data-level="2.3.3" data-path="ggplot.html"><a href="ggplot.html#putting-the-legend-inside-the-figure"><i class="fa fa-check"></i><b>2.3.3</b> Putting the legend inside the figure</a></li>
+<li class="chapter" data-level="2.3.1" data-path="figures.html"><a href="figures.html#removing-the-legend-title"><i class="fa fa-check"></i><b>2.3.1</b> Removing the legend title</a></li>
+<li class="chapter" data-level="2.3.2" data-path="figures.html"><a href="figures.html#removing-black-boxes-around-legend-keys"><i class="fa fa-check"></i><b>2.3.2</b> Removing black boxes around legend keys</a></li>
+<li class="chapter" data-level="2.3.3" data-path="figures.html"><a href="figures.html#putting-the-legend-inside-the-figure"><i class="fa fa-check"></i><b>2.3.3</b> Putting the legend inside the figure</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="ggplot.html"><a href="ggplot.html#number-formatting-functions"><i class="fa fa-check"></i><b>2.4</b> Number formatting functions</a>
+<li class="chapter" data-level="2.4" data-path="figures.html"><a href="figures.html#number-formatting-functions"><i class="fa fa-check"></i><b>2.4</b> Number formatting functions</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="ggplot.html"><a href="ggplot.html#calculating-the-mean-median-and-standard-deviation-of-a-variable"><i class="fa fa-check"></i><b>2.4.1</b> Calculating the mean, median and standard deviation of a variable</a></li>
-<li class="chapter" data-level="2.4.2" data-path="ggplot.html"><a href="ggplot.html#checking-if-a-number-is-an-integer."><i class="fa fa-check"></i><b>2.4.2</b> Checking if a number is an integer.</a></li>
-<li class="chapter" data-level="2.4.3" data-path="ggplot.html"><a href="ggplot.html#number-formatting-function"><i class="fa fa-check"></i><b>2.4.3</b> Number formatting function</a></li>
+<li class="chapter" data-level="2.4.1" data-path="figures.html"><a href="figures.html#calculating-the-mean-median-and-standard-deviation-of-a-variable"><i class="fa fa-check"></i><b>2.4.1</b> Calculating the mean, median and standard deviation of a variable</a></li>
+<li class="chapter" data-level="2.4.2" data-path="figures.html"><a href="figures.html#checking-if-a-number-is-an-integer."><i class="fa fa-check"></i><b>2.4.2</b> Checking if a number is an integer.</a></li>
+<li class="chapter" data-level="2.4.3" data-path="figures.html"><a href="figures.html#number-formatting-function"><i class="fa fa-check"></i><b>2.4.3</b> Number formatting function</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="ggplot.html"><a href="ggplot.html#multiplot-figures"><i class="fa fa-check"></i><b>2.5</b> Multiplot figures</a>
+<li class="chapter" data-level="2.5" data-path="figures.html"><a href="figures.html#multiplot-figures"><i class="fa fa-check"></i><b>2.5</b> Multiplot figures</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="ggplot.html"><a href="ggplot.html#auxiliary-functions-to-remove-figure-components-axes-legend"><i class="fa fa-check"></i><b>2.5.1</b> Auxiliary functions to remove figure components: axes, legend</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html"><i class="fa fa-check"></i><b>3</b> Generating publication-quality tables</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#guidelines-for-table-formatting"><i class="fa fa-check"></i><b>3.1</b> Guidelines for table formatting</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#horizontal-and-vertical-lines"><i class="fa fa-check"></i><b>3.1.1</b> Horizontal and vertical lines</a></li>
-<li class="chapter" data-level="3.1.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#column-headings"><i class="fa fa-check"></i><b>3.1.2</b> Column headings</a></li>
-<li class="chapter" data-level="3.1.3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#symbols"><i class="fa fa-check"></i><b>3.1.3</b> Symbols</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#an-example-using-the-iris-dataset"><i class="fa fa-check"></i><b>3.2</b> An example using the <code>iris</code> dataset</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#two-simple-models-using-the-iris-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Two simple models using the <code>iris</code> dataset</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adjusting-table-size-and-position"><i class="fa fa-check"></i><b>3.3</b> Adjusting table size and position</a></li>
-<li class="chapter" data-level="3.4" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#updating-variable-names-and-adding-a-caption-and-label"><i class="fa fa-check"></i><b>3.4</b> Updating variable names and adding a caption and label</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#updating-independent-variable-names"><i class="fa fa-check"></i><b>3.4.1</b> Updating independent variable names</a></li>
-<li class="chapter" data-level="3.4.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adding-dependent-variable-names-and-model-numbers"><i class="fa fa-check"></i><b>3.4.2</b> Adding dependent variable names and model numbers</a></li>
-<li class="chapter" data-level="3.4.3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adding-a-multicolumn-title"><i class="fa fa-check"></i><b>3.4.3</b> Adding a multicolumn title</a></li>
-<li class="chapter" data-level="3.4.4" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adding-a-caption-and-title-to-the-table"><i class="fa fa-check"></i><b>3.4.4</b> Adding a caption and title to the table</a></li>
-</ul></li>
-<li class="chapter" data-level="3.5" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#final-table-formatting"><i class="fa fa-check"></i><b>3.5</b> Final table formatting</a>
-<ul>
-<li class="chapter" data-level="3.5.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#updating-the-number-of-observations"><i class="fa fa-check"></i><b>3.5.1</b> Updating the number of observations</a></li>
-<li class="chapter" data-level="3.5.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#inserting-additional-data-rows"><i class="fa fa-check"></i><b>3.5.2</b> Inserting additional data rows</a></li>
-<li class="chapter" data-level="3.5.3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#distributing-coefficient-names-over-two-rows"><i class="fa fa-check"></i><b>3.5.3</b> Distributing coefficient names over two rows</a></li>
-<li class="chapter" data-level="3.5.4" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#inserting-space-between-variables"><i class="fa fa-check"></i><b>3.5.4</b> Inserting space between variables</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#putting-it-all-together"><i class="fa fa-check"></i><b>3.6</b> Putting it all together</a>
-<ul>
-<li class="chapter" data-level="3.6.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#combining-everything-into-one-simple-function"><i class="fa fa-check"></i><b>3.6.1</b> Combining everything into one simple function</a></li>
-<li class="chapter" data-level="3.6.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adding-footnotes"><i class="fa fa-check"></i><b>3.6.2</b> Adding footnotes</a></li>
-</ul></li>
-<li class="chapter" data-level="3.7" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#preparing-tables-for-presentations"><i class="fa fa-check"></i><b>3.7</b> Preparing tables for presentations</a>
-<ul>
-<li class="chapter" data-level="3.7.1" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#generating-presentation-versions-of-tables"><i class="fa fa-check"></i><b>3.7.1</b> Generating presentation versions of tables</a></li>
-<li class="chapter" data-level="3.7.2" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#removing-standard-errors-and-column-numbers"><i class="fa fa-check"></i><b>3.7.2</b> Removing standard errors and column numbers</a></li>
-<li class="chapter" data-level="3.7.3" data-path="generating-publication-quality-tables.html"><a href="generating-publication-quality-tables.html#adding-notes"><i class="fa fa-check"></i><b>3.7.3</b> Adding notes</a></li>
+<li class="chapter" data-level="2.5.1" data-path="figures.html"><a href="figures.html#auxiliary-functions-to-remove-figure-components-axes-legend"><i class="fa fa-check"></i><b>2.5.1</b> Auxiliary functions to remove figure components: axes, legend</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="post-regression-statistical-tests.html"><a href="post-regression-statistical-tests.html"><i class="fa fa-check"></i><b>4</b> Post-regression statistical tests</a>
+<li class="chapter" data-level="3" data-path="tables.html"><a href="tables.html"><i class="fa fa-check"></i><b>3</b> Tables</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="post-regression-statistical-tests.html"><a href="post-regression-statistical-tests.html#easy-two-sided-hypothesis-tests-in-r"><i class="fa fa-check"></i><b>4.1</b> Easy two-sided hypothesis tests in R</a></li>
+<li class="chapter" data-level="3.1" data-path="tables.html"><a href="tables.html#guidelines-for-table-formatting"><i class="fa fa-check"></i><b>3.1</b> Guidelines for table formatting</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="tables.html"><a href="tables.html#horizontal-and-vertical-lines"><i class="fa fa-check"></i><b>3.1.1</b> Horizontal and vertical lines</a></li>
+<li class="chapter" data-level="3.1.2" data-path="tables.html"><a href="tables.html#column-headings"><i class="fa fa-check"></i><b>3.1.2</b> Column headings</a></li>
+<li class="chapter" data-level="3.1.3" data-path="tables.html"><a href="tables.html#symbols"><i class="fa fa-check"></i><b>3.1.3</b> Symbols</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tables.html"><a href="tables.html#an-example-using-the-iris-dataset"><i class="fa fa-check"></i><b>3.2</b> An example using the <code>iris</code> dataset</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="tables.html"><a href="tables.html#two-simple-models-using-the-iris-dataset"><i class="fa fa-check"></i><b>3.2.1</b> Two simple models using the <code>iris</code> dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="tables.html"><a href="tables.html#adjusting-table-size-and-position"><i class="fa fa-check"></i><b>3.3</b> Adjusting table size and position</a></li>
+<li class="chapter" data-level="3.4" data-path="tables.html"><a href="tables.html#updating-variable-names-and-adding-a-caption-and-label"><i class="fa fa-check"></i><b>3.4</b> Updating variable names and adding a caption and label</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="tables.html"><a href="tables.html#updating-independent-variable-names"><i class="fa fa-check"></i><b>3.4.1</b> Updating independent variable names</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tables.html"><a href="tables.html#adding-dependent-variable-names-and-model-numbers"><i class="fa fa-check"></i><b>3.4.2</b> Adding dependent variable names and model numbers</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tables.html"><a href="tables.html#adding-a-multicolumn-title"><i class="fa fa-check"></i><b>3.4.3</b> Adding a multicolumn title</a></li>
+<li class="chapter" data-level="3.4.4" data-path="tables.html"><a href="tables.html#adding-a-caption-and-title-to-the-table"><i class="fa fa-check"></i><b>3.4.4</b> Adding a caption and title to the table</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="tables.html"><a href="tables.html#final-table-formatting"><i class="fa fa-check"></i><b>3.5</b> Final table formatting</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="tables.html"><a href="tables.html#updating-the-number-of-observations"><i class="fa fa-check"></i><b>3.5.1</b> Updating the number of observations</a></li>
+<li class="chapter" data-level="3.5.2" data-path="tables.html"><a href="tables.html#inserting-additional-data-rows"><i class="fa fa-check"></i><b>3.5.2</b> Inserting additional data rows</a></li>
+<li class="chapter" data-level="3.5.3" data-path="tables.html"><a href="tables.html#distributing-coefficient-names-over-two-rows"><i class="fa fa-check"></i><b>3.5.3</b> Distributing coefficient names over two rows</a></li>
+<li class="chapter" data-level="3.5.4" data-path="tables.html"><a href="tables.html#inserting-space-between-variables"><i class="fa fa-check"></i><b>3.5.4</b> Inserting space between variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="tables.html"><a href="tables.html#putting-it-all-together"><i class="fa fa-check"></i><b>3.6</b> Putting it all together</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="tables.html"><a href="tables.html#combining-everything-into-one-simple-function"><i class="fa fa-check"></i><b>3.6.1</b> Combining everything into one simple function</a></li>
+<li class="chapter" data-level="3.6.2" data-path="tables.html"><a href="tables.html#adding-footnotes"><i class="fa fa-check"></i><b>3.6.2</b> Adding footnotes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="tables.html"><a href="tables.html#preparing-tables-for-presentations"><i class="fa fa-check"></i><b>3.7</b> Preparing tables for presentations</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="tables.html"><a href="tables.html#generating-presentation-versions-of-tables"><i class="fa fa-check"></i><b>3.7.1</b> Generating presentation versions of tables</a></li>
+<li class="chapter" data-level="3.7.2" data-path="tables.html"><a href="tables.html#removing-standard-errors-and-column-numbers"><i class="fa fa-check"></i><b>3.7.2</b> Removing standard errors and column numbers</a></li>
+<li class="chapter" data-level="3.7.3" data-path="tables.html"><a href="tables.html#adding-notes"><i class="fa fa-check"></i><b>3.7.3</b> Adding notes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="statistical-tests.html"><a href="statistical-tests.html"><i class="fa fa-check"></i><b>4</b> Statistical tests</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="statistical-tests.html"><a href="statistical-tests.html#easy-two-sided-hypothesis-tests-in-r"><i class="fa fa-check"></i><b>4.1</b> Easy two-sided hypothesis tests in R</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="geographic-place-matching.html"><a href="geographic-place-matching.html"><i class="fa fa-check"></i><b>5</b> Geographic place matching</a>
 <ul>
@@ -226,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Short Programming Guide for Economics Research</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Economists</a>
           </h1>
         </div>
 
@@ -290,7 +292,7 @@ Here is a simple example of an individual query.</p>
           </div>
         </div>
       </div>
-<a href="post-regression-statistical-tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

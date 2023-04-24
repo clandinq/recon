@@ -1,5 +1,4 @@
-# Generating publication-quality tables
-
+# Tables
 This section introduces best practices for the presentation of tables in economics papers and explains the usage of functions that can generate formatted tables from R model objects. First, we give guidelines for table formatting adapted from the Journal of Political Economy's [manuscript preparation guide](journals.uchicago.edu/journals/jpe/prep-table). Second, we construct a publication-quality table using custom functions that can be downloaded [here](https://github.com/clandinq/ra_tools/blob/main/scripts/table_functions.R).
 
 ## Guidelines for table formatting

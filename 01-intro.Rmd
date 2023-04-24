@@ -1,4 +1,5 @@
-# Tips for using `ggplot` to generate publication-quality graphs {#ggplot}
+# Figures
+Tips for using `ggplot` to generate publication-quality graphs {#ggplot}
 
 <!-- Figures -->
 <!-- - Sans-serif fonts such as Arial and Helvetica should be used whenever possible. Package `ggplot2` uses Arial as the default font. -->
@@ -25,7 +26,7 @@
 ## Plot margins
 ### Removing white space around the plot
 To remove the white space around the plot, set the plot margins equal to 0. The order is [top, right, bottom, left].
-```{r plot.margin, eval = FALSE, echo = TRUE}
+```{r plot.margin1, eval = FALSE, echo = TRUE}
 figure %>% 
   theme(plot.margin = margin(0, 0, 0, 0))
 ```

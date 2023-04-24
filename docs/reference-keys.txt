@@ -1,5 +1,5 @@
-this-is-a-dummy-chapter
-ggplot
+index
+figures
 plot-margins
 removing-white-space-around-the-plot
 removing-white-space-between-axes-and-plot
@@ -15,7 +15,7 @@ checking-if-a-number-is-an-integer.
 number-formatting-function
 multiplot-figures
 auxiliary-functions-to-remove-figure-components-axes-legend
-generating-publication-quality-tables
+tables
 guidelines-for-table-formatting
 horizontal-and-vertical-lines
 column-headings
@@ -42,7 +42,7 @@ preparing-tables-for-presentations
 generating-presentation-versions-of-tables
 removing-standard-errors-and-column-numbers
 adding-notes
-post-regression-statistical-tests
+statistical-tests
 easy-two-sided-hypothesis-tests-in-r
 geographic-place-matching
 google-places-api-searches

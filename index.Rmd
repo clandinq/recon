@@ -1,18 +1,28 @@
 --- 
-title: "A Short Programming Guide for Economics Research"
+title: "R for Economists"
 author: "César Landín"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
-documentclass: book
+documentclass: krantz
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 # github-repo: rstudio/bookdown-demo
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+description: "A short programming guide for economics research."
 ---
 
-# This is a dummy chapter
+# Index
+
+<!-- * [1. Introduction](https://bookdown.org/yihui/bookdown/introduction.html) introduces the package and how to get started using it. -->
+<!-- * [2. Components](https://bookdown.org/yihui/bookdown/components.html) introduces elements than can be used while writing a book like Markdown syntax, custom blocks, Theorem and Proof environments, and numbered references. -->
+<!-- * [3. Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html) documents the formats to produce HTML, PDF, and EPUB books.  -->
+<!-- * [4. Customization](https://bookdown.org/yihui/bookdown/customization.html) documents the configuration options available for authors. -->
+<!-- * [5. Editing](https://bookdown.org/yihui/bookdown/editing.html) explains how to edit, build, preview, and serve the book locally. -->
+<!-- * [6. Publishing](https://bookdown.org/yihui/bookdown/publishing.html) explains how to publish your book early online for feedback, and how to formally publish as either printed copies or e-books. -->
+
+
+
 <!-- # Prerequisites -->
 
 <!-- This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$. -->
