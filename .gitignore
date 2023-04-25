@@ -18,3 +18,10 @@ _book
 # Other files
 _*
 .Rproj.user
+
+*.DS_Store
+*.Rhistory
+.Rhistory
+.Rprofile
+\.Rprofile
+\.Rhistory
