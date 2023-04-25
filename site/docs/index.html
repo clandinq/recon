@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Geographic place matching | R for Economists</title>
+  <title>R for Economists</title>
   <meta name="description" content="A short programming guide for economics research." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Geographic place matching | R for Economists" />
+  <meta property="og:title" content="R for Economists" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="A short programming guide for economics research." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Geographic place matching | R for Economists" />
+  <meta name="twitter:title" content="R for Economists" />
   
   <meta name="twitter:description" content="A short programming guide for economics research." />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="César Landín" />
 
 
-<meta name="date" content="2023-04-24" />
+<meta name="date" content="2023-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="statistical-tests.html"/>
 
+<link rel="next" href="figures.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -236,64 +236,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="geographic-place-matching" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Geographic place matching<a href="geographic-place-matching.html#geographic-place-matching" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In applied work, we often have to deal with observations that have an associated address or coordinates but no geographic codes. For cases in which no coordinates are available, one option is to match addresses to coordinates using Google Place API searches, and then merge the resulting coordinates with shapefiles to obtain geographic codes.</p>
-<div id="google-places-api-searches" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Google Places API searches<a href="geographic-place-matching.html#google-places-api-searches" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R package <code>googleway</code> makes it easy to perform Google Place API searches. <code>googleway::google_find_place</code> generates a <a href="https://developers.google.com/maps/documentation/places/web-service/search-find-place">Find Place request</a>, taking a text input and returning an array of place candidates, along with their corresponding search status. From this result, we can extract the address and coordinates.</p>
-<p>Currently, you get $200 of Google Maps Platform usage every month for free. <a href="https://mapsplatform.google.com/pricing/">Each request costs $0.017</a>. While this may seem like little, generating 12,000 requests will already exceed the monthly free usage quota ($200 = 11,764.7 requests). It’s easy to exceed this number of requests when you’re running loops for large query vectors repeatedly. Therefore, the best practice is to start out with a small sample, ensure that searches are returning valid results, and then extend the method to the full sample. You can <a href="https://developers.google.com/maps/documentation/places/web-service/report-monitor#quotas">set a maximum quota</a> of 375 requests per day (375 x 31 = 11,625) to ensure you don’t exceed the monthly free usage limit.</p>
-<p>To start using <code>googleway</code> to conduct Google Place API searches, you first need to <a href="https://developers.google.com/maps/documentation/places/web-service/cloud-setup">create a Google Cloud project</a> and <a href="https://developers.google.com/maps/documentation/places/web-service/get-api-key">set up an API key</a>. Once you have set this up, you can load <code>googleway</code>, define the API key and start conducting searches.
-Here is a simple example of an individual query.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="geographic-place-matching.html#cb52-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(here, tidyverse, googleway)</span>
-<span id="cb52-2"><a href="geographic-place-matching.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="geographic-place-matching.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.1): Set Google Place search API key.</span></span>
-<span id="cb52-4"><a href="geographic-place-matching.html#cb52-4" aria-hidden="true" tabindex="-1"></a>key <span class="ot">&lt;-</span> <span class="st">&quot;KJzaLyCLI-nXPsHqVwz-jna1HYg2jKpBueSsTWs&quot;</span> <span class="co"># insert API key here</span></span>
-<span id="cb52-5"><a href="geographic-place-matching.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set_key</span>(key)</span>
-<span id="cb52-6"><a href="geographic-place-matching.html#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-7"><a href="geographic-place-matching.html#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.2): Define tibble with addresses to look up.</span></span>
-<span id="cb52-8"><a href="geographic-place-matching.html#cb52-8" aria-hidden="true" tabindex="-1"></a>missing_locs <span class="ot">&lt;-</span> <span class="fu">tribble</span>(<span class="sc">~</span>id, <span class="sc">~</span>address,</span>
-<span id="cb52-9"><a href="geographic-place-matching.html#cb52-9" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">1</span>, <span class="st">&quot;Av. Álvaro Obregón 225, Roma Norte, Cuauhtémoc, CDMX, Mexico&quot;</span>,</span>
-<span id="cb52-10"><a href="geographic-place-matching.html#cb52-10" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">2</span>, <span class="st">&quot;Río Hondo #1, Col. Progreso Tizapán, Álvaro Obregón, CDMX, México&quot;</span>)</span>
-<span id="cb52-11"><a href="geographic-place-matching.html#cb52-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-12"><a href="geographic-place-matching.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.3): Loop over missing addresses.</span></span>
-<span id="cb52-13"><a href="geographic-place-matching.html#cb52-13" aria-hidden="true" tabindex="-1"></a>loc_coords <span class="ot">&lt;-</span> <span class="fu">tibble</span>()</span>
-<span id="cb52-14"><a href="geographic-place-matching.html#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(missing_locs)) {     </span>
-<span id="cb52-15"><a href="geographic-place-matching.html#cb52-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get results from Google Place search</span></span>
-<span id="cb52-16"><a href="geographic-place-matching.html#cb52-16" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">google_find_place</span>(missing_locs<span class="sc">$</span>address[i], <span class="at">inputtype =</span> <span class="st">&quot;textquery&quot;</span>, <span class="at">language =</span> <span class="st">&quot;es&quot;</span>)</span>
-<span id="cb52-17"><a href="geographic-place-matching.html#cb52-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-18"><a href="geographic-place-matching.html#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print results</span></span>
-<span id="cb52-19"><a href="geographic-place-matching.html#cb52-19" aria-hidden="true" tabindex="-1"></a>  search_status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(results[[<span class="st">&quot;status&quot;</span>]] <span class="sc">==</span> <span class="st">&quot;OK&quot;</span>, </span>
-<span id="cb52-20"><a href="geographic-place-matching.html#cb52-20" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;search successful&quot;</span>, </span>
-<span id="cb52-21"><a href="geographic-place-matching.html#cb52-21" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;search returned no results&quot;</span>)</span>
-<span id="cb52-22"><a href="geographic-place-matching.html#cb52-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">str_c</span>(<span class="st">&quot;Working on address &quot;</span>, i, <span class="st">&quot; out of &quot;</span>, <span class="fu">nrow</span>(missing_locs), <span class="st">&quot;, &quot;</span>, search_status))</span>
-<span id="cb52-23"><a href="geographic-place-matching.html#cb52-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-24"><a href="geographic-place-matching.html#cb52-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract formatted address and coordinates results</span></span>
-<span id="cb52-25"><a href="geographic-place-matching.html#cb52-25" aria-hidden="true" tabindex="-1"></a>  clean_results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> missing_locs<span class="sc">$</span>id[i],</span>
-<span id="cb52-26"><a href="geographic-place-matching.html#cb52-26" aria-hidden="true" tabindex="-1"></a>                          <span class="at">address_clean =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;formatted_address&quot;</span>]],</span>
-<span id="cb52-27"><a href="geographic-place-matching.html#cb52-27" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loc_lat =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;geometry&quot;</span>]][[<span class="st">&quot;location&quot;</span>]][[<span class="st">&quot;lat&quot;</span>]],</span>
-<span id="cb52-28"><a href="geographic-place-matching.html#cb52-28" aria-hidden="true" tabindex="-1"></a>                          <span class="at">loc_lon =</span> results[[<span class="st">&quot;candidates&quot;</span>]][[<span class="st">&quot;geometry&quot;</span>]][[<span class="st">&quot;location&quot;</span>]][[<span class="st">&quot;lng&quot;</span>]])</span>
-<span id="cb52-29"><a href="geographic-place-matching.html#cb52-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-30"><a href="geographic-place-matching.html#cb52-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Append to full results dataframe.</span></span>
-<span id="cb52-31"><a href="geographic-place-matching.html#cb52-31" aria-hidden="true" tabindex="-1"></a>  loc_coords <span class="sc">%&lt;&gt;%</span> <span class="fu">bind_rows</span>(clean_results)</span>
-<span id="cb52-32"><a href="geographic-place-matching.html#cb52-32" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb52-33"><a href="geographic-place-matching.html#cb52-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(results, clean_results, i, search_status)</span>
-<span id="cb52-34"><a href="geographic-place-matching.html#cb52-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-35"><a href="geographic-place-matching.html#cb52-35" aria-hidden="true" tabindex="-1"></a><span class="co"># (1.4): Keep first result for each address.</span></span>
-<span id="cb52-36"><a href="geographic-place-matching.html#cb52-36" aria-hidden="true" tabindex="-1"></a>clean_results <span class="sc">%&lt;&gt;%</span></span>
-<span id="cb52-37"><a href="geographic-place-matching.html#cb52-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-38"><a href="geographic-place-matching.html#cb52-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span></code></pre></div>
-<p>Once you finish your set of Google Place API requests, you should save the results to a CSV file for later use. The search process is not perfectly replicable as identical searches can produce different results over time, so you should only run your full search loop once.</p>
-
+<div id="header">
+<h1 class="title">R for Economists</h1>
+<p class="author"><em>César Landín</em></p>
+<p class="date"><em>2023-04-25</em></p>
 </div>
+<div id="index" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Index<a href="index.html#index" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- * [1. Introduction](https://bookdown.org/yihui/bookdown/introduction.html) introduces the package and how to get started using it. -->
+<!-- * [2. Components](https://bookdown.org/yihui/bookdown/components.html) introduces elements than can be used while writing a book like Markdown syntax, custom blocks, Theorem and Proof environments, and numbered references. -->
+<!-- * [3. Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html) documents the formats to produce HTML, PDF, and EPUB books.  -->
+<!-- * [4. Customization](https://bookdown.org/yihui/bookdown/customization.html) documents the configuration options available for authors. -->
+<!-- * [5. Editing](https://bookdown.org/yihui/bookdown/editing.html) explains how to edit, build, preview, and serve the book locally. -->
+<!-- * [6. Publishing](https://bookdown.org/yihui/bookdown/publishing.html) explains how to publish your book early online for feedback, and how to formally publish as either printed copies or e-books. -->
+<!-- # Prerequisites -->
+<!-- This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$. -->
+<!-- The **bookdown** package can be installed from CRAN or Github: -->
+<!-- ```{r eval=FALSE} -->
+<!-- install.packages("bookdown") -->
+<!-- # or the development version -->
+<!-- # devtools::install_github("rstudio/bookdown") -->
+<!-- ``` -->
+<!-- Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`. -->
+<!-- To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.name/tinytex/>. -->
+<!-- ```{r include=FALSE} -->
+<!-- # automatically create a bib database for R packages -->
+<!-- knitr::write_bib(c( -->
+<!--   .packages(), "bookdown", "knitr", "rmarkdown" -->
+<!-- ), "packages.bib") -->
+<!-- ``` -->
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="statistical-tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
+<a href="figures.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -324,7 +304,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-geo_data.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
 "text": "Edit"
 },
 "history": {
