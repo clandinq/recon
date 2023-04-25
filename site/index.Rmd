@@ -12,14 +12,14 @@ link-citations: yes
 description: "A short programming guide for economics research."
 ---
 
-# Index
+# Introduction
 
-<!-- * [1. Introduction](https://bookdown.org/yihui/bookdown/introduction.html) introduces the package and how to get started using it. -->
-<!-- * [2. Components](https://bookdown.org/yihui/bookdown/components.html) introduces elements than can be used while writing a book like Markdown syntax, custom blocks, Theorem and Proof environments, and numbered references. -->
-<!-- * [3. Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html) documents the formats to produce HTML, PDF, and EPUB books.  -->
-<!-- * [4. Customization](https://bookdown.org/yihui/bookdown/customization.html) documents the configuration options available for authors. -->
-<!-- * [5. Editing](https://bookdown.org/yihui/bookdown/editing.html) explains how to edit, build, preview, and serve the book locally. -->
-<!-- * [6. Publishing](https://bookdown.org/yihui/bookdown/publishing.html) explains how to publish your book early online for feedback, and how to formally publish as either printed copies or e-books. -->
+## Contents
+* [1. Introduction](https://clandinq.github.io/recon/index.html) introduces the guide and how to get started using it.
+* [2. Figures](https://clandinq.github.io/recon/figures.html) describes tips for using ggplot to generate publication-quality graphs.
+* [3. Tables](https://clandinq.github.io/recon/tables.html) introduces best practices for the presentation of tables in economics papers and explains the usage of functions that can generate formatted tables from R model objects.
+* [4. Statistical Tests](https://clandinq.github.io/recon/statistical-tests.html) explains how to perform hypothesis tests on model coefficients.
+* [5. Geographic Place Matching](https://clandinq.github.io/recon/geographic-place-matching.html) explains how to match addresses to coordinates using Google Place API searches.
 
 
 
