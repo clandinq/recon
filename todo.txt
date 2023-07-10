@@ -1,0 +1,6 @@
+add to guide:
+1. Finish first: general index and explanation of the guide.
+2. footnotes
+3. index of tables and what they do
+4. how to link Zotero to a paper
+
